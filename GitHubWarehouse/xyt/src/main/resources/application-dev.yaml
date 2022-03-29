@@ -1,0 +1,7 @@
+# 测试接口运行环境
+server:
+  port: 8081
+
+spring:
+  profiles:
+    active: dev

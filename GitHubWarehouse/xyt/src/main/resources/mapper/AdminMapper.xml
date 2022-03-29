@@ -12,4 +12,9 @@
     <select id="queryAdminById" resultType="Admin">
         select * from admin where Anu = #{arg0} and Apd = #{arg1}
     </select>
+
+    <!--查询单个用户-->
+    <select id="queryAdminByAnu" resultType="Admin">
+        select * from admin where Anu = #{Anu}
+    </select>
 </mapper>

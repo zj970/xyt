@@ -1,5 +1,6 @@
 package com.zj.xyt;
 
+import com.zj.xyt.Entity.Department;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

@@ -1,5 +1,7 @@
 package com.zj.xyt.Entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,25 +14,17 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = {"Anu","Apd"})
+@ApiModel(value = "管理员")
+@ToString(exclude = {"Apd"})
 public class Admin {
-    private String Anu;//管理员账号
-    private String Apd;//管理员密码
-
-    public String getAnu(){
-        return Anu;
-    }
-
-    public String getApd(){
-        return Apd;
-    }
-
-    public void setAnu(String Anu){
-        this.Anu = Anu;
-    }
-
-    public void setApd(String Apd){
-        this.Apd = Apd;
-    }
-
+    /**
+     * 用户名
+     */
+    @ApiModelProperty(value = "用户名")
+    private String Anu;
+    /**
+     * 用户密码
+     */
+    @ApiModelProperty(value = "密码")
+    private String Apd;
 }

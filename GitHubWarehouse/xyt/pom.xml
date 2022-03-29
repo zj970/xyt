@@ -63,6 +63,17 @@
             <version>1.2.8.RELEASE</version>
         </dependency>
 
+        <!--swagger接口测试以及接口注释-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

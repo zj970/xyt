@@ -27,7 +27,9 @@ CREATE TABLE teacher
     Tname CHAR(20) NOT NULL ,
     Tsex CHAR(2) NOT NULL ,
     Title CHAR(8) ,
-    Tphone CHAR(11) , 
+    Tphone CHAR(11) ,
+    Teyte DATE NOT NULL,
+    Tsnte DATE, 
     Dnu CHAR(3) ,
     Tpd CHAR(20) NOT NULL ,
     FOREIGN KEY (Dnu) REFERENCES department(Dnu) /* 表级完整性的约束条件,Dnu是外码连接department */

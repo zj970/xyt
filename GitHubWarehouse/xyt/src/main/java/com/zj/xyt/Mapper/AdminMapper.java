@@ -15,4 +15,6 @@ public interface AdminMapper {
     List<Admin> queryAdminList();//查询所有用户
 
     Admin queryAdminById(String Anu,String Apd);
+
+    Admin queryAdminByAnu(String Anu);
 }
