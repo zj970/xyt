@@ -39,7 +39,7 @@ public class AdminController {
     @GetMapping("/queryAdminOne/{Anu}/{Apd}")
     @ApiOperation(value = "验证登录信息",notes = "根据账号查询用户信息")
     public String queryAdminOne(@PathVariable("Anu") String Anu, @PathVariable("Apd") String Apd){
-        Admin admin = adminMapper.queryAdminById(Anu,Apd);
+        Admin admin = adminMapper.queryAdminLogin(Anu,Apd);
         if (admin != null){
             System.out.println(admin);
             return "ok";

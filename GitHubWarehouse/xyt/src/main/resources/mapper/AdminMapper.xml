@@ -9,7 +9,7 @@
     </select>
 
     <!--查询单个用户-->
-    <select id="queryAdminById" resultType="Admin">
+    <select id="queryAdminLogin" resultType="Admin">
         select * from admin where Anu = #{arg0} and Apd = #{arg1}
     </select>
 

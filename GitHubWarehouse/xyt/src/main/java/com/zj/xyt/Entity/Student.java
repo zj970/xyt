@@ -22,15 +22,15 @@ import java.sql.Date;
 public class Student {
     /**学生学号--账号*/
     @ApiModelProperty("学生学号")
-    private Integer Snu;
+    private String Snu;
 
     /**学生姓名*/
     @ApiModelProperty("学生姓名")
     private String Sname;
 
-    /**学生性别(男false女true)*/
+    /**学生性别*/
     @ApiModelProperty("学生性别")
-    private boolean Ssex;
+    private String Ssex;
 
     /**学生出生日期*/
     @ApiModelProperty("出生日期")

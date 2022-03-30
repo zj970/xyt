@@ -28,9 +28,9 @@ public class Teacher {
     @ApiModelProperty(value = "教师姓名")
     private String Tname;
 
-    /**教师性别(男false女ture)*/
+    /**教师性别*/
     @ApiModelProperty(value = "教师性别")
-    private boolean Tsex;
+    private String Tsex;
 
     /**教师职称*/
     @ApiModelProperty(value = "教师职称")
