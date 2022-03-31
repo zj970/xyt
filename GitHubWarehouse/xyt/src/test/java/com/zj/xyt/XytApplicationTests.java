@@ -1,18 +1,15 @@
 package com.zj.xyt;
 
-import com.zj.xyt.Entity.Department;
-import com.zj.xyt.Entity.Teacher;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.sql.Date;
+import org.springframework.http.HttpRequest;
+import javax.servlet.http.HttpServlet;
 
 @SpringBootTest
-class XytApplicationTests {
+class XytApplicationTests extends HttpServlet {
 
     @Test
     void contextLoads() {
-
     }
 
     @Test

@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 /**
  * @author zj
  * @since 2022/3/12 15:00
@@ -16,7 +18,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @ApiModel(value = "管理员")
 @ToString(exclude = {"Apd"})
-public class Admin {
+public class Admin implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * 用户名
      */
