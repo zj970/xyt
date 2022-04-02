@@ -1,5 +1,14 @@
 # 应用名称
 spring:
+  # 整合thymeleaf
+  thymeleaf:
+    cache: false
+  messages:
+    basename: i18n.login
+  #修改i日期格式
+  mvc:
+    format:
+      date: yyyy-MM-dd
   application:
     name: xyt
     # 数据库相关配置
@@ -43,7 +52,7 @@ spring:
       max-pool-prepared-statement-per-connection-size: 20
 
       # 配置监控统计拦截的filters, 去掉后监控界面sql无法统计, 'wall'用于防火墙防御sql注入，stat监控统计,logback日志
-      filters: stat,wall
+      filters: stat,wall,log4j
       # Spring监控AOP切入点，如x.y.z.service.*,配置多个英文逗号分隔
       #aop-patterns: com.springboot.servie.*
       # lowSqlMillis用来配置SQL慢的标准，执行时间超过slowSqlMillis的就是慢
@@ -82,16 +91,15 @@ spring:
     host: localhost # Redis服务器地址
     port: 6379 # Redis服务器连接端口
     password:  # Redis服务器连接密码（默认为空）
-
 server:
   # 服务端口
   port: 8888
   # 服务地址
+  servlet:
+    context-path: /xyt
 # 整合Mybatis-plus 配置
 mybatis-plus:
   type-aliases-package: com.zj.xyt.Entity
   mapper-locations: classpath:mapper/*.xml
-
-
 
 
