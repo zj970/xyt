@@ -1,7 +1,7 @@
 package com.zj.xyt.Controller;
 
 import com.zj.xyt.Entity.StudentVo;
-import com.zj.xyt.Server.LoginService;
+import com.zj.xyt.Server.StudentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -16,15 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2022/3/12 15:00
  */
 @RestController
-@RequestMapping("/login")
-@Api(tags = "登录接口")
-public class LoginController {
+@RequestMapping("/student")
+@Api(tags = "个人信息接口")
+public class StudentController {
     @Autowired
-    LoginService loginService;
+    StudentService studentService;
 
-    @ApiOperation(value="查询用户", notes="通过账户密码进行验证登录")
-    @GetMapping("/{nu}/{pd}")
-    public String queryUser(@ApiParam(value = "账号", required = true)@PathVariable("nu") String nu, @ApiParam(value = "密码", required = true)@PathVariable("pd") String pd){
-        return loginService.queryUser(nu,pd);
+    @GetMapping("/{Snu}")
+    @ApiOperation(value="查询用户", notes="通过账户进行查询")
+    public StudentVo queryStudentVoBySnu(@ApiParam(value = "账号", required = true)@PathVariable("Snu") String Snu){
+        return studentService.queryStudentVo(Snu);
     }
 }

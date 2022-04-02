@@ -1,13 +1,11 @@
 package com.zj.xyt.Entity;
 
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
 import java.io.Serializable;
 
 /**
@@ -17,7 +15,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(description = "管理员实体类")
+@ApiModel(value = "com.zj.xyt.Entity.Admin",description = "管理员实体类")
 @ToString(exclude = {"Apd"})
 public class Admin implements Serializable {
     private static final long serialVersionUID = 1L;
