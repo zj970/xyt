@@ -5,7 +5,7 @@ import io.swagger.annotations.Api;
 
 /**
  *<p>
- *     个人信息类
+ *     学生业务类
  *</p>
  * @author zj970
  */

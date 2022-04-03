@@ -11,6 +11,11 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     StudentMapper studentMapper;
 
+    /**
+     * 查询学生的基本信息
+     * @param Snu 账号
+     * @return
+     */
     @Override
     public StudentVo queryStudentVo(String Snu) {
         return studentMapper.queryStudentVo(Snu);
