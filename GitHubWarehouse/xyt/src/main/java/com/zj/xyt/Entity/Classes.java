@@ -19,6 +19,8 @@ public class Classes {
     /**班主任工作证号*/
     @ApiModelProperty(value = "班主任工作证号")
     private Integer Tnu;
+    /**班级名称*/
+    private String Cname;
     /**学生*/
     @ApiModelProperty(value = "学生")
     private List<Student> C_S_List = new ArrayList<>();

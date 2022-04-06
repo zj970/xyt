@@ -20,6 +20,9 @@ public class StudentVo extends Student{
     /**班主任姓名*/
     @ApiModelProperty("班主任姓名")
     private String Tname;
+    /**学生所属班级名称*/
+    @ApiModelProperty("学生所属班级名称")
+    private String Cname;
     /**学生所属系名*/
     @ApiModelProperty("学生所属系名")
     private String Dname;

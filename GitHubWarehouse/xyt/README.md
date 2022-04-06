@@ -41,6 +41,7 @@ CREATE TABLE class
     Cnu CHAR(6) PRIMARY KEY ,/* 列级完整性约束条件，Cnu是主码 */
     Tnu CHAR(6) ,
     Dnu CHAR(3) ,
+    Cname CHAR(30) NOT NULL,
     FOREIGN KEY (Dnu) REFERENCES department(Dnu),/* 表级完整性的约束条件,Dnu是外码连接department */
     FOREIGN KEY (Tnu) REFERENCES teacher(Tnu)/* 表级完整性的约束条件,Tnu是外码连接teacher */
 );
