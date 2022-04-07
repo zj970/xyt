@@ -1,6 +1,4 @@
 package com.zj.xyt.Controller;
-
-import com.zj.xyt.Entity.StudentVo;
 import com.zj.xyt.Server.LoginService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

@@ -274,6 +274,9 @@
  <Reference Include="UnityEngine.SpatialTracking">
  <HintPath>D:/Unity/Unity-2018.4.3f1/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
+ <Reference Include="LitJson ">
+ <HintPath>F:/UnityWorkplace/XYT/Assets/LitJson .dll</HintPath>
+ </Reference>
  <Reference Include="Unity.Analytics.Editor">
  <HintPath>F:/UnityWorkplace/XYT/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
  </Reference>
@@ -282,9 +285,6 @@
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
  <HintPath>F:/UnityWorkplace/XYT/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
- </Reference>
- <Reference Include="LitJson ">
- <HintPath>F:/UnityWorkplace/XYT/Assets/LitJson .dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>D:/Unity/Unity-2018.4.3f1/Unity/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
