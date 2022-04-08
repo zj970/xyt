@@ -82,6 +82,17 @@ CREATE TABLE sc
     FOREIGN KEY (Lnu) REFERENCES lesson(Lnu) ON DELETE NO ACTION ON UPDATE CASCADE 
 );
 
+/* 创建公告表 */
+CREATE TABLE notice
+(
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(255) NOT NULL ,
+  author VARCHAR(30) NOT NULL ,
+  content VARCHAR(100) NOT NULL ,
+  type INT NOT NULL ,
+  releasedate DATE NOT NULL
+);
+
 /* 建立索引 */
 CREATE UNIQUE INDEX stu_name ON student(Sname);
 CREATE UNIQUE INDEX tea_name ON teacher(Tname);

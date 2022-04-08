@@ -99,6 +99,12 @@
             <artifactId>springfox-swagger2</artifactId>
             <version>2.9.2</version>
         </dependency>
+        <!--websocket依赖-->
+        <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-websocket</artifactId>
+        <scope>provided</scope>
+    </dependency>
 
         <!--redis相关-->
         <dependency>
