@@ -41,17 +41,17 @@ public class Teacher {
     private  String Tphone;
 
     /**教师入职时间*/
-    @ApiModelProperty("教师入职时间")
+    @ApiModelProperty(value = "教师入职时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date Teyte;
 
     /**教师离职时间*/
-    @ApiModelProperty("教师离职时间")
+    @ApiModelProperty(value = "教师离职时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date Tsnte;
 
     /**教师账号密码*/
-    @ApiModelProperty("教师账号密码")
+    @ApiModelProperty(value = "教师账号密码")
     private String Tpd;
 
 }
