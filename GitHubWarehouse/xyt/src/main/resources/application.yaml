@@ -7,6 +7,9 @@ spring:
     basename: i18n.login
   #修改i日期格式
   mvc:
+    view:
+      suffix: .jsp
+      prefix: /WEB-INF/jsp
     format:
       date: yyyy-MM-dd
   application:
@@ -101,5 +104,6 @@ server:
 mybatis-plus:
   type-aliases-package: com.zj.xyt.Entity
   mapper-locations: classpath:mapper/*.xml
+
 
 

@@ -139,7 +139,11 @@
             <artifactId>jstl</artifactId>
             <scope>compile</scope>
         </dependency>
-
+        <!--用于编译jsp-->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+        </dependency>
 
         <!-- 这里有用到日志打印，所以引入 -->
         <dependency>
