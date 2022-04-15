@@ -23,11 +23,11 @@ public class SwaggerConfig {
         Profiles profiles = Profiles.of("dev");
         //获取项目的环境：通过environment.acceptsProfiles判断是否处于自己设定的环境中
         boolean flag = environment.acceptsProfiles(profiles);
-
+        System.out.println("-----------------------" + flag);
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .groupName("周健")
-                .enable(!flag)//是否启用Swagger,默认是true,false则不能访问swaggeer
+                .enable(flag)//是否启用Swagger,默认是true,false则不能访问swaggeer
                 .select()
                 //配置要扫描接口的方式RequestHandlerSelectors
                 //指定扫描的包basePackage

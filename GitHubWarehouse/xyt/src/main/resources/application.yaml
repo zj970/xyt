@@ -1,14 +1,13 @@
 # 应用名称
 spring:
-  # 整合thymeleaf
-  thymeleaf:
-    cache: false
-  messages:
-    basename: i18n.login
+  profiles:
+    active: dev
   #修改i日期格式
   mvc:
     view:
+      #响应页面默认后缀
       suffix: .jsp
+      #页面默认前缀目录
       prefix: /WEB-INF/jsp
     format:
       date: yyyy-MM-dd
@@ -104,6 +103,5 @@ server:
 mybatis-plus:
   type-aliases-package: com.zj.xyt.Entity
   mapper-locations: classpath:mapper/*.xml
-
 
 
