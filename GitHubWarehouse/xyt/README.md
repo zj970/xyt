@@ -1,7 +1,7 @@
 # 工程简介
 # MySql版本
 mysql-installer-community-8.0.28.0
-# 数据库代码
+0.
 ```sql
 CREATE DATABASE xyt;
 

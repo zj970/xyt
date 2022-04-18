@@ -5,14 +5,14 @@
 <mapper namespace="com.zj.xyt.Mapper.LoginMapper">
     <!--查询管理员-->
     <select id="queryAdmin" resultType="Admin">
-        select * from admin where Anu = #{Anu} and Apd = #{Apd}
+        select * from admin where Anu = #{arg0} and Apd = #{arg1}
     </select>
     <!--查询学生-->
     <select id="queryStudent" resultType="Student">
-        select * from student where Snu = #{Snu} and Spd = #{Spd}
+        select * from student where Snu = #{arg0} and Spd = #{arg1}
     </select>
     <!--查询教师-->
     <select id="queryTeacher" resultType="Teacher">
-        select * from teacher where Tnu = #{Tnu} and Tpd = #{Tpd}
+        select * from teacher where Tnu = #{arg0} and Tpd = #{arg1}
     </select>
 </mapper>

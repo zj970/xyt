@@ -11,4 +11,10 @@ public class TestController {
         ModelAndView mv = new ModelAndView("system/home/homePage");
         return mv;
     }
+
+    @RequestMapping("/1")
+    public ModelAndView success(){
+        ModelAndView mv = new ModelAndView("system/home/homePage");
+        return mv;
+    }
 }
