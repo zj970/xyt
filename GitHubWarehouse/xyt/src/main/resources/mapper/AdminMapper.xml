@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zj.xyt.Mapper.AdminMapper">
     <!--查询所有管理员用户-->
-    <select id="queryAdminList" resultType="Admin">
+    <select id="queryAdminList" resultType="com.zj.xyt.Entity.Admin">
         select * from admin
     </select>
 

@@ -35,15 +35,15 @@ public class LoginServiceImpl implements LoginService {
         //TODO:应该写一个方法，直接判断用户输入的类型---学生or教师or管理员
         if (queryStudent(nu,pd)!=null){
             //TODO:学生账户验证成功
-            return "student";
+            return queryStudent(nu,pd).getUserType().toString();
         }else if (queryTeacher(nu,pd)!=null){
             //TODO:教师账户验证成功
-            return "teacher";
+            return queryTeacher(nu,pd).getUserType().toString();
         }else if (queryAdmin(nu,pd)!=null){
             //TODO：管理员账户验证成功
-            return "admin";
+            return queryAdmin(nu,pd).getUserType().toString();
         }
-            return "false";
+            return "FALSE";
     }
 
 }

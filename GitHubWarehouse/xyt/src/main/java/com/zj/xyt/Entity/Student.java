@@ -1,8 +1,8 @@
 package com.zj.xyt.Entity;
 
+import com.zj.xyt.utils.UserType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +21,8 @@ import java.sql.Date;
 @ApiModel(value = "学生")
 @ToString(exclude = {"Spd"})
 public class Student {
+    private UserType userType = UserType.STUDENT;
+
     /**学生学号--账号*/
     @ApiModelProperty(value = "学生学号")
     private String Snu;

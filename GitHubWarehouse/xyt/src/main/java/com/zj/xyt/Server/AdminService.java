@@ -13,6 +13,6 @@ public interface AdminService{
     /**
      * 全查询管理员信息
      */
-    List<Admin> selectAdminList();
+    List<Admin> queryAdminList();
 
 }

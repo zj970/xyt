@@ -1,5 +1,6 @@
 package com.zj.xyt.Entity;
 
+import com.zj.xyt.utils.UserType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,8 @@ import java.sql.Date;
 @ApiModel(value = "教师")
 @ToString(exclude = {"Tpd"})
 public class Teacher {
+    private UserType userType = UserType.TEACHER;
+
     /**教师工作证号*/
     @ApiModelProperty(value = "教师工作证号")
     private Integer Tnu;

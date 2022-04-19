@@ -1,5 +1,6 @@
 package com.zj.xyt.Entity;
 
+import com.zj.xyt.utils.UserType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,7 @@ import java.io.Serializable;
 @ToString(exclude = {"Apd"})
 public class Admin implements Serializable {
     private static final long serialVersionUID = 1L;
+    private UserType userType = UserType.ADMIN;
     /**
      * 用户名
      */

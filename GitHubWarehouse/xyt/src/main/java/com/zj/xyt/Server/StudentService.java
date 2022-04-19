@@ -1,7 +1,10 @@
 package com.zj.xyt.Server;
 
+import com.zj.xyt.Entity.Student;
 import com.zj.xyt.Entity.StudentVo;
 import io.swagger.annotations.Api;
+
+import java.util.List;
 
 /**
  *<p>
@@ -17,4 +20,10 @@ public interface StudentService {
      * @return 学生信息视图
      */
     StudentVo queryStudentVo(String Snu);
+
+    /**
+     * 查询学生的所有信息
+     * @return 学生表中的所有信息
+     */
+    List<Student> queryStudentList();
 }

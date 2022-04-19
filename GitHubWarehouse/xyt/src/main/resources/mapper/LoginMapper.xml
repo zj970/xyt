@@ -4,15 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zj.xyt.Mapper.LoginMapper">
     <!--查询管理员-->
-    <select id="queryAdmin" resultType="Admin">
+    <select id="queryAdmin" resultType="com.zj.xyt.Entity.Admin">
         select * from admin where Anu = #{arg0} and Apd = #{arg1}
     </select>
     <!--查询学生-->
-    <select id="queryStudent" resultType="Student">
+    <select id="queryStudent" resultType="com.zj.xyt.Entity.Student">
         select * from student where Snu = #{arg0} and Spd = #{arg1}
     </select>
     <!--查询教师-->
-    <select id="queryTeacher" resultType="Teacher">
+    <select id="queryTeacher" resultType="com.zj.xyt.Entity.Teacher">
         select * from teacher where Tnu = #{arg0} and Tpd = #{arg1}
     </select>
 </mapper>

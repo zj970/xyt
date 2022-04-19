@@ -1,10 +1,13 @@
 package com.zj.xyt.Impl;
 
+import com.zj.xyt.Entity.Student;
 import com.zj.xyt.Entity.StudentVo;
 import com.zj.xyt.Mapper.StudentMapper;
 import com.zj.xyt.Server.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -19,5 +22,14 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public StudentVo queryStudentVo(String Snu) {
         return studentMapper.queryStudentVo(Snu);
+    }
+
+    /**
+     * 查询学生表的所有信息
+     * @return
+     */
+    @Override
+    public List<Student> queryStudentList() {
+        return studentMapper.queryStudentList();
     }
 }
