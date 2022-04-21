@@ -14,5 +14,9 @@ public interface AdminService{
      * 全查询管理员信息
      */
     List<Admin> queryAdminList();
-
+    /**
+     * 根据Anu查询管理员账号
+     * @return 返回管理员
+     */
+    Admin queryAdminByID(String Anu);
 }

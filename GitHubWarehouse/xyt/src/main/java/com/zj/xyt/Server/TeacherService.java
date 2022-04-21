@@ -1,5 +1,6 @@
 package com.zj.xyt.Server;
 
+import com.zj.xyt.Entity.Teacher;
 import com.zj.xyt.Entity.TeacherVo;
 import io.swagger.annotations.Api;
 
@@ -17,4 +18,10 @@ public interface TeacherService {
      * @return 教师信息
      */
     TeacherVo queryTeacher(String Tnu);
+    /**
+     * 查询老师的个人信息
+     * @param Tnu 账号
+     * @return 教师信息
+     */
+    Teacher queryTeacherByID(String Tnu);
 }

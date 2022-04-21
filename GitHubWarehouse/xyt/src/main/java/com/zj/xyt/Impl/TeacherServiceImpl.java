@@ -1,5 +1,6 @@
 package com.zj.xyt.Impl;
 
+import com.zj.xyt.Entity.Teacher;
 import com.zj.xyt.Entity.TeacherVo;
 import com.zj.xyt.Mapper.TeacherMapper;
 import com.zj.xyt.Server.TeacherService;
@@ -19,5 +20,10 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public TeacherVo queryTeacher(String Tnu) {
         return teacherMapper.queryTeacher(Tnu);
+    }
+
+    @Override
+    public Teacher queryTeacherByID(String Tnu) {
+        return teacherMapper.queryTeacherByID(Tnu);
     }
 }

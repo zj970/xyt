@@ -26,4 +26,10 @@ public interface StudentService {
      * @return 学生表中的所有信息
      */
     List<Student> queryStudentList();
+
+    /**
+     * 查询学生信息
+     * @return 学生表
+     */
+    Student queryStudentByID(String Snu);
 }

@@ -32,4 +32,9 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> queryStudentList() {
         return studentMapper.queryStudentList();
     }
+
+    @Override
+    public Student queryStudentByID(String Snu) {
+        return studentMapper.queryStudentByID(Snu);
+    }
 }
