@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -11,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author zj
  * @since 2022/3/12 15:00
  */
-@RestController
+@Controller
 @RequestMapping("/login")
 @Api(tags = "登录接口")
 public class LoginController {
