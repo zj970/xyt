@@ -1,12 +1,18 @@
 package com.zj.xyt.Controller;
+
 import com.zj.xyt.Server.LoginService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * @author zj
@@ -19,30 +25,33 @@ public class LoginController {
     @Autowired
     LoginService loginService;
 
-    /**
-     * 为客户端提供的接口
-     * @param nu 账号
-     * @param pd 密码
-     * @return
-     */
-    @ApiOperation(value="查询用户", notes="通过账户密码进行验证登录")
-    @GetMapping("/{nu}/{pd}")
-    public String queryUser(@ApiParam(value = "账号", required = true)@PathVariable("nu") String nu, @ApiParam(value = "密码", required = true)@PathVariable("pd") String pd){
-        return loginService.queryUser(nu,pd);
+    @RequestMapping("/main")
+    public String main() throws Exception{
+        return "/main";
     }
 
-    /**
-     * 登录页面
-     * @return
-     * @throws Exception
-     */
+    @RequestMapping("/home")
+    public String home() throws Exception{
+        return "/system/home/homePage";
+    }
     @RequestMapping(value = "/login",method = RequestMethod.GET)
     public ModelAndView login() throws Exception{
+        System.out.println("认证失败了吧！来我这了吧");
         return new ModelAndView("/login");
     }
 
-    @RequestMapping("/main")
-    public ModelAndView toMain() throws Exception{
-        return new ModelAndView("/main");
+    /**
+     * post方式的login方式什么时候调用？
+     * 身份认证失败的时候会自动调用
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
+    public String login(String username,String password){
+        System.out.println("认证失败了吧！来我这了吧"+username+"密碼"+password);
+
+        return null;
     }
+
 }

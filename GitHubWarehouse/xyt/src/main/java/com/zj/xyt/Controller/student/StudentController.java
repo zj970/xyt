@@ -1,4 +1,4 @@
-package com.zj.xyt.Controller;
+package com.zj.xyt.Controller.student;
 
 import com.zj.xyt.Entity.StudentVo;
 import com.zj.xyt.Server.StudentService;

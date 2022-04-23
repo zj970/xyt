@@ -1,4 +1,4 @@
-package com.zj.xyt.config;
+package com.zj.xyt.config.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +23,7 @@ public class SwaggerConfig {
         Profiles profiles = Profiles.of("dev");
         //获取项目的环境：通过environment.acceptsProfiles判断是否处于自己设定的环境中
         boolean flag = environment.acceptsProfiles(profiles);
-        System.out.println("-----------------------" + flag);
+        //System.out.println("-----------------------" + flag);
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .groupName("周健")

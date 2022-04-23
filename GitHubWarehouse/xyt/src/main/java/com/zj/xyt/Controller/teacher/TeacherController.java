@@ -1,4 +1,4 @@
-package com.zj.xyt.Controller;
+package com.zj.xyt.Controller.teacher;
 
 import com.zj.xyt.Entity.TeacherVo;
 import com.zj.xyt.Impl.TeacherServiceImpl;

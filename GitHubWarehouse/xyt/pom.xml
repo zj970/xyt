@@ -111,18 +111,46 @@
         </dependency>
 
         <!--redis相关-->
-
         <!-- 添加Redis缓存支持 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
-            <version>1.4.3.RELEASE</version>
+            <!-- 默认指定了lettuce,我们需要排除 ，并且引入jedis的客户端-->
+            <exclusions>
+                <exclusion>
+                    <groupId>io.lettuce</groupId>
+                    <artifactId>lettuce-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- shiro+redis缓存插件 -->
         <dependency>
             <groupId>org.crazycake</groupId>
             <artifactId>shiro-redis</artifactId>
             <version>2.4.2.1-RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>shiro-core</artifactId>
+                    <groupId>org.apache.shiro</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>shiro-core</artifactId>
+                    <groupId>org.apache.shiro</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jedis</artifactId>
+                    <groupId>redis.clients</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
+        <!-- jedis的客户端 -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
         </dependency>
         <!--shiro整合Spring的包-->
         <dependency>
