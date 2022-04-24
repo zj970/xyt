@@ -1,4 +1,4 @@
-package com.zj.xyt.Impl;
+package com.zj.xyt.Server.Impl;
 
 import com.zj.xyt.Entity.Admin;
 import com.zj.xyt.Entity.Student;
@@ -9,7 +9,6 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
 @Api(tags = "验证登录的业务实现层")
 public class LoginServiceImpl implements LoginService {
     @Autowired

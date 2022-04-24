@@ -7,37 +7,39 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
-
 
 /**
  * @author zj
  * @since 2022/3/12 15:00
  */
 @Controller
-@RequestMapping("/login")
 @Api(tags = "登录接口")
 public class LoginController {
     @Autowired
     LoginService loginService;
-
-    @RequestMapping("/main")
+    @GetMapping("/main")
     public String main() throws Exception{
         return "/main";
     }
 
-    @RequestMapping("/home")
+    @GetMapping("/registerUser")
+    public String registerForm(){
+        System.out.println("registerForm");
+        return "/registerForm";
+    }
+    @GetMapping("/home")
     public String home() throws Exception{
+        System.out.println("homePage");
         return "/system/home/homePage";
     }
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public ModelAndView login() throws Exception{
-        System.out.println("认证失败了吧！来我这了吧");
-        return new ModelAndView("/login");
+    @GetMapping(value = "/login")
+    public String login() throws Exception{
+        System.out.println("login");
+        return "/login";
     }
 
     /**
@@ -46,12 +48,29 @@ public class LoginController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
-    public String login(String username,String password){
-        System.out.println("认证失败了吧！来我这了吧"+username+"密碼"+password);
-
+    public Map<String,Object> login(HttpServletRequest request,Map<String, Object> map) throws Exception {
+        System.out.println("认证失败了吧！来我这了吧");
+        //认证失败后从request中获取shiro处理的信息
+        //shiroLoginFailure:就是shiro异常类的全类名
+        String exceptionName = (String) request.getAttribute("shiroLoginFailure");
+        System.out.println("--------------------------------"+exceptionName);
+        if (exceptionName !=null ){
+            if (exceptionName.equals(UnknownAccountException.class.getName())) {
+                map.put("code", 1);
+                map.put("msg", "用户名不正确");
+                return map;
+            } else if (exceptionName.equals(IncorrectCredentialsException.class.getName())) {
+                map.put("code", 2);
+                map.put("msg", "密码不正确");
+                return map;
+            } else if (exceptionName.equals("randomCodeError")) {
+                map.put("code", 3);
+                map.put("msg", "验证码不正确");
+                return map;
+            }
+        }
         return null;
     }
-
 }

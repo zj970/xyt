@@ -6,6 +6,10 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+/**
+ * 学生的持久层
+ * @author zj970
+ */
 @Mapper
 public interface StudentMapper {
     //TODO:学生的基本信息展示
@@ -22,4 +26,9 @@ public interface StudentMapper {
      * @return 学生表
      */
     Student queryStudentByID(String Snu);
+
+    /**
+     * 注册学生账号
+     */
+    void insertStudent(Student student);
 }

@@ -3,6 +3,7 @@ package com.zj.xyt.Server;
 import com.zj.xyt.Entity.Student;
 import com.zj.xyt.Entity.StudentVo;
 import io.swagger.annotations.Api;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  *</p>
  * @author zj970
  */
+@Service
 @Api(tags = "学生个人信息管理")
 public interface StudentService {
     /**
@@ -32,4 +34,9 @@ public interface StudentService {
      * @return 学生表
      */
     Student queryStudentByID(String Snu);
+
+    /**
+     * 注册学生账号
+     */
+    void insertStudent(Student student);
 }

@@ -1,4 +1,4 @@
-package com.zj.xyt.Impl;
+package com.zj.xyt.Server.Impl;
 
 import com.zj.xyt.Entity.Teacher;
 import com.zj.xyt.Entity.TeacherVo;
@@ -7,7 +7,6 @@ import com.zj.xyt.Server.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
 public class TeacherServiceImpl implements TeacherService {
     @Autowired
     TeacherMapper teacherMapper;

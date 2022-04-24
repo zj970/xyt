@@ -1,6 +1,7 @@
 package com.zj.xyt.Controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -8,24 +9,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
 public class TestController {
-    @RequestMapping("/homePage")
-    public ModelAndView homePage(){
-        ModelAndView mv = new ModelAndView("system/home/homePage");
-        return mv;
-    }
 
-    @RequestMapping("/registerUser")
-    public ModelAndView registerForm(){
-
-        return new ModelAndView("registerForm");
-    }
-
-    @RequestMapping(value = "/registerUser",method = RequestMethod.POST)
+    @PostMapping(value = "/registerUser")
     @ResponseBody
     public Map<String, Object> registerUser(HttpServletRequest request) throws Exception{
         Map<String, Object> map = new HashMap<>();

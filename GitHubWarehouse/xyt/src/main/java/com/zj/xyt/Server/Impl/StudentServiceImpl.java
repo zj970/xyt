@@ -1,4 +1,4 @@
-package com.zj.xyt.Impl;
+package com.zj.xyt.Server.Impl;
 
 import com.zj.xyt.Entity.Student;
 import com.zj.xyt.Entity.StudentVo;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 public class StudentServiceImpl implements StudentService {
     @Autowired
     StudentMapper studentMapper;
@@ -36,5 +35,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student queryStudentByID(String Snu) {
         return studentMapper.queryStudentByID(Snu);
+    }
+
+    @Override
+    public void insertStudent(Student student) {
+        studentMapper.insertStudent(student);
     }
 }

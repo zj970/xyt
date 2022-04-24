@@ -4,6 +4,7 @@ import com.zj.xyt.Entity.Admin;
 import com.zj.xyt.Entity.Student;
 import com.zj.xyt.Entity.Teacher;
 import io.swagger.annotations.Api;
+import org.springframework.stereotype.Service;
 
 /**
  *<p>
@@ -11,6 +12,7 @@ import io.swagger.annotations.Api;
  *</p>
  * @author zj970
  */
+@Service
 @Api(tags = "验证登录的业务层")
 public interface LoginService {
     /**

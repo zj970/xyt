@@ -3,6 +3,7 @@ package com.zj.xyt.Server;
 import com.zj.xyt.Entity.Teacher;
 import com.zj.xyt.Entity.TeacherVo;
 import io.swagger.annotations.Api;
+import org.springframework.stereotype.Service;
 
 /**
  *<p>
@@ -10,6 +11,7 @@ import io.swagger.annotations.Api;
  *</p>
  * @author zj970
  */
+@Service
 @Api(tags = "教师个人信息管理")
 public interface TeacherService {
     /**

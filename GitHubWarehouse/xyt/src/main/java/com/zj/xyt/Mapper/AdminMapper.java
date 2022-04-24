@@ -1,22 +1,23 @@
-package com.zj.xyt.Server;
+package com.zj.xyt.Mapper;
 
 import com.zj.xyt.Entity.Admin;
-import org.springframework.stereotype.Service;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
- *<p>
- *     管理员服务类
- *</p>
  * @author zj970
  */
-@Service
-public interface AdminService{
+@Repository
+@Mapper
+public interface AdminMapper {
     /**
-     * 全查询管理员信息
+     * 查询所有的管理员账号
+     * @return 返回所有管理员
      */
     List<Admin> queryAdminList();
+
     /**
      * 根据Anu查询管理员账号
      * @return 返回管理员

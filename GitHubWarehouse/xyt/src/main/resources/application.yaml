@@ -96,9 +96,6 @@ spring:
 server:
   # 服务端口
   port: 8888
-  # 服务地址
-  servlet:
-    context-path: /xyt
 # 整合Mybatis-plus 配置
 mybatis-plus:
   type-aliases-package: com.zj.xyt.Entity
