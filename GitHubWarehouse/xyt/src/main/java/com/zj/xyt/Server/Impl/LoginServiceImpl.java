@@ -8,7 +8,7 @@ import com.zj.xyt.Server.LoginService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+@Service
 @Api(tags = "验证登录的业务实现层")
 public class LoginServiceImpl implements LoginService {
     @Autowired
