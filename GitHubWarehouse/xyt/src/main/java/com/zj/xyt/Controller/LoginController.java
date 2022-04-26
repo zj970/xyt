@@ -8,14 +8,12 @@ import io.swagger.annotations.Api;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+
 
 import javax.servlet.http.HttpServletRequest;
-import java.rmi.activation.UnknownObjectException;
 import java.util.HashMap;
 import java.util.Map;
 /**
@@ -24,6 +22,7 @@ import java.util.Map;
  */
 @Controller
 @Api(tags = "登录接口")
+@RequestMapping
 public class LoginController {
     private UserType ADMIN_LOGIN_TYPE = UserType.ADMIN;
     @Autowired
@@ -45,7 +44,6 @@ public class LoginController {
     }
     @GetMapping(value = "/login")
     public String login() throws Exception{
-        System.out.println("login");
         return "/login";
     }
     /**
@@ -56,9 +54,9 @@ public class LoginController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> login(String name,String password,HttpServletRequest request) throws Exception{
+    public Map<String,Object> login(HttpServletRequest request) throws Exception{
+        System.out.println("认证失败了吧！来我这了吧");
         Map<String,Object> map = new HashMap<>();
-        System.out.println("认证失败了吧！来我这了吧"+name+password);
         String exceptionName = request.getAttribute("shiroLoginFailure").toString();
         if (exceptionName!=null){
             System.out.println(exceptionName);
@@ -76,10 +74,7 @@ public class LoginController {
                 return map;
             }
         }
-        map.put("code",3);
-        map.put("msg","验证码不正确");
-        return map;
-
+        return null;
     }
 
 }

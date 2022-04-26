@@ -26,14 +26,15 @@ public class UserModularRealmAuthenticator extends ModularRealmAuthenticator {
         //2.强制转换回定义的userToken
         UserToken userToken = (UserToken) authenticationToken;
         //3.获取登录类型
-        UserType userType = userToken.getUserType();
+        String userType = userToken.getUserType();
+        System.out.println("++++++++++++"+userType);
         //所有的Realm
         Collection<Realm> realms = getRealms();
         //登录类型对应的所有Realm
         Collection<Realm> typeReamls = new ArrayList<>();
         for (Realm realm : realms){
             //4.根据Reaml的类名和UserType对比决定那个reaml起作用
-            if (realm.getName().contains(userType.toString()))
+            if (realm.getName().contains(userType))
             {
                 typeReamls.add(realm);
             }

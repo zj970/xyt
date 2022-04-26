@@ -52,22 +52,26 @@ public class AdminRealm extends AuthorizingRealm {
         System.out.println("开始admin登录认证。。。。。。。");
         UserToken userToken = (UserToken)authenticationToken;
         //1.连接数据库 从userToken中获取账号
+        System.out.println("=-=-=-=-=-=-="+userToken.getUsername());
         Admin admin = adminService.queryAdminByID(userToken.getUsername());
         if (admin == null){
+            System.out.println("此管理员不存在");
             //没有返回登录用户名对应的SimpleAuthorizationInfo对象时，就会在LoginController中抛出UUnknownAccountException
             return (AuthenticationInfo) new UnknownAccountException("此管理员不存在");
-        }
-        //根据用户的情况, 来构建 AuthenticationInfo 对象并返回. 通常使用的实现类为: SimpleAuthenticationInfo
-        //通常需要以下四个参数
-        //1). principal: 认证的实体信息. 可以是 username, 也可以是数据表对应的用户的实体类对象.
-        Object principal = admin;
-        //2). credentials: 密码.即从数据库中获取的密码
-        Object credentials = admin.getApd();
-        //3). realmName: 当前 realm 对象的 name. 调用父类的 getName() 方法即可
-        String realmName = getName();
-        //4). credentialsSalt: 盐值,这里我使用的是用户名
-        ByteSource credentialsSalt = ByteSource.Util.bytes(admin.getAnu());
+        }else {
+            System.out.println("此管理员存在");
+            //根据用户的情况, 来构建 AuthenticationInfo 对象并返回. 通常使用的实现类为: SimpleAuthenticationInfo
+            //通常需要以下四个参数
+            //1). principal: 认证的实体信息. 可以是 username, 也可以是数据表对应的用户的实体类对象.
+            Object principal = admin;
+            //2). credentials: 密码.即从数据库中获取的密码
+            Object credentials = admin.getApd();
+            //3). realmName: 当前 realm 对象的 name. 调用父类的 getName() 方法即可
+            String realmName = getName();
+            //4). credentialsSalt: 盐值,这里我使用的是用户名
+            ByteSource credentialsSalt = ByteSource.Util.bytes(admin.getAnu());
 
-        return new SimpleAuthenticationInfo(principal,credentials,credentialsSalt,realmName);
+            return new SimpleAuthenticationInfo(principal,credentials,credentialsSalt,realmName);
+        }
     }
 }

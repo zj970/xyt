@@ -60,9 +60,7 @@ public class ShiroConfiguration {
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
         System.out.println("ShiroConfiguration.shiroFilter()");
         Map<String, Filter> filters = bean.getFilters();//获取filters
-        filters.put("authc", new MyFormAuthenticationFilter());//将自定义 的FormAuthenticationFilter注入shiroFilter中
-        //Map<String, Filter> filters = bean.getFilters();//获取filters
-        //将自定义 的权限验证失败的过滤器ShiroFilterFactoryBean注入shiroFilter
+        filters.put("authc", new MyFormAuthenticationFilter());//将自定义的FormAuthenticationFilter注入shiroFilter中
         //filters.put("perms", new ShiroPermissionsFilter());
 
         // 必须设置SecuritManager
@@ -82,7 +80,11 @@ public class ShiroConfiguration {
          * */
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         //放行静态资源
-        filterChainDefinitionMap.put("/static/**", "anon");
+        filterChainDefinitionMap.put("/css/**", "anon");
+        filterChainDefinitionMap.put("/images/**", "anon");
+        filterChainDefinitionMap.put("/js/**", "anon");
+        filterChainDefinitionMap.put("/layui/**", "anon");
+        filterChainDefinitionMap.put("/lib/**", "anon");
         //放行swagger
         filterChainDefinitionMap.put("/swagger-ui.html","anon");
         filterChainDefinitionMap.put("/swagger/**","anon");
@@ -90,8 +92,11 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/swagger-resources/**","anon");
         filterChainDefinitionMap.put("/v2/**","anon");
         filterChainDefinitionMap.put("/druid/**","anon");
+        //验证码可以匿名访问
+        filterChainDefinitionMap.put("/validatecode.jsp", "anon");
+        filterChainDefinitionMap.put("/refuse.jsp", "anon");
         //授权
-        filterChainDefinitionMap.put("/main","anon");
+        filterChainDefinitionMap.put("/**","authc");
         //允许访问静态资源
         System.out.println(filterChainDefinitionMap);
         //authc表示需要验证身份才能访问，还有一些比如anon表示不需要验证身份就能访问等。
@@ -243,7 +248,7 @@ public class ShiroConfiguration {
     public HashedCredentialsMatcher hashedCredentialsMatcher() {
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
         hashedCredentialsMatcher.setHashAlgorithmName("md5");//散列算法:这里使用MD5算法;
-        hashedCredentialsMatcher.setHashIterations(2);//散列的次数，比如散列两次，相当于 md5(md5(""));
+        hashedCredentialsMatcher.setHashIterations(1024);//散列的次数，比如散列两次，相当于 md5(md5(""));
         return hashedCredentialsMatcher;
     }
 

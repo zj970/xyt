@@ -1,5 +1,7 @@
 package com.zj.xyt.utils;
 
+import com.zj.xyt.realms.UserToken;
+import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.util.WebUtils;
 
@@ -31,15 +33,39 @@ public class MyFormAuthenticationFilter extends FormAuthenticationFilter {
             //如果验证失败 将验证码错误信息通过shiroLoginFailure设这到request中
             httpServletRequest.setAttribute("shiroLoginFailure",Constants.CODE_ERROR);
             //拒绝访问 不再校验用户名密码 return true
+            System.out.println("验证码錯誤" + randomCode);
             return true;
+        }else
+        {
+            //认证通过调用父类的认证方法
+            return super.onAccessDenied(request, response);
         }
-        //认证通过调用父类的认证方法
-        return super.onAccessDenied(request, response);
     }
 
     @Override
     protected void issueSuccessRedirect(ServletRequest request, ServletResponse response) throws Exception {
         System.out.println("这是哪");
         WebUtils.issueRedirect(	request, response, getSuccessUrl(),null,true);
+    }
+
+    //创建多人realmd的token
+    @Override
+    protected AuthenticationToken createToken(String username, String password, ServletRequest request, ServletResponse response) {
+        System.out.println("登录账号为"+username+"登录密码为"+password);
+        System.out.println("-----------------request"+"登录账号为"+getUsername(request)+"登录密码为"+getPassword(request));
+        String userType = request.getParameter("userType");
+        System.out.println("登录类型"+userType);
+        if(userType!=null){
+            if ("Student".equals(userType)){
+                return new UserToken(username,password,"Student");
+            }else if("Teacher".equals(userType)){
+                return new UserToken(username,password,"Teacher");
+            } else {
+                return new UserToken(username,password,"Admin");
+            }
+        }else {
+            return new UserToken(username,password,"Admin");
+        }
+
     }
 }

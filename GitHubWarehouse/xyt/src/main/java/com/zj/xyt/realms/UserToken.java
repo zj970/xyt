@@ -12,8 +12,8 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 @Data
 public class UserToken extends UsernamePasswordToken {
     //登录类型
-    private UserType userType;
-    public UserToken(final String username, final String password, UserType userType){
+    private String userType;
+    public UserToken( String username,  String password, String userType){
         super(username,password);
         this.userType = userType;
     }
