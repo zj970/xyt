@@ -25,7 +25,7 @@ public class Teacher {
 
     /**教师工作证号*/
     @ApiModelProperty(value = "教师工作证号")
-    private Integer Tnu;
+    private String Tnu;
 
     /**教师姓名*/
     @ApiModelProperty(value = "教师姓名")

@@ -5,6 +5,7 @@ import com.zj.xyt.Server.AdminService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -57,20 +58,19 @@ public class AdminRealm extends AuthorizingRealm {
         if (admin == null){
             System.out.println("此管理员不存在");
             //没有返回登录用户名对应的SimpleAuthorizationInfo对象时，就会在LoginController中抛出UUnknownAccountException
-            return (AuthenticationInfo) new UnknownAccountException("此管理员不存在");
+            return null;
         }else {
             System.out.println("此管理员存在");
             //根据用户的情况, 来构建 AuthenticationInfo 对象并返回. 通常使用的实现类为: SimpleAuthenticationInfo
             //通常需要以下四个参数
             //1). principal: 认证的实体信息. 可以是 username, 也可以是数据表对应的用户的实体类对象.
             Object principal = admin;
-            //2). credentials: 密码.即从数据库中获取的密码
+            //2). credentials: 密码.即从数据库中获取的密码,,,加密后的密码
             Object credentials = admin.getApd();
             //3). realmName: 当前 realm 对象的 name. 调用父类的 getName() 方法即可
             String realmName = getName();
             //4). credentialsSalt: 盐值,这里我使用的是用户名
             ByteSource credentialsSalt = ByteSource.Util.bytes(admin.getAnu());
-
             return new SimpleAuthenticationInfo(principal,credentials,credentialsSalt,realmName);
         }
     }

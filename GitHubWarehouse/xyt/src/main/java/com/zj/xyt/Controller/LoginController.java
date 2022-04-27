@@ -1,11 +1,8 @@
 package com.zj.xyt.Controller;
 
-import com.zj.xyt.Entity.Admin;
 import com.zj.xyt.Server.LoginService;
-import com.zj.xyt.realms.UserToken;
 import com.zj.xyt.utils.UserType;
 import io.swagger.annotations.Api;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 /**
@@ -32,16 +30,26 @@ public class LoginController {
         return "/main";
     }
 
-    @GetMapping("/registerUser")
-    public String registerForm(){
-        System.out.println("registerForm");
-        return "/registerForm";
-    }
     @GetMapping("/home")
-    public String home() throws Exception{
-        System.out.println("homePage");
-        return "/system/home/homePage";
+    public String home() throws Exception {
+        return "system/home/homePage";
     }
+
+    /**
+     * 将url地址配置在shiro的配置文件中，设置显示成功后的页面
+     * @param session
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/success")
+    @ResponseBody
+    public Map<String,Object> success(HttpSession session) throws Exception{
+        Map<String,Object> map = new HashMap<>();
+        map.put("code",0);
+        //获得权限资源
+        return map;
+    }
+
     @GetMapping(value = "/login")
     public String login() throws Exception{
         return "/login";
@@ -60,6 +68,7 @@ public class LoginController {
         String exceptionName = request.getAttribute("shiroLoginFailure").toString();
         if (exceptionName!=null){
             System.out.println(exceptionName);
+            System.out.println(UnknownAccountException.class.getName()+"=======================");
             if (exceptionName.equals(UnknownAccountException.class.getName())){
                 map.put("code",1);
                 map.put("msg","用户名不正确");

@@ -101,8 +101,11 @@ public class ShiroConfiguration {
         System.out.println(filterChainDefinitionMap);
         //authc表示需要验证身份才能访问，还有一些比如anon表示不需要验证身份就能访问等。
         System.out.println("拦截器链：" + filterChainDefinitionMap);
+        //传入未登录用户访问登录
         //如果没有权限登录
         bean.setLoginUrl("/login");
+        //设置成功后后返回页面
+        bean.setSuccessUrl("/success");
         //未授权页面
         //bean.setUnauthorizedUrl("/Unauth");
 
@@ -147,10 +150,11 @@ public class ShiroConfiguration {
 
     //创建Realm对象,需要自定义 1
     @Bean(name = "adminRealm")
-    public AdminRealm adminRealm(){
+    public AdminRealm adminRealm(@Qualifier("hashedCredentialsMatcher") HashedCredentialsMatcher matcher){
         AdminRealm adminRealm = new AdminRealm();
         //设置解密规则
-        adminRealm.setCredentialsMatcher(hashedCredentialsMatcher());//设置解密规则
+        //adminRealm.setCredentialsMatcher(hashedCredentialsMatcher());//设置解密规则
+        adminRealm.setCredentialsMatcher(matcher);
         return adminRealm;
     }
     @Bean(name = "studentRealm")
@@ -244,10 +248,16 @@ public class ShiroConfiguration {
         return simpleCookie;
     }
     //因为我们的密码是加过密的，所以，如果要Shiro验证用户身份的话，需要告诉它我们用的是md5加密的，并且是加密了两次。同时我们在自己的Realm中也通过SimpleAuthenticationInfo返回了加密时使用的盐。这样Shiro就能顺利的解密密码并验证用户名和密码是否正确了。
-    @Bean
+
+    /***
+     * 替换当前Realm的credentialsMatcher属性
+     * 直接使用 HashedCredentialsMatcher 对象，并设置加密
+     * @return
+     */
+    @Bean("hashedCredentialsMatcher")
     public HashedCredentialsMatcher hashedCredentialsMatcher() {
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-        hashedCredentialsMatcher.setHashAlgorithmName("md5");//散列算法:这里使用MD5算法;
+        hashedCredentialsMatcher.setHashAlgorithmName("MD5");//散列算法:这里使用MD5算法;
         hashedCredentialsMatcher.setHashIterations(1024);//散列的次数，比如散列两次，相当于 md5(md5(""));
         return hashedCredentialsMatcher;
     }

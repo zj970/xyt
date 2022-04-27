@@ -110,7 +110,7 @@
     }
 
     function subForm() {
-        console.log("开始调用登录方法")
+        //console.log("开始调用登录方法")
 
         var params = $("#login").serialize();
         $.post("${path}/login",params,function (data) {
@@ -118,7 +118,7 @@
             if(data.code != 0){
                 layui.layer.msg(data.msg,{icon:5});
             }else{
-                alert("登录成功")
+                //alert("登录成功")
                 layui.layer.msg("登录成功",{icon:1,time:1000},function () {
                     location.href = "${path}/main";
                 });

@@ -5,6 +5,7 @@ import com.zj.xyt.Server.StudentService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -55,7 +56,8 @@ public class StudentRealm extends AuthorizingRealm {
         Student student = studentService.queryStudentByID(userToken.getUsername());
         if (student == null){
             //没有返回登录用户名对应的SimpleAuthorizationInfo对象时，就会在LoginController中抛出UUnknownAccountException
-            return (AuthenticationInfo) new UnknownAccountException("此学生不存在");
+            //return (AuthenticationInfo) new UnknownAccountException("此学生不存在");
+            return null;
         }
         else {
             //根据用户的情况, 来构建 AuthenticationInfo 对象并返回. 通常使用的实现类为: SimpleAuthenticationInfo
@@ -67,6 +69,17 @@ public class StudentRealm extends AuthorizingRealm {
             //3). realmName: 当前 realm 对象的 name. 调用父类的 getName() 方法即可
             String realmName = getName();
             //4). credentialsSalt: 盐值,这里我使用的是用户名
+//            /***
+//             * 模拟加密后的密码为多少
+//             */
+//            System.out.println("-------------------------------------------------------");
+//            String hashAlgorithmName = "MD5";//加密方式
+//            Object crdentials = "123456";//密码原值
+//            ByteSource salt = ByteSource.Util.bytes(student.getSnu());//以账号作为盐值
+//            int hashIterations = 1024;//加密1024次
+//            Object result = new SimpleHash(hashAlgorithmName,crdentials,salt,hashIterations);
+//            System.out.println(student.getSnu()+"加密后的结果为:"+result);
+//            System.out.println("=================================================================");
             ByteSource credentialsSalt = ByteSource.Util.bytes(student.getSnu());
             return new SimpleAuthenticationInfo(principal,credentials,credentialsSalt,realmName);
         }

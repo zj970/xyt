@@ -9,7 +9,7 @@ CREATE DATABASE xyt;
 CREATE TABLE admin
 (
     Anu CHAR(11) PRIMARY KEY,
-    Apd CHAR(20) NOT NULL 
+    Apd CHAR(33) NOT NULL 
 );
 
 /*创建系表*/
@@ -31,7 +31,7 @@ CREATE TABLE teacher
     Teyte DATE NOT NULL,
     Tsnte DATE, 
     Dnu CHAR(3) ,
-    Tpd CHAR(20) NOT NULL ,
+    Tpd CHAR(33) NOT NULL ,
     FOREIGN KEY (Dnu) REFERENCES department(Dnu) /* 表级完整性的约束条件,Dnu是外码连接department */
 );
 
@@ -56,7 +56,7 @@ CREATE TABLE student
     Cnu CHAR(8),
     Scredit FLOAT(3),
     Sette DATE,
-    Spd CHAR(20) NOT NULL ,
+    Spd CHAR(33) NOT NULL ,
     FOREIGN KEY (Cnu) REFERENCES class(Cnu)/* 表级完整性的约束条件,Cnu是外码连接class */
 );
 /* 创建课程表 */
@@ -116,7 +116,6 @@ SELECT SUM(Lcredit) FROM sc,lesson WHERE Snu = '180608501017' AND sc.Lnu = lesso
 /* 查询教师授课信息 */
 SELECT lesson.* FROM lesson WHERE Tnu = '201809';
 SELECT student.Snu,Sname,Cnu,Grade FROM lesson,sc,student WHERE Tnu = '201809' AND lesson.Lnu = sc.Lnu AND sc.Snu = student.Snu;
-
 
 
 ```
