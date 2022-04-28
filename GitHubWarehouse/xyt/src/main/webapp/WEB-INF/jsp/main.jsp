@@ -67,7 +67,7 @@
     </div>
 
     <div class="layui-body">
-        <iframe src="${path}/home" name="middle" width="100%" height="100%" frameborder="0"></iframe>
+        <iframe src="${path}/main/home" name="middle" width="100%" height="100%" frameborder="0"></iframe>
     </div>
 
     <div class="layui-footer">

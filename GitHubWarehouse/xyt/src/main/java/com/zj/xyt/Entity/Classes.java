@@ -15,16 +15,16 @@ import java.util.List;
 public class Classes {
     /**所属系编号*/
     @ApiModelProperty("所属系编号")
-    private Integer Dnu;
+    private String Dnu;
     /**班主任工作证号*/
     @ApiModelProperty(value = "班主任工作证号")
-    private Integer Tnu;
+    private String Tnu;
     /**班级名称*/
     private String Cname;
     /**学生*/
     @ApiModelProperty(value = "学生")
     private List<Student> C_S_List = new ArrayList<>();
-    public Classes(Integer Dnu,Integer Tnu){
+    public Classes(String Dnu,String Tnu){
         this.Dnu = Dnu;
         this.Tnu = Tnu;
     }

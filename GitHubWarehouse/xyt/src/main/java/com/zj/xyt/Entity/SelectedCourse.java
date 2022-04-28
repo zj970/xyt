@@ -19,9 +19,9 @@ public class SelectedCourse {
 
     /**学生学号--账号*/
     @ApiModelProperty("学生学号")
-    private Integer Snu;
+    private String Snu;
 
     /**课序号*/
     @ApiModelProperty("课序号")
-    private Integer Lnu;
+    private String Lnu;
 }

@@ -93,6 +93,19 @@ CREATE TABLE notice
   releasedate DATE NOT NULL
 );
 
+/* 创建权限资源表 */
+CREATE TABLE  permission
+(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name CHAR(20) NOT NULL ,
+    permission CHAR(20) NOT NULL ,
+    url CHAR(50),
+    percode CHAR(30),
+    parentId INT(10) ,
+    sortString INT,
+    avaliable INT 
+);
+
 /* 建立索引 */
 CREATE UNIQUE INDEX stu_name ON student(Sname);
 CREATE UNIQUE INDEX tea_name ON teacher(Tname);

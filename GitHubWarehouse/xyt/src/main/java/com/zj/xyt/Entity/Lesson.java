@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class Lesson {
     /**课序号*/
     @ApiModelProperty("课序号")
-    private Integer Lnu;
+    private String Lnu;
 
     /**上课时间地点*/
     @ApiModelProperty("上课时间地点")

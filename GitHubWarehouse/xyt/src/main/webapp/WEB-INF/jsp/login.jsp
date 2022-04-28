@@ -116,7 +116,8 @@
         $.post("${path}/login",params,function (data) {
             console.log("开始调用登录方法"+data)
             if(data.code != 0){
-                layui.layer.msg(data.msg,{icon:5});
+                layui.layer.msg(data.msg,{icon:5,time:500})
+                reloadValidateCode();//验证码刷新
             }else{
                 //alert("登录成功")
                 layui.layer.msg("登录成功",{icon:1,time:1000},function () {
