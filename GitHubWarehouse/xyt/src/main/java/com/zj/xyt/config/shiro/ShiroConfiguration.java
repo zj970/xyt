@@ -1,5 +1,6 @@
 package com.zj.xyt.config.shiro;
 
+import com.zj.xyt.Entity.Permission;
 import com.zj.xyt.realms.*;
 import com.zj.xyt.utils.MyFormAuthenticationFilter;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
@@ -61,9 +62,7 @@ public class ShiroConfiguration {
         System.out.println("ShiroConfiguration.shiroFilter()");
         Map<String, Filter> filters = bean.getFilters();//获取filters
         filters.put("authc", new MyFormAuthenticationFilter());//将自定义的FormAuthenticationFilter注入shiroFilter中
-        //filters.put("perms", new ShiroPermissionsFilter());
-
-        // 必须设置SecuritManager
+        //设置SecuritManager
         //设置安全管理器
         bean.setSecurityManager(securityManager);
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
@@ -96,10 +95,15 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/validatecode.jsp", "anon");
         filterChainDefinitionMap.put("/refuse.jsp", "anon");
         //授权
+        filterChainDefinitionMap.put("/admin/**", "roles[admin]");
+        filterChainDefinitionMap.put("/teacher/**", "roles[teacher]");
+        filterChainDefinitionMap.put("/student/**", "roles[student]");
+        //从数据库获取所有的权限
+        //List<Permission> list =
+
+        // <!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
+        // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
         filterChainDefinitionMap.put("/**","authc");
-        //允许访问静态资源
-        System.out.println(filterChainDefinitionMap);
-        //authc表示需要验证身份才能访问，还有一些比如anon表示不需要验证身份就能访问等。
         System.out.println("拦截器链：" + filterChainDefinitionMap);
         //传入未登录用户访问登录
         //如果没有权限登录

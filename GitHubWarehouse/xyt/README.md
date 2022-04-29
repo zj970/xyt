@@ -103,7 +103,7 @@ CREATE TABLE  permission
     percode CHAR(30),
     parentId INT(10) ,
     sortString INT,
-    avaliable INT 
+    available INT 
 );
 
 /* 建立索引 */
