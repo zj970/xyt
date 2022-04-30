@@ -1,9 +1,12 @@
 package com.zj.xyt.Controller.other;
 
 import com.zj.xyt.Entity.Admin;
+import com.zj.xyt.Entity.Permission;
 import com.zj.xyt.Entity.Student;
 import com.zj.xyt.Entity.Teacher;
 import com.zj.xyt.Server.LoginService;
+import com.zj.xyt.Server.PermissionService;
+import com.zj.xyt.utils.Constants;
 import com.zj.xyt.utils.UserType;
 import io.swagger.annotations.Api;
 import org.apache.shiro.SecurityUtils;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 /**
  * @author zj
@@ -30,6 +34,10 @@ import java.util.Map;
 public class LoginController {
     @Autowired
     LoginService loginService;
+
+    @Autowired
+    PermissionService permissionService;
+
     @GetMapping("/main")
     public String main() throws Exception{
         return "/main";
@@ -48,13 +56,19 @@ public class LoginController {
         Object ob = SecurityUtils.getSubject().getPrincipal();
          if(ob instanceof Admin){
              System.out.println("登录类型为管理员");
+             session.setAttribute(Constants.LOGIN_USER,ob);
          }
         if(ob instanceof Student){
             System.out.println("登录类型为学生");
+            session.setAttribute(Constants.LOGIN_USER,ob);
         }
         if(ob instanceof Teacher){
             System.out.println("登录类型为教师");
+            session.setAttribute(Constants.LOGIN_USER,ob);
         }
+
+        List<Permission> list = permissionService.queryAll();
+        session.setAttribute(Constants.LOGIN_USER_PERS,list);
         //session.getAttribute("userType");
         //获得权限资源
         return map;

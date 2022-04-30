@@ -97,12 +97,12 @@ CREATE TABLE notice
 CREATE TABLE  permission
 (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    name CHAR(20) NOT NULL ,
+    text CHAR(20) NOT NULL ,
     permission CHAR(20) NOT NULL ,
     url CHAR(50),
     percode CHAR(30),
-    parentId INT(10) ,
-    sortString INT,
+    parentid INT(10) ,
+    sortstring INT,
     available INT 
 );
 

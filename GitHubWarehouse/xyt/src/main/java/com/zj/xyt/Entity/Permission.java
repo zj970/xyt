@@ -20,7 +20,7 @@ public class Permission {
      * 权限名称
      */
     @ApiModelProperty(value = "权限名称")
-    private String name;
+    private String text;
     /**
      * 功能地址
      */
@@ -35,12 +35,12 @@ public class Permission {
      * 父级编号
      */
     @ApiModelProperty(value = "父级编号")
-    private String parentId;
+    private String parentid;
     /**
      * 排序
      */
     @ApiModelProperty(value = "排序")
-    private String sortString;
+    private String sortstring;
     /**
      * 是否启用，0 不启用 1 启用
      */

@@ -11,7 +11,7 @@
         layui.use('layer');
         function logout() {
             layer.confirm('是否确认退出?',{icon:3,title:'提示'},function (index) {
-                location.href = "${path}/easUser/logout";
+                location.href = "${path}/logout";
             });
         }
     </script>
@@ -32,7 +32,7 @@
                 <a href="javascript:;">
 <%--                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">--%>
                     <img src="${path}/images/320755dbe6849f1c26308e67c5eb2b67.jpeg" class="layui-nav-img">
-                    ${sessionScope.login_user.username}
+                    ${sessionScope.login_user}
                 </a>
                 <dl class="layui-nav-child">
                     <%--   target="middle"在指定的框架中打开被链接文档。 --%>

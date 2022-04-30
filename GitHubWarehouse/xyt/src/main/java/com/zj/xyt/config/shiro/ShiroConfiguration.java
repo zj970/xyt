@@ -1,6 +1,7 @@
 package com.zj.xyt.config.shiro;
 
 import com.zj.xyt.Entity.Permission;
+import com.zj.xyt.Server.PermissionService;
 import com.zj.xyt.realms.*;
 import com.zj.xyt.utils.MyFormAuthenticationFilter;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
@@ -16,6 +17,7 @@ import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisManager;
 import org.crazycake.shiro.RedisSessionDAO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -36,6 +38,8 @@ import java.util.Map;
 public class ShiroConfiguration {
     //TODO:日志实例出现问题
     //static final Logger logger = LoggerFactory.getLogger(ShiroConfiguration.class);
+    @Autowired
+    PermissionService permissionService;
 
     //获取application.properties参数
     @Value("${spring.redis.host}")
@@ -78,6 +82,7 @@ public class ShiroConfiguration {
          *         filterChainDefinitionMap.put("/user/update","authc");
          * */
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
+        filterChainDefinitionMap.put("/logout", "logout");
         //放行静态资源
         filterChainDefinitionMap.put("/css/**", "anon");
         filterChainDefinitionMap.put("/images/**", "anon");
@@ -99,7 +104,10 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/teacher/**", "roles[teacher]");
         filterChainDefinitionMap.put("/student/**", "roles[student]");
         //从数据库获取所有的权限
-        //List<Permission> list =
+//        List<Permission> list = permissionService.queryAll();
+//        for (Permission permission :list){
+//            filterChainDefinitionMap.put(permission.getUrl(),permission.getPercode());
+//        }
 
         // <!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
         // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
@@ -108,6 +116,7 @@ public class ShiroConfiguration {
         //传入未登录用户访问登录
         //如果没有权限登录
         bean.setLoginUrl("/login");
+
         //设置成功后后返回页面
         bean.setSuccessUrl("/success");
         //未授权页面
