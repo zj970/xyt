@@ -40,7 +40,6 @@ public class ShiroConfiguration {
     //static final Logger logger = LoggerFactory.getLogger(ShiroConfiguration.class);
     @Autowired
     PermissionService permissionService;
-
     //获取application.properties参数
     @Value("${spring.redis.host}")
     private String host;
@@ -48,7 +47,6 @@ public class ShiroConfiguration {
     private int port;
     @Value("${spring.redis.timeout}")
     private int timeout;
-
     /**
      * ShiroFilterFactoryBean 处理拦截资源文件问题。
      * 注意：单独一个ShiroFilterFactoryBean配置是或报错的，因为在
@@ -127,8 +125,6 @@ public class ShiroConfiguration {
 
         return bean;
     }
-
-
     //defaultWebSecurityManager 管理对象 2
     //SecurityManager 是 Shiro 架构的核心，通过它来链接Realm和用户(文档中称之为Subject.)
     @Bean("securityManager")
@@ -184,8 +180,6 @@ public class ShiroConfiguration {
         teacherRealm.setCredentialsMatcher(hashedCredentialsMatcher());//设置解密规则
         return teacherRealm;
     }
-
-
     /**
      * cacheManager 缓存 redis实现
      * 使用的是shiro-redis开源插件
@@ -198,8 +192,6 @@ public class ShiroConfiguration {
         redisCacheManager.setRedisManager(redisManager());
         return redisCacheManager;
     }
-
-
     /**
      * 配置shiro redisManager
      * 使用的是shiro-redis开源插件
@@ -261,7 +253,6 @@ public class ShiroConfiguration {
         return simpleCookie;
     }
     //因为我们的密码是加过密的，所以，如果要Shiro验证用户身份的话，需要告诉它我们用的是md5加密的，并且是加密了两次。同时我们在自己的Realm中也通过SimpleAuthenticationInfo返回了加密时使用的盐。这样Shiro就能顺利的解密密码并验证用户名和密码是否正确了。
-
     /***
      * 替换当前Realm的credentialsMatcher属性
      * 直接使用 HashedCredentialsMatcher 对象，并设置加密

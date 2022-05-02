@@ -57,6 +57,10 @@ public class LoginController {
         Object ob = SecurityUtils.getSubject().getPrincipal();
          if(ob instanceof Admin){
              System.out.println("登录类型为管理员");
+             if (SecurityUtils.getSubject().hasRole("admin")){
+                 System.out.println("=-=======================================");
+             }
+
              Admin admin = (Admin) SecurityUtils.getSubject().getPrincipal();
              //设置名字的
              session.setAttribute(Constants.LOGIN_USER,admin.getAnu());

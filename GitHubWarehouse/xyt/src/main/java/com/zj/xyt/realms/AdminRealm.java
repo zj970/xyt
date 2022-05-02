@@ -37,6 +37,7 @@ public class AdminRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         if (principalCollection.getPrimaryPrincipal() instanceof Admin){
             Admin admin = (Admin) principalCollection.getPrimaryPrincipal();
+            System.out.println("开始admin权限授权"+admin.getAnu());
             System.out.println("Admin:"+admin);
             info.addRole("admin");
             //每次都从数据中重新查找，确保能及时更新权限
