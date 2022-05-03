@@ -1,6 +1,8 @@
 package com.zj.xyt.realms;
 
+import com.zj.xyt.Entity.Permission;
 import com.zj.xyt.Entity.Student;
+import com.zj.xyt.Server.PermissionService;
 import com.zj.xyt.Server.StudentService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -12,6 +14,9 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -28,6 +33,8 @@ public class StudentRealm extends AuthorizingRealm {
     @Lazy
     @Autowired
     StudentService studentService;
+    @Autowired
+    PermissionService permissionService;
     //日志实例
     //private static final Logger log = (Logger) LoggerFactory.getLogger(AdminRealm.class);
     //授权
@@ -41,6 +48,15 @@ public class StudentRealm extends AuthorizingRealm {
         if (principalCollection.getPrimaryPrincipal() instanceof Student){
             Student student = (Student) principalCollection.getPrimaryPrincipal();
             info.addRole("student");
+            //每次都从数据中重新查找，确保能及时更新权限
+            List<Permission> list = permissionService.queryByID("1");
+            Set<String> set = new HashSet<>();
+            for (Permission permission : list){
+                set.add(permission.getPercode());
+            }
+            info.setStringPermissions(set);
+            System.out.println("当前student授权角色：" +info.getRoles() + "，权限：" + info.getStringPermissions());
+
             //log.info(admin.get);
             return info;
         }

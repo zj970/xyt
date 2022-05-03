@@ -114,7 +114,7 @@
 			// 实际使用时的提交信息
 			$.ajax({
 				type: 'post',
-				url: "${path}/easNotice/addNotice",
+				url: "${path}/notice/addNotice",
 				data : {
 					opType: $("#opType").val(),
 					id : $("#id").val(),

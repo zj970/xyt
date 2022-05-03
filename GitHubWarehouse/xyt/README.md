@@ -92,6 +92,14 @@ CREATE TABLE notice
   type INT NOT NULL ,
   releasedate DATE NOT NULL
 );
+
+/* 创建角色表 */
+CREATE TABLE role
+(
+    roleID INT PRIMARY KEY ,
+    roleName CHAR(20)
+);
+
 /* 创建权限角色关系表 */
 CREATE TABLE role_permission
 (

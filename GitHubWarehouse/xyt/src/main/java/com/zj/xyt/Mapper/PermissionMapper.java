@@ -11,4 +11,9 @@ public interface PermissionMapper {
      * 获取所有的权限
      */
     List<Permission> queryAll();
+
+    /**
+     * 根据角色获取权限
+     */
+    List<Permission> queryByID(String id);
 }

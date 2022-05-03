@@ -1,7 +1,9 @@
 package com.zj.xyt.realms;
 
 import com.zj.xyt.Entity.Admin;
+import com.zj.xyt.Entity.Permission;
 import com.zj.xyt.Server.AdminService;
+import com.zj.xyt.Server.PermissionService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -11,6 +13,11 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  * @author zj970
  * @Description 自定义AdminRealm
@@ -25,6 +32,8 @@ public class AdminRealm extends AuthorizingRealm {
     @Lazy
     @Autowired
     AdminService adminService;
+    @Autowired
+    PermissionService permissionService;
     //日志实例
     //private static final Logger log = (Logger) LoggerFactory.getLogger(AdminRealm.class);
     //授权
@@ -41,7 +50,12 @@ public class AdminRealm extends AuthorizingRealm {
             System.out.println("Admin:"+admin);
             info.addRole("admin");
             //每次都从数据中重新查找，确保能及时更新权限
-            //log.info(admin.get);
+            List<Permission> list = permissionService.queryByID("0");
+            Set<String> set = new HashSet<>();
+            for (Permission permission : list){
+                set.add(permission.getPercode());
+            }
+            info.setStringPermissions(set);
             System.out.println("当前Admin授权角色：" +info.getRoles() + "，权限：" + info.getStringPermissions());
             return info;
         }

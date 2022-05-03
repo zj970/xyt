@@ -17,7 +17,7 @@ public class Notice {
      * 通知id
      */
     @ApiModelProperty(value = "通知id")
-    private String id;
+    private Integer id;
     /**
      * 标题
      */

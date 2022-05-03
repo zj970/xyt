@@ -53,7 +53,7 @@ public class LoginController {
     public Map<String,Object> success(HttpSession session) throws Exception{
         Map<String,Object> map = new HashMap<>();
         map.put("code",0);
-        //设置个人信息的展示
+        //设置个人信息的展示 0 管理员 1 学生 2 教师
         Object ob = SecurityUtils.getSubject().getPrincipal();
          if(ob instanceof Admin){
              System.out.println("登录类型为管理员");
@@ -64,12 +64,16 @@ public class LoginController {
              Admin admin = (Admin) SecurityUtils.getSubject().getPrincipal();
              //设置名字的
              session.setAttribute(Constants.LOGIN_USER,admin.getAnu());
+             List<Permission> list = permissionService.queryByID("0");
+             session.setAttribute(Constants.LOGIN_USER_PERS,list);
          }
         if(ob instanceof Student){
             System.out.println("登录类型为学生");
             Student student = (Student) SecurityUtils.getSubject().getPrincipal();
             //设置名字的
             session.setAttribute(Constants.LOGIN_USER,student.getSname());
+            List<Permission> list = permissionService.queryByID("1");
+            session.setAttribute(Constants.LOGIN_USER_PERS,list);
         }
         if(ob instanceof Teacher){
 
@@ -77,10 +81,10 @@ public class LoginController {
             Teacher teacher = (Teacher) SecurityUtils.getSubject().getPrincipal();
             //设置名字的
             session.setAttribute(Constants.LOGIN_USER,teacher.getTname());
+            List<Permission> list = permissionService.queryByID("2");
+            session.setAttribute(Constants.LOGIN_USER_PERS,list);
         }
 
-        List<Permission> list = permissionService.queryAll();
-        session.setAttribute(Constants.LOGIN_USER_PERS,list);
         //session.getAttribute("userType");
         //获得权限资源
         return map;

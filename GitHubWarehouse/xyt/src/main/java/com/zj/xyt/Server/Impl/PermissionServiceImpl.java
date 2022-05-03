@@ -18,4 +18,11 @@ public class PermissionServiceImpl implements PermissionService {
     public List<Permission> queryAll() {
         return permissionMapper.queryAll();
     }
+
+    @Override
+    public List<Permission> queryByID(String id) {
+        return permissionMapper.queryByID(id);
+    }
+
+
 }

@@ -6,4 +6,7 @@
     <select id="queryAll" resultType="com.zj.xyt.Entity.Permission">
         select * from permission
     </select>
+    <select id="queryByID" resultType="com.zj.xyt.Entity.Permission">
+        select * from permission where permission.id in (select distinct permission_id from role_permission where role_id = #{arg0})
+    </select>
 </mapper>

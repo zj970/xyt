@@ -18,4 +18,21 @@ import java.util.List;
 @Api(tags = "公告业务层")
 public interface NoticeService {
 
+    int addNotice(@Param("notice")Notice notice) throws Exception;
+
+    int updateNotice(@Param("notice")Notice notice) throws Exception;
+
+    int deleteNotice(@Param("notice")Notice notice);
+
+    int deleteNoticeList(@Param("list")List<Integer> list);
+
+    int getCountByTypeAndNotice(int type, Notice notice);
+
+    int getCountByType(@Param("type")int type, @Param("searchKey")String searchKey) throws Exception;
+
+    List<Notice> getNoticeListByType(int type, String searchKey, PageUtil pageUtil) throws Exception;
+
+    List<Notice> getNoticeListByTypeAndNotice(int type, Notice notice, PageUtil pageUtil);
+
+    List<Notice> getNoticeById(Integer id);
 }

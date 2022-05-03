@@ -54,7 +54,7 @@
         var tableIns = table.render({
             id : "adminNoticeList",
             elem: '#adminNoticeList',
-            url : '${path}/easNotice/list',
+            url : '${path}/notice/list',
             // where: {
             //     searchKey: $(".searchVal").val()
             // },
@@ -81,7 +81,7 @@
             var index = layui.layer.open({
                 title : "编辑公告",
                 type : 2,
-                content : "${path}/easNotice/addPage",
+                content : "${path}/notice/addPage",
                 success : function(layero, index){
                     var body = layui.layer.getChildFrame('body', index);
                     //编辑公告(通知)
@@ -131,7 +131,7 @@
                     nIds += data[i].id + ",";
                 }
                 layer.confirm('确定删除选中的公告？', {icon: 3, title: '提示信息'}, function (index) {
-                    $.get("${path}/easNotice/deleteList",{
+                    $.get("${path}/notice/deleteList",{
                         nIds : nIds  //将需要删除的newsId作为参数传入
                     },function(res){
                         if (res.result === true) {
@@ -158,7 +158,7 @@
                 addNotice(data);
             } else if(layEvent === 'del'){ //删除
                 layer.confirm('确定删除此公告？',{icon:3, title:'提示信息'},function(index){
-                    $.get("${path}/easNotice/deleteNotice",{id : data.id},function(res){
+                    $.get("${path}/notice/deleteNotice",{id : data.id},function(res){
                         if (res.result === true) {
                             layer.msg(res.msg, {icon: 1,time:1000},function () {
                                 tableIns.reload();
@@ -175,7 +175,7 @@
                 var index = layui.layer.open({
                     title : "公告详情",
                     type : 2,
-                    content : "${path}/easNotice/look",
+                    content : "${path}/notice/look",
                     success : function(layero, index){
                         var body = layui.layer.getChildFrame('body', index);
                         body.find("#title").html(data.title);

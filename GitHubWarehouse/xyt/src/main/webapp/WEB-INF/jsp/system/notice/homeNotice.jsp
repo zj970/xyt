@@ -20,7 +20,7 @@
     <div class="main-container">
         <div class="left-container">
             <div class="title">
-                <p><span>名称:</span><br />${notice.title}</p>
+                <p><span>标题</span><br />${notice.title}</p>
                 <div class="line"></div>
             </div>
             <div class="profile">
@@ -32,7 +32,7 @@
         <div class="right-container">
             <div class="text">
                 <p>
-                    <span>TEXT</span><br/>${notice.content}
+                    <span>内容</span><br/>${notice.content}
                 </p>
             </div>
             <div class="footer">
@@ -54,7 +54,7 @@
 
 <script>
     function quit(){
-        location.href = "${path}/main/homePage";
+        location.href = "${path}/main/home";
     }
 </script>
 </body>

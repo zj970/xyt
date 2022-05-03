@@ -20,4 +20,9 @@ public interface PermissionService {
      * 获取所有的权限信息
      */
     List<Permission> queryAll();
+
+    /**
+     * 根据角色获取权限
+     */
+    List<Permission> queryByID(String id);
 }

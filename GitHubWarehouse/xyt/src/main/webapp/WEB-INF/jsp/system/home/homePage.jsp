@@ -202,7 +202,7 @@
             ,done: function(page, next){ //到达临界点（默认滚动触发），触发下一页
                 var lis = [];
                 $.get('${path}/main/getNotice?page='+page, function(res){
-                    // console.log("返回到前端的list数据为:"+res.data);
+                    console.log("返回到前端的list数据为:"+res.data);
                     //假设你的列表返回在data集合中
                     layui.each(res.data, function(index, item){
                         // console.log("返回到前端的id数据为:"+item.id);

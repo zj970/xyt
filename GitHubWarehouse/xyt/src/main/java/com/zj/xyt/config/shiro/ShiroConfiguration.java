@@ -63,7 +63,6 @@ public class ShiroConfiguration {
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
         System.out.println("ShiroConfiguration.shiroFilter()");
         Map<String, Filter> filters = bean.getFilters();//获取filters
-        filters.put("authc", new MyFormAuthenticationFilter());//将自定义的FormAuthenticationFilter注入shiroFilter中
         //设置SecuritManager
         //设置安全管理器
         bean.setSecurityManager(securityManager);
@@ -88,12 +87,14 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/layui/**", "anon");
         filterChainDefinitionMap.put("/lib/**", "anon");
         //放行swagger
-        filterChainDefinitionMap.put("/swagger-ui.html","anon");
+        filterChainDefinitionMap.put("/swagger-ui/**","anon");
         filterChainDefinitionMap.put("/swagger/**","anon");
         filterChainDefinitionMap.put("/webjars/**", "anon");
         filterChainDefinitionMap.put("/swagger-resources/**","anon");
         filterChainDefinitionMap.put("/v2/**","anon");
         filterChainDefinitionMap.put("/druid/**","anon");
+        //放行测试页面
+        filterChainDefinitionMap.put("/test/**","anon");
         //验证码可以匿名访问
         filterChainDefinitionMap.put("/validatecode.jsp", "anon");
         filterChainDefinitionMap.put("/refuse.jsp", "anon");
@@ -101,6 +102,7 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/admin/**", "roles[admin]");
         filterChainDefinitionMap.put("/teacher/**", "roles[teacher]");
         filterChainDefinitionMap.put("/student/**", "roles[student]");
+        filters.put("authc", new MyFormAuthenticationFilter());//将自定义的FormAuthenticationFilter注入shiroFilter中
         //从数据库获取所有的权限
 //        List<Permission> list = permissionService.queryAll();
 //        for (Permission permission :list){
