@@ -68,7 +68,7 @@ public class AdminRealm extends AuthorizingRealm {
         System.out.println("开始admin登录认证。。。。。。。");
         UserToken userToken = (UserToken)authenticationToken;
         //1.连接数据库 从userToken中获取账号
-        System.out.println("=-=-=-=-=-=-="+userToken.getUsername());
+        System.out.println("=-=-=-=-=-=-="+userToken.getUsername()+userToken.getUserType());
         Admin admin = adminService.queryAdminByID(userToken.getUsername());
         if (admin == null){
             System.out.println("此管理员不存在");

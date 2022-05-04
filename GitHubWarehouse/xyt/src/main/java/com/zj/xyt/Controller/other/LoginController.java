@@ -100,27 +100,29 @@ public class LoginController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @PostMapping(value = "/login")
     @ResponseBody
     public Map<String,Object> login(HttpServletRequest request) throws Exception{
         System.out.println("认证失败了吧！来我这了吧");
         Map<String,Object> map = new HashMap<>();
-        String exceptionName = request.getAttribute("shiroLoginFailure").toString();
-        if (exceptionName!=null){
-            System.out.println(exceptionName);
-            System.out.println(UnknownAccountException.class.getName()+"=======================");
-            if (exceptionName.equals(UnknownAccountException.class.getName())){
-                map.put("code",1);
-                map.put("msg","用户名不正确");
-                return map;
-            }else if(exceptionName.equals(IncorrectCredentialsException.class.getName())){
-                map.put("code",2);
-                map.put("msg","密码不正确");
-                return map;
-            }else if (exceptionName.equals("randomCodeError")){
-                map.put("code",3);
-                map.put("msg","验证码不正确");
-                return map;
+        if(request.getAttribute("shiroLoginFailure")!=null) {
+            String exceptionName = request.getAttribute("shiroLoginFailure").toString();
+            if (exceptionName != null) {
+                System.out.println(exceptionName);
+                System.out.println(UnknownAccountException.class.getName() + "=======================");
+                if (exceptionName.equals(UnknownAccountException.class.getName())) {
+                    map.put("code", 1);
+                    map.put("msg", "用户名不正确");
+                    return map;
+                } else if (exceptionName.equals(IncorrectCredentialsException.class.getName())) {
+                    map.put("code", 2);
+                    map.put("msg", "密码不正确");
+                    return map;
+                } else if (exceptionName.equals("randomCodeError")) {
+                    map.put("code", 3);
+                    map.put("msg", "验证码不正确");
+                    return map;
+                }
             }
         }
         return null;

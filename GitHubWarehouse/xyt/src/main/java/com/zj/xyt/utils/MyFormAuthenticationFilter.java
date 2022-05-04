@@ -53,9 +53,9 @@ public class MyFormAuthenticationFilter extends FormAuthenticationFilter {
     //创建多人realmd的token
     @Override
     protected AuthenticationToken createToken(String username, String password, ServletRequest request, ServletResponse response) {
-        //System.out.println("-----------------request"+"登录账号为"+getUsername(request)+"登录密码为"+getPassword(request));
+        System.out.println("-----------------request"+"登录账号为"+getUsername(request)+"登录密码为"+getPassword(request));
         String userType = request.getParameter("userType");
-        //System.out.println("登录类型"+userType);
+        System.out.println("登录类型"+userType);
             if ("Student".equals(userType)){
                 return new UserToken(username,password,"Student");
             }else if("Teacher".equals(userType)){

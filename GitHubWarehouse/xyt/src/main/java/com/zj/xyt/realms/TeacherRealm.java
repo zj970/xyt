@@ -64,7 +64,7 @@ public class TeacherRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         System.out.println("开始teacher登录认证。。。。。。。");
         UserToken userToken = (UserToken)authenticationToken;
-        System.out.println("=-=-=-=-=-=-="+userToken.getUsername());
+        System.out.println("=-=-=-=-=-=-="+userToken.getUsername()+userToken.getUserType());
         //1.连接数据库
         Teacher teacher = teacherService.queryTeacherByID(userToken.getUsername());
         if (teacher == null){

@@ -69,6 +69,7 @@ public class StudentRealm extends AuthorizingRealm {
         System.out.println("开始student登录认证。。。。。。。");
         UserToken userToken = (UserToken)authenticationToken;
         //1.连接数据库
+        System.out.println("=-=-=-=-=-=-="+userToken.getUsername()+userToken.getUserType());
         Student student = studentService.queryStudentByID(userToken.getUsername());
         if (student == null){
             //没有返回登录用户名对应的SimpleAuthorizationInfo对象时，就会在LoginController中抛出UUnknownAccountException
