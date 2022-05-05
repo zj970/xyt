@@ -41,4 +41,9 @@ public class StudentServiceImpl implements StudentService {
     public void insertStudent(Student student) {
         studentMapper.insertStudent(student);
     }
+
+    @Override
+    public List<Student> findList(Student student) {
+        return studentMapper.findList(student);
+    }
 }

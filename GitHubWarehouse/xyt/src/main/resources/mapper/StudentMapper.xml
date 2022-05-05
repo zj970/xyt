@@ -3,6 +3,19 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zj.xyt.Mapper.StudentMapper">
+
+
+    <resultMap id="resStudent" type="com.zj.xyt.Entity.Student">
+        <!-- property指实体类 -->
+        <id property="Snu" column="Snu"/>
+        <result property="Sname" column="Sname"/>
+        <result property="Ssex" column="Ssex"/>
+        <result property="Sbirth" column="Sbirth"/>
+        <result property="Scredit" column="Scredit"/>
+        <result property="Sette" column="Sette"/>
+        <result property="Cnu" column="Cnu"/>
+        
+    </resultMap>
     <!--查询所有学生-->
     <select id="queryStudentList" parameterType="String" resultType="com.zj.xyt.Entity.Student">
         select * from student
@@ -23,4 +36,8 @@
         insert into student values (#{Snu},#{Sette},#{Cnu},#{Sbirth},#{Ssex},#{Spd})
     </insert>
 
+    <!--查询所有学生信息-->
+    <select id="findList" parameterType="com.zj.xyt.Entity.Student" resultMap="resStudent">
+        select * from student
+    </select>
 </mapper>

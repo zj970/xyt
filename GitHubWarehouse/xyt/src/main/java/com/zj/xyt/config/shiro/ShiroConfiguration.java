@@ -187,7 +187,6 @@ public class ShiroConfiguration {
      * 使用的是shiro-redis开源插件
      * @return
      */
-    @Bean
     public RedisCacheManager cacheManager() {
         System.out.println("创建RedisCacheManager...");
         RedisCacheManager redisCacheManager = new RedisCacheManager();
@@ -199,7 +198,6 @@ public class ShiroConfiguration {
      * 使用的是shiro-redis开源插件
      * @return
      */
-    @Bean
     public RedisManager redisManager() {
         System.out.println("创建shiro redisManager,连接Redis..URL= " + host + ":" + port);
         RedisManager redisManager = new RedisManager();

@@ -36,19 +36,18 @@
 
     </div>
 </form>
-<table class="layui-table" lay-data="{id:'studentTable',url:'${path}/easStudent/list', page:true,toolbar:'#toolbarDemo',defaultToolbar: ['filter', 'print', 'exports'],even: true}"
+<table class="layui-table" lay-data="{id:'studentTable',url:'${path}/student/list', page:true,toolbar:'#toolbarDemo',defaultToolbar: ['filter', 'print', 'exports'],even: true}"
        lay-filter="studentTable">
     <thead>
     <tr>
 <%--        <th lay-data="{type:'checkbox'}">student_msg</th>--%>
-        <th lay-data="{field:'id', width:80}">ID</th>
-        <th lay-data="{field:'username', width:180,align:'center',sort: true,templet:function(res){return res.user.username;}}">用户名</th>
-        <th lay-data="{field:'name',align:'center'}">姓名</th>
-        <th lay-data="{field:'sex',}">性别</th>
-        <th lay-data="{field:'birthday',align:'center'}">生日</th>
-        <th lay-data="{field:'phone',align:'center'}">电话</th>
-        <th lay-data="{field:'classes',sort: true,templet:function(data){return data.easClass.classes;}}">班级</th>
-        <th lay-data="{field:'motto',}">座右铭</th>
+    <th lay-data="{field:'Snu', width:180,align:'center',sort: true,templet:function(res){return res.student.Snu;}}">学号</th>
+        <th lay-data="{field:'Sname',align:'center'}">姓名</th>
+        <th lay-data="{field:'Ssex',}">性别</th>
+        <th lay-data="{field:'Sbirth',align:'center'}">生日</th>
+        <th lay-data="{field:'Scredit',align:'center'}">学分</th>
+    <%-- <th lay-data="{field:'class_id',sort: true,templet:function(data){return data.easClass.classes;}}">班级</th>--%>
+     <th lay-data="{field:Sette',align:'center'}">入学时间</th>
 <%--        <th lay-data="{toolbar:'#barDemo',align:'center'}">操作</th>--%>
     </tr>
     </thead>

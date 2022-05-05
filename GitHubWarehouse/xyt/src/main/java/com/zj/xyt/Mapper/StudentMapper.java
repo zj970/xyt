@@ -31,4 +31,6 @@ public interface StudentMapper {
      * 注册学生账号
      */
     void insertStudent(Student student);
+
+    List<Student> findList(Student student);
 }

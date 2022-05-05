@@ -145,6 +145,7 @@
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
+            <version>3.1.0</version>
         </dependency>
         <!--shiro整合Spring的包-->
         <dependency>
@@ -159,7 +160,13 @@
             <version>2.4</version>
             <classifier>jdk15</classifier>
         </dependency>
-
+        <!--    分页    -->
+        <!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>5.1.10</version>
+        </dependency>
         <!--shiro整合thymeleaf-->
         <!-- 这里有用到日志打印，所以引入 -->
         <dependency>
