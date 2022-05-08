@@ -18,7 +18,7 @@
             <div class="layui-input-inline" style="width: 200px;">
                 <input id="name" type="text" name="price_min" autocomplete="off" class="layui-input">
             </div>
-            <label class="layui-form-label">电话</label>
+            <label class="layui-form-label">学号</label>
             <div class="layui-input-inline" style="width: 200px;">
                 <input id="phone" type="text" name="price_min" autocomplete="off" class="layui-input">
             </div>
@@ -40,25 +40,26 @@
        lay-filter="studentTable">
     <thead>
     <tr>
-<%--        <th lay-data="{type:'checkbox'}">student_msg</th>--%>
-    <th lay-data="{field:'Snu', width:180,align:'center',sort: true,templet:function(res){return res.student.Snu;}}">学号</th>
-        <th lay-data="{field:'Sname',align:'center'}">姓名</th>
-        <th lay-data="{field:'Ssex',}">性别</th>
-        <th lay-data="{field:'Sbirth',align:'center'}">生日</th>
-        <th lay-data="{field:'Scredit',align:'center'}">学分</th>
-    <%-- <th lay-data="{field:'class_id',sort: true,templet:function(data){return data.easClass.classes;}}">班级</th>--%>
-     <th lay-data="{field:Sette',align:'center'}">入学时间</th>
-<%--        <th lay-data="{toolbar:'#barDemo',align:'center'}">操作</th>--%>
+        <th lay-data="{field:'snu',align:'center'}">学号</th>
+        <th lay-data="{field:'sname',align:'center'}">姓名</th>
+        <th lay-data="{field:'ssex',align:'center'}">性别</th>
+        <th lay-data="{field:'sbirth',align:'center'}">生日</th>
+        <th lay-data="{field:'scredit',align:'center'}">学分</th>
+        <th lay-data="{field:'tname',align:'center'}">班主任</th>
+        <th lay-data="{field:'cname',sort: true,templet:function(data){return data.cname;}}">班级</th>
+        <th lay-data="{field:'dname',sort: true,templet:function(data){return data.dname;}}">系名</th>
+        <th lay-data="{field:'sette',align:'center'}">入学时间</th>
     </tr>
     </thead>
 </table>
+
+
 <script>
-
-    $.get("${path}/easClass/search",function (data) {
+    $.get("${path}/class/search",function (data) {
         $.each(data,function () {
+            console(data+"开始执行此方法");
             var opt = $("<option></option>").appendTo("#allclass");
-            opt.text(this.classes).val(this.id);
-
+            opt.text(this.classes).val(this.cnu);
         });
         layui.form.render();
     });
@@ -69,12 +70,12 @@
                 curr : 1
             },
             where:{
-                "name":$("#name").val(),
-                "phone":$("#phone").val(),
-                "class_id":$("#allclass").val()
+                "sname":$("#sname").val(),
+                "scredit":$("#snu").val(),
+                "cnu":$("#allclass").val()
             }
         });
-        // console.log($("#name").val());
+         console.log("jidfjoesfjiosf"+$("#sname").val());
     }
 
     layui.use(["table","form"],function () {
@@ -82,7 +83,6 @@
 
 
     });
-
 </script>
 
 

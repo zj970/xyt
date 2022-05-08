@@ -2,6 +2,7 @@ package com.zj.xyt.Mapper;
 
 import com.zj.xyt.Entity.Admin;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,5 +23,5 @@ public interface AdminMapper {
      * 根据Anu查询管理员账号
      * @return 返回管理员
      */
-    Admin queryAdminByID(String Anu);
+    Admin queryAdminByID(@Param("Anu")String Anu);
 }

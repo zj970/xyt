@@ -12,8 +12,6 @@ import io.swagger.annotations.Api;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +39,11 @@ public class LoginController {
     @GetMapping("/main")
     public String main() throws Exception{
         return "/main";
+    }
+
+    @GetMapping("/unauth")
+    public String unauth() throws Exception{
+        return "/unauth";
     }
     /**
      * 将url地址配置在shiro的配置文件中，设置显示成功后的页面

@@ -10,6 +10,6 @@
 
     <!--查询单个用户-->
     <select id="queryAdminByID" parameterType="String" resultType="com.zj.xyt.Entity.Admin">
-        select * from admin where Anu = #{arg0}
+        select * from admin where Anu = #{Anu}
     </select>
 </mapper>

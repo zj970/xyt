@@ -1,6 +1,7 @@
 package com.zj.xyt.Server;
 
 import com.zj.xyt.Entity.Admin;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,5 +22,5 @@ public interface AdminService{
      * 根据Anu查询管理员账号
      * @return 返回管理员
      */
-    Admin queryAdminByID(String Anu);
+    Admin queryAdminByID(@Param("Anu") String Anu);
 }

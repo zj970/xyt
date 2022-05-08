@@ -99,9 +99,9 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/validatecode.jsp", "anon");
         filterChainDefinitionMap.put("/refuse.jsp", "anon");
         //授权
-        filterChainDefinitionMap.put("/admin/**", "roles[admin]");
-        filterChainDefinitionMap.put("/teacher/**", "roles[teacher]");
-        filterChainDefinitionMap.put("/student/**", "roles[student]");
+        //filterChainDefinitionMap.put("/admin/**", "roles[admin]");
+        //filterChainDefinitionMap.put("/teacher/**", "roles[teacher]");
+        //filterChainDefinitionMap.put("/student/**", "roles[student]");
         filters.put("authc", new MyFormAuthenticationFilter());//将自定义的FormAuthenticationFilter注入shiroFilter中
         //从数据库获取所有的权限
 //        List<Permission> list = permissionService.queryAll();
@@ -120,7 +120,7 @@ public class ShiroConfiguration {
         //设置成功后后返回页面
         bean.setSuccessUrl("/success");
         //未授权页面
-        //bean.setUnauthorizedUrl("/Unauth");
+        bean.setUnauthorizedUrl("/unauth");
 
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 

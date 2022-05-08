@@ -43,7 +43,12 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> findList(Student student) {
-        return studentMapper.findList(student);
+    public List<StudentVo> findList() {
+        return studentMapper.findList();
+    }
+
+    @Override
+    public List<StudentVo> headteacherFindList(String Tnu) {
+        return studentMapper.headteacherFindList(Tnu);
     }
 }

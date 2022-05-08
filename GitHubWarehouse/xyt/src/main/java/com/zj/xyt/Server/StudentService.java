@@ -39,8 +39,14 @@ public interface StudentService {
      * 注册学生账号
      */
     void insertStudent(Student student);
+    /**
+     * 管理员查询学生信息
+     */
+    List<StudentVo> findList();
 
-
-    List<Student> findList(Student student);
+    /**
+     * 根据班主任Cnu查询学生信息
+     */
+    List<StudentVo> headteacherFindList(String Tnu);
 
 }

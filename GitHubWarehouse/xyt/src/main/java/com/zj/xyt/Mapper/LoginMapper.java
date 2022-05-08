@@ -3,6 +3,7 @@ import com.zj.xyt.Entity.Admin;
 import com.zj.xyt.Entity.Student;
 import com.zj.xyt.Entity.Teacher;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface LoginMapper {
@@ -12,7 +13,7 @@ public interface LoginMapper {
      * @param Spd 学生用户密码
      * @return
      */
-    Student queryStudent(String Snu,String Spd);
+    Student queryStudent(String Snu, String Spd);
 
     /**
      * 查询教师账户密码是否存在
