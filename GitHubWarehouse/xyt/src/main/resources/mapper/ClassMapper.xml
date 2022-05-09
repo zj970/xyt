@@ -7,4 +7,9 @@
     <select id="getAll" resultType="com.zj.xyt.Entity.Classes">
         select * from class
     </select>
+
+    <!--根据班级编号查询所有班级-->
+    <select id="queryByCnu" parameterType="java.lang.String" resultType="com.zj.xyt.Entity.Classes">
+        select * from class where Cnu = #{Cnu}
+    </select>
 </mapper>

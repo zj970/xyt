@@ -20,24 +20,13 @@
 <%--                <a class="layui-btn search_btn" data-type="reload">搜索</a>--%>
                 <button type="reset" class="layui-btn layui-btn-normal"><i class="layui-icon layui-icon-refresh"></i>重置</button>
             </div>
-
             <div class="layui-inline" style="width: 100px;">
                 <a class="layui-btn layui-btn-primary search_btn" id = "allCourse">可选课程</a>
             </div>
-
-<%--            <div class="layui-inline">--%>
-<%--                <div class="layui-input-inline">--%>
-<%--                    <input type="text" class="layui-input searchVal" placeholder="请输入搜索的内容" />--%>
-<%--                </div>--%>
-<%--                <a class="layui-btn search_btn2" data-type="reload">搜索</a>--%>
-<%--            </div>        --%>
-
             <div class="layui-inline" style="width: 100px;">
                 <a class="layui-btn layui-btn-primary search_btn" id = "myCourse">已选课程</a>
             </div>
-
         </div>
-
     </div>
 </form>
 
@@ -48,14 +37,10 @@
         var table = layui.table;
 
         var colsArray = [[
-            {field: "id", title: "课程编号", sort:true, width:100, align:"left"},
-            {field: "courseName", title: "课程名",minWidth:120, align:"left"},
-            {field: "teacherName", title: "任课教师",minWidth:120, align:"center"},
-            {field: "startDate", title: "开始时间", minWidth:100, align:"center"},
-            {field: "endDate", title: "结束时间", minWidth:100, align:"center"},
-            {field: "classHour", title: "课时", minWidth:100, align:"center"},
-            {field: "testMode", title: "考核方式", minWidth:100, align:"center"},
-            {field: "studentNum", title: "最大人数", minWidth:100, align:"center"},
+            {field: "lnu", title: "课程编号", sort:true, width:100, align:"left"},
+            {field: "lname", title: "课程名",minWidth:120, align:"left"},
+            {field: "tname", title: "任课教师",minWidth:120, align:"center"},
+            {field: "lnum", title: "最大人数", minWidth:100, align:"center"},
             {field: "choiceNum", title: "已选（人）", minWidth:100, align:"center"},
             {title: "操作", width:90, templet:"#courseListBar",fixed:"right",align:"center"}
         ]];
@@ -75,7 +60,7 @@
             tableIns = table.render({
                 id : 'studentCourseTable',
                 elem: '#studentCourseTable',
-                url : '${path}/easCourse/choiceList',
+                url : '${path}/course/choiceList',
                 even:true,
                 where: {
                     isAll: isAll,
@@ -112,10 +97,10 @@
             var url;
             if (layEvent == "choice") {
                 //选课操作
-                url = "${path}/easScore/choiceCourse";
+                url = "${path}/score/choiceCourse";
             } else {
                 //退课操作
-                url = "${path}/easScore/outCourse";
+                url = "${path}/score/outCourse";
             }
             $.ajax({
                 type: "get",

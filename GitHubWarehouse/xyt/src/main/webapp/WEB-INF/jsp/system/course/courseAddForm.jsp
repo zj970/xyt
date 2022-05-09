@@ -4,7 +4,6 @@
 <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <html>
 <head>
-<%--    课程添加(开始结束时间、老师等)--%>
     <title>Title</title>
 </head>
 <body>
@@ -79,15 +78,15 @@
 
 <script>
     layui.form.render();//渲染表格加载 radio 以及下拉框select
-    $.get("${path}/easBaseCourse/search",function (data) {
+    $.get("${path}/baseCourse/search",function (data) {
         $.each(data,function () {
             var opt = $("<option></option>").appendTo("#baseCourseSelect");
-            opt.text(this.coursename).val(this.id);
+            opt.text(this.lname).val(this.id);
         });
         //获取数据后再进行渲染，显示未显示的option
         layui.form.render();
     });
-    $.get("${path}/easTeacher/search",function (data) {
+    $.get("${path}/teacher/search",function (data) {
         $.each(data,function () {
             var opt = $("<option></option>").appendTo("#teacherSelect");
             opt.text(this.name).val(this.id);

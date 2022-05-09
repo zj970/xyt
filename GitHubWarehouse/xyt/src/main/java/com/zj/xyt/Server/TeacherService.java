@@ -5,6 +5,8 @@ import com.zj.xyt.Entity.TeacherVo;
 import io.swagger.annotations.Api;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  *<p>
  *     教师业务类
@@ -26,4 +28,14 @@ public interface TeacherService {
      * @return 教师信息
      */
     Teacher queryTeacherByID(String Tnu);
+
+    /**
+     * 查询老师的所有信息
+     */
+    List<TeacherVo> findTeacherVoList() throws Exception;
+
+    /**
+     * 查询本系的老师
+     */
+    List<TeacherVo> findTeacherVoListByDnu(String Dnu);
 }

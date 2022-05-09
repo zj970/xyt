@@ -36,14 +36,11 @@
     layui.use(['form','layer','table','laytpl','upload'],function() {
         var form = layui.form,
             table = layui.table;
-
         var colsArray =[[
             {field: 'startDate', title: '开始时间',width:60, align:'center'},
-            {field: 'courseName', title: '课程名',width:100, align:'left'},
-            {field: 'teacherName', title: '任课教师',minWidth:120, align:'left'},
-            {field: 'testMode', title: '考核方式', minWidth:100, align:'center'},
-            {field: 'score', title: '成绩', minWidth:100, align:'center'},
-            {field: 'result', title: '结果', minWidth:100, align:'center'}
+            {field: 'lname', title: '课程名',width:100, align:'left'},
+            {field: 'tname', title: '任课教师',minWidth:120, align:'left'},
+            {field: 'grade', title: '成绩', minWidth:100, align:'center'}
         ]];
 
         //MyScoreListTable列表
@@ -53,7 +50,7 @@
             tableIns = table.render({
                 id : "MyScoreListTable",
                 elem: "#MyScoreListTable",
-                url : "${path}/easScore/myScore",
+                url : "${path}/score/myScore",
                 cellMinWidth : 95,
                 page : true,
                 toolbar: true,

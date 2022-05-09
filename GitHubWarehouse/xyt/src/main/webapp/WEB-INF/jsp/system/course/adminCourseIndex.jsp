@@ -59,22 +59,19 @@
 
         var colsArray =[[
             {type: "checkbox", fixed:"left", width:50},
-            {field: 'id', title: '课程编号', minWidth:40, align:"left", sort: true},
-            {field: 'courseName', title: '课程名',minWidth:120, align:'left'},
-            {field: 'teacherName', title: '任课教师',minWidth:120, align:'left'},
-            {field: 'startDate', title: '开始时间', minWidth:100, align:'center'},
-            {field: 'endDate', title: '结束时间', minWidth:100, align:'center'},
-            {field: 'classHour', title: '课时', minWidth:100, align:'center'},
-            {field: 'testMode', title: '考核方式', minWidth:100, align:'center'},
-            {field: 'studentNum', title: '最大人数', minWidth:100, align:'center'},
-            {field: "choiceNum", title: "已选（人）", minWidth:100, align:'center'},
+            {field: "lnu", title: "课程编号", sort:true, width:100, align:"left"},
+            {field: "lname", title: "课程名",minWidth:120, align:"left"},
+            {field: "tname", title: "任课教师",minWidth:120, align:"center"},
+            {field: "lnum", title: "最大人数", minWidth:100, align:"center"},
+            {field: "choiceNum", title: "已选（人）", minWidth:100, align:"center"},
+            {title: "操作", width:90, templet:"#courseListBar",fixed:"right",align:"center"},
             {fixed: "right",title: '操作', width:160,toolbar: '#barDemo',align:'center'}
         ]];
 
         table.render({
             id:'adminCourseTable'
             ,elem: '#adminCourseTable'
-            ,url:'${path}/easCourse/getCourseList' //获取数据
+            ,url:'${path}/course/getCourseList' //获取数据
             ,even: true
             ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
             ,defaultToolbar: ['filter', 'exports', 'print']
@@ -90,7 +87,7 @@
             var e = obj.event;
             switch (e){
                 case "add":
-                    $.get('${path}/easCourse/courseAddForm',function (str) {
+                    $.get('${path}/course/courseAddForm',function (str) {
                         var addCourseIndex =layer.open({
                             type:1,
                             title :'添加课程',
@@ -104,7 +101,7 @@
                                 var params = $("#add_course_form").serialize();
                                 console.log("我是课程表单:"+params);
 
-                                $.post('${path}/easCourse/addCourse',params,function (data) {
+                                $.post('${path}/course/addCourse',params,function (data) {
 
                                     if(data.result === false){
                                         layui.layer.msg(data.msg,{icon:5});
@@ -154,7 +151,7 @@
                         for(let course of data){
                             params += "ids="+course.id+"&";
                         }
-                        $.post('${path}/easCourse/batchDeleteCourse',params,function (data) {
+                        $.post('${path}/course/batchDeleteCourse',params,function (data) {
                             if (data.result === true ){
                                 layer.close(index);
                                 table.reload('adminCourseTable');
@@ -174,7 +171,7 @@
         table.on("tool(adminCourseTable)",function (obj) {
             var data = obj.data;
             if (obj.event == 'edit'){ //edit
-                $.get("${path}/easCourse/courseEditForm",function (str) {
+                $.get("${path}/course/courseEditForm",function (str) {
                     var editCourseIndex = layer.open({
                         type:1,
                         title : '修改课程信息',
@@ -185,7 +182,7 @@
                         btnAlign:'c', //按钮居中对齐
                         anim: 1, //从上掉落样式
                         success:function(){
-                            $.get('${path}/easCourse/getCourseById',{id:data.id},function (data) {
+                            $.get('${path}/course/getCourseById',{id:data.id},function (data) {
                                 // console.log("我是返回的课程信息:"+data);
                                 //显示数据
                                 layui.form.val('courseEditForm',data);
@@ -193,7 +190,7 @@
                         },
                         yes : function (index) {
                             var params2 = $("#edit_course_form").serialize();
-                            $.post('${path}/easCourse/editCourse',params2,function (data) {
+                            $.post('${path}/course/editCourse',params2,function (data) {
                                 console.log("修改的数据为:"+params2);
 
                                 if(data.result === true){
@@ -224,7 +221,7 @@
                     shade: [0.3, '#000'],
                     btn:['确定','取消'],
                     yes : function () {
-                        $.post("${path}/easCourse/batchDeleteCourse",{"ids":data.id},function (data) {
+                        $.post("${path}/course/batchDeleteCourse",{"ids":data.id},function (data) {
                             if (data.result === true ){
                                 layer.msg('删除成功');
                                 table.reload('adminCourseTable');

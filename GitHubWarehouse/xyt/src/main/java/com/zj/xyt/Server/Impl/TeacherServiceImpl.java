@@ -6,6 +6,9 @@ import com.zj.xyt.Mapper.TeacherMapper;
 import com.zj.xyt.Server.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @Service
 public class TeacherServiceImpl implements TeacherService {
     @Autowired
@@ -25,4 +28,16 @@ public class TeacherServiceImpl implements TeacherService {
     public Teacher queryTeacherByID(String Tnu) {
         return teacherMapper.queryTeacherByID(Tnu);
     }
+
+    @Override
+    public List<TeacherVo> findTeacherVoList() throws Exception {
+        return teacherMapper.findTeacherVoList();
+    }
+
+    @Override
+    public List<TeacherVo> findTeacherVoListByDnu(String Dnu) {
+        return teacherMapper.findTeacherVoListByDnu(Dnu);
+    }
+
+
 }

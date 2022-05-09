@@ -19,4 +19,9 @@ public class ClassServiceImpl implements ClassService {
     public List<Classes> getAll() {
         return classMapper.getAll();
     }
+
+    @Override
+    public Classes queryByCnu(String Cnu) {
+        return classMapper.queryByCnu(Cnu);
+    }
 }

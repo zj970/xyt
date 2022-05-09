@@ -40,51 +40,37 @@
 
     </div>
 </form>
-<table class="layui-table" lay-data="{id:'teacherTable',url:'${path}/easTeacher/list', page:true,toolbar:'#toolbarDemo',defaultToolbar: ['filter', 'print', 'exports'],even: true}"
+<table class="layui-table" lay-data="{id:'teacherTable',url:'${path}/teacher/list', page:true,toolbar:'#toolbarDemo',defaultToolbar: ['filter', 'print', 'exports'],even: true}"
        lay-filter="teacherTable">
     <thead>
     <tr>
-        <%--        <th lay-data="{type:'checkbox'}">teacher_msg</th>--%>
-        <th lay-data="{field:'id', width:80}">ID</th>
-        <th lay-data="{field:'username', width:180,sort: true,templet:function(res){return res.user.username;}}">用户名</th>
-        <th lay-data="{field:'name',align:'center'}">姓名</th>
-        <th lay-data="{field:'sex',align:'center'}">性别</th>
-        <th lay-data="{field:'birthday',align:'center'}">生日</th>
-        <th lay-data="{field:'phone',align:'center'}">电话</th>
-        <th lay-data="{field:'education',align:'center'}">学历</th>
-        <th lay-data="{field:'motto',}">座右铭</th>
-        <%--        <th lay-data="{toolbar:'#barDemo',align:'center'}">操作</th>--%>
-        <%--        待完善操作列--%>
-    </r>
+        <th lay-data="{field:'tnu', width:80}">工作证号</th>
+        <th lay-data="{field:'tname',align:'center'}">姓名</th>
+        <th lay-data="{field:'tsex',align:'center'}">性别</th>
+        <th lay-data="{field:'tphone',align:'center'}">电话</th>
+        <th lay-data="{field:'teyte',align:'center'}">入职时间</th>
+        <th lay-data="{field:'tsnte',align:'center'}">离职时间</th>
+        <th lay-data="{field:'title',align:'center'}">学历</th>
+        <th lay-data="{field:'dname',}">系名</th>
+    </tr>
     </thead>
 </table>
 <script>
-
     function searchData(){
         layui.table.reload("teacherTable",{
             page:{
                 curr : 1
             },
             where:{
-                "name":$("#name").val(),
-                "phone":$("#phone").val(),
-                "education":$("#education").val()
+                "cname":$("#cname").val(),
+                "tphone":$("#tphone").val(),
+                "title":$("#title").val()
             }
         });
-
-
     }
-
     layui.use(["table","form"],function () {
         var table = layui.table;
-
-
     });
-
-
-
 </script>
-
-
 </body>
 </html>

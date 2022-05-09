@@ -13,13 +13,13 @@
 <form class="layui-form" action="">
     <div class="layui-form-item" style="margin-left: 5%;margin-top: 30px;">
         <div class="layui-inline">
+            <label class="layui-form-label">课程号</label>
+            <div class="layui-input-inline" style="width: 200px;">
+                <input id="lnu" type="text" autocomplete="off" class="layui-input">
+            </div>
             <label class="layui-form-label">课程名称</label>
             <div class="layui-input-inline" style="width: 200px;">
-                <input id="coursename" type="text" autocomplete="off" class="layui-input">
-            </div>
-            <label class="layui-form-label">课程简介</label>
-            <div class="layui-input-inline" style="width: 200px;">
-                <input id="synopsis" type="text" autocomplete="off" class="layui-input">
+                <input id="lname" type="text" autocomplete="off" class="layui-input">
             </div>
 
             <div class="layui-input-inline" style="width: 100px;">
@@ -41,8 +41,8 @@
                 curr : 1
             },
             where:{
-                "coursename":$("#coursename").val(),
-                "synopsis":$("#synopsis").val()
+                "lnu":$("#lnu").val(),
+                "lname":$("#lname").val()
             }
         });
     }
@@ -52,7 +52,7 @@
         table.render({
              id:'baseCourseTable'
             ,elem: '#baseCourseTable'
-            ,url:'${path}/easBaseCourse/list'
+            ,url:'${path}/baseCourse/list'
             ,even: true
             ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
             ,defaultToolbar: ['filter', 'exports', 'print']
@@ -60,9 +60,11 @@
             ,page: true
             ,cols: [[
                 {type: 'checkbox', fixed: 'left'}
-                ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
-                ,{field:'coursename', title:'课程名称', width:180}
-                ,{field:'synopsis', title:'课程简介'}
+                ,{field:'lnu', title:'ID', width:80, fixed: 'left', unresize: true, sort: true}
+                ,{field:'lname', title:'课程名称',width:180, align: "center"}
+                ,{field:'lcredit', title:'学分',width:80,align:"center"}
+                ,{field:'tname', title:'授课教师',width:100,align: "center"}
+                ,{field:'las', title:'授课时间地点',align: "center"}
                 // ,{field:'synopsis', title:'课程简介', edit: 'text'} 可编辑
                 ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150,align:"center"}
             ]]
@@ -108,7 +110,7 @@
                         layer.msg("请选择要删除的数据",function(){});
                         return;
                     }
-                    layer.confirm('真的干掉这么多基本课程吗？',{icon:5,title:'友情提示'},function (index) {
+                    layer.confirm('确定删除课程吗？',{icon:5,title:'友情提示'},function (index) {
                         var params = "";
                         for(let baseCourse of data){
                             params += "ids="+baseCourse.id+"&";

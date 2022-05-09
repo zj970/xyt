@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zj.xyt.Mapper.ScoreMapper">
+    <!--查询某个课程已选多少人-->
+    <select id="getCountByLnu" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from sc where Lnu = #{Lnu}
+    </select>
+    <!--增加选课记录-->
+    <insert id="insertSelective" parameterType="com.zj.xyt.Entity.Score">
+        insert into sc
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="Snu != null">
+                Snu,
+            </if>
+            <if test="Lnu != null">
+                Lnu,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="Snu != null">
+                #{Snu,jdbcType=CHAR},
+            </if>
+            <if test="Lnu != null">
+                #{Lnu,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>

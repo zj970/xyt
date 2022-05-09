@@ -55,15 +55,12 @@
 
         var colsArray =[[
             {type: "checkbox", fixed:"left", width:50},
-            {field: "id", title: "ID", sort:true, width:60, align:"center"},
-            {field: "name", title: "姓名",width:100, align:"center"},
-            {field: "sex", title: "性别", width:70, align:"center"},
-            {field: "phone", title: "电话", width:150, align:"center"},
-            {field: "className", title: "班级", minWidth:180, align:"center"},
-            {field: "courseName", title: "课程名", minWidth:150, align:"center"},
-            {field: "score", title: "成绩", edit: "text", width:140, align:"center"},
-            {field: "result", title: "结果", edit: "text", width:130, align:"center"},
-            // {field: "result", title: "结果", edit: "text",sort: true, width:130, align:"center",templet: '#resultSelect'},
+            {field: "snu", title: "学号", sort:true, width:60, align:"center"},
+            {field: "sname", title: "姓名",width:100, align:"center"},
+            {field: "ssex", title: "性别", width:70, align:"center"},
+            {field: "cname", title: "班级", minWidth:180, align:"center"},
+            {field: "lname", title: "课程名", minWidth:150, align:"center"},
+            {field: "grade", title: "成绩", edit: "text", width:140, align:"center"},
             {title: "操作", width:120, templet:"#studentScoreListBar",fixed:"right",align:"center"}
         ]];
 
@@ -71,7 +68,7 @@
         var tableIns = table.render({
             id : "studentScoreListTable",
             elem: "#studentScoreListTable",
-            url : "${path}/easScore/stuScoreList",
+            url : "${path}/score/stuScoreList",
             // where: {
             //     courseId: $("#searchType").val() //课程id
             // },
@@ -85,10 +82,10 @@
 
         //查询所有基本课程名称
         layui.form.render('select','scoreSearchForm');//渲染表格加载 下拉框select
-        $.get("${path}/easBaseCourse/search",function (data) {
+        $.get("${path}/baseCourse/search",function (data) {
             $.each(data,function () {
                 var opt = $("<option></option>").appendTo("#baseCourseId");
-                opt.text(this.coursename).val(this.id);
+                opt.text(this.lname).val(this.id);
             });
             //获取数据后再进行渲染，显示未显示的option
             layui.form.render('select','scoreSearchForm'); //获取内容重新渲染表格 下拉框select
@@ -96,10 +93,10 @@
 
         //查询所有班级名称 返回班级id和班级名称
         layui.form.render('select','scoreSearchForm');//渲染表格加载 下拉框select
-        $.get("${path}/easClass/search",function (data) {
+        $.get("${path}/class/search",function (data) {
             $.each(data,function () {
                 var opt = $("<option></option>").appendTo("#classId");
-                opt.text(this.classes).val(this.id);
+                opt.text(this.cname).val(this.id);
             });
             //获取数据后再进行渲染，显示未显示的option
             layui.form.render('select','scoreSearchForm'); //获取内容重新渲染表格 下拉框select
@@ -130,7 +127,7 @@
                         score: data.score,
                         result: data.result
                     },
-                    url: "${path}/easScore/updateScore",
+                    url: "${path}/score/updateScore",
                     success:function(res) {
                         if (res.result === true) {
                             //提交成绩成功
@@ -167,7 +164,7 @@
                         data: {
                             scoreListStr : JSON.stringify(scoreList)
                         },
-                        url: "${path}/easScore/updateScoreList",
+                        url: "${path}/score/updateScoreList",
                         timeout:2000,
                         success:function(res) {
                             if (res.result === true) {

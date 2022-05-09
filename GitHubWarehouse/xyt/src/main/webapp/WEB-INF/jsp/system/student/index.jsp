@@ -57,13 +57,12 @@
 <script>
     $.get("${path}/class/search",function (data) {
         $.each(data,function () {
-            console(data+"开始执行此方法");
+            console.log(data+"--------");
             var opt = $("<option></option>").appendTo("#allclass");
             opt.text(this.classes).val(this.cnu);
         });
         layui.form.render();
     });
-
     function searchData(){
         layui.table.reload("studentTable",{
             page:{
@@ -75,13 +74,9 @@
                 "cnu":$("#allclass").val()
             }
         });
-         console.log("jidfjoesfjiosf"+$("#sname").val());
     }
-
     layui.use(["table","form"],function () {
         var table = layui.table;
-
-
     });
 </script>
 

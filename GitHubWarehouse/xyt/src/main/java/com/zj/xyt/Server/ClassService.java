@@ -2,6 +2,7 @@ package com.zj.xyt.Server;
 
 import com.zj.xyt.Entity.Classes;
 import io.swagger.annotations.Api;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,4 +20,9 @@ public interface ClassService {
      * 查询所有班级
      */
     List<Classes> getAll();
+
+    /**
+     * 查询学生所在班级
+     */
+    Classes queryByCnu(String Cnu);
 }
