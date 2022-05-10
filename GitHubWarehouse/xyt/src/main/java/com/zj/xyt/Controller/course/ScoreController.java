@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -65,18 +66,15 @@ public class ScoreController {
             Student student = (Student) SecurityUtils.getSubject().getPrincipal();//获取EasUser对象
             String username = student.getSname();
             System.out.println("学生用户名为:"+username);
-
+            //TODO:判断学生是否已选择了这门课
             if (username == null || username.equals("")){
                 map.put("result",false);
                 map.put("msg","出错了！");
             }else {
-
                 Score score = new Score();
                 score.setSnu(student.getSnu());
                 score.setLnu(lnu);
-
                 int res = scoreService.choiceCourse(score);
-
                 if (res > 0) {
                     map.put("result",true);
                     map.put("msg","选课成功！");
@@ -84,7 +82,6 @@ public class ScoreController {
                     map.put("result",false);
                     map.put("msg","人数已满，选课失败！");
                 }
-
             }
         }else {
             map.put("result",false);
@@ -93,5 +90,48 @@ public class ScoreController {
 
         return map;
     }
+    /**
+     * 返回可选课程列表（可选：人数未满、课程开始时间在当前时间之后）
+     * @param page
+     * @param limit
+     * @param isAll
+     * @param searchKey
+     * @return
+     */
+    @RequestMapping(value="/choiceList")
+    @ResponseBody
+    public Map<String, Object> getCourseChoiceList(@RequestParam(defaultValue = "1") Integer page,
+                                                   @RequestParam(defaultValue = "10") Integer limit,
+                                                   @RequestParam(defaultValue="1") int isAll,
+                                                   @RequestParam(defaultValue="")String searchKey) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        if(SecurityUtils.getSubject().getPrincipal() instanceof Student){
+            //查询学生的可选课信息
 
+            //1.从课表中选择适合的课程
+
+            //2.条件 1 没有选择的 2 人数不够的
+
+            //3.返回可以选择的课程信息
+        }
+        EasUser easUser = (EasUser) SecurityUtils.getSubject().getPrincipal();//获取EasUser对象
+        String username = easUser.getUsername();
+//        System.out.println("教师用户名为:"+username);
+        EasStudent easStudent = easStudentService.getStudentByUsername(username);
+        if (easStudent.getUsername() == null || easStudent.getUsername().equals("")){
+            map.put("code",1);
+            map.put("msg","目前还没有选课信息");
+        }else{
+            PageUtil pageUtil = new PageUtil(page,limit);
+            int sId = easStudent.getId();
+            int count = easCourseService.getTotalItemsCountBySid(isAll, searchKey, sId);
+
+            List<EasCourse> list = easCourseService.getCourseListBySid(isAll, searchKey, sId,pageUtil);
+            map.put("count",count);
+            map.put("data",list);
+            map.put("code",0);
+            map.put("msg","");
+        }
+        return map;
+    }
 }

@@ -21,12 +21,9 @@
             limit #{pageUtil.pageStart},#{pageUtil.count}
         </if>
     </select>
-
-
     <select id="getCount" resultType="java.lang.Integer">
         select count(*) from lesson
     </select>
-
     <!--根据Lnu查询课程-->
     <select id="queryByLnu" parameterType="java.lang.String" resultType="com.zj.xyt.Entity.LessonVo">
         select * from lesson where Lnu = #{Lnu}

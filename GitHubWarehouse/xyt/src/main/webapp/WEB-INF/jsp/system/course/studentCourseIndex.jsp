@@ -88,8 +88,6 @@
         $(".reset_btn").on("click",function(){
 
         });
-
-
         //表格操作列表操作
         table.on("tool(studentCourseTable)", function(obj){
             var data = obj.data,
