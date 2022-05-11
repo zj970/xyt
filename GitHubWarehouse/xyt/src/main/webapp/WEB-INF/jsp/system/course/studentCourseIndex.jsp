@@ -56,7 +56,6 @@
             } else {
                 colsArray[0][9] = {title: "操作", width:90, templet:"#courseListBar2",fixed:"right",align:"center"};
             }
-
             tableIns = table.render({
                 id : 'studentCourseTable',
                 elem: '#studentCourseTable',
@@ -75,7 +74,6 @@
                 cols : colsArray
             });
         }
-
         //搜索
         $(".search_btn").on("click",function(){
             if ($(this).attr("id") == "myCourse") {

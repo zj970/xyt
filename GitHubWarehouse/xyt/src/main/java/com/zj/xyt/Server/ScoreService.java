@@ -1,8 +1,12 @@
 package com.zj.xyt.Server;
 
+import com.zj.xyt.Entity.LessonVo;
 import com.zj.xyt.Entity.Score;
 import io.swagger.annotations.Api;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  *<p>
@@ -17,4 +21,7 @@ public interface ScoreService {
     int getCountByLnu(String Lnu);
     /**选课*/
     int choiceCourse(Score score);
+
+    /**根据Snu查询当前学生的可选择课程*/
+    List<LessonVo> queryChoiceListBySnu(@Param("Snu") String Snu);
 }

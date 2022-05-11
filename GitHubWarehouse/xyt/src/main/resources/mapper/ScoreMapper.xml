@@ -27,4 +27,10 @@
             </if>
         </trim>
     </insert>
+
+    <!--根据学生Snu查询可选择的课程-->
+    <select id="queryChoiceListBySnu" parameterType="java.lang.String">
+        select lesson.Lnu,lesson.Lname,lesson.Lcredit,teacher.Tname,lesson.Las from lesson inner join teacher on lesson.Tnu = teacher.Tnu where lesson.Lnu not in (select sc.Lnu from sc where Snu = #{Snu});
+    </select>
+    
 </mapper>

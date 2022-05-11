@@ -1,5 +1,6 @@
 package com.zj.xyt.Controller.course;
 
+import com.zj.xyt.Entity.LessonVo;
 import com.zj.xyt.Entity.Score;
 import com.zj.xyt.Entity.Student;
 import com.zj.xyt.Server.ScoreService;
@@ -107,30 +108,19 @@ public class ScoreController {
         Map<String, Object> map = new HashMap<>();
         if(SecurityUtils.getSubject().getPrincipal() instanceof Student){
             //查询学生的可选课信息
-
+            Student student = (Student) SecurityUtils.getSubject().getPrincipal();
             //1.从课表中选择适合的课程
-
+            List<LessonVo> list = scoreService.queryChoiceListBySnu(student.getSnu());
             //2.条件 1 没有选择的 2 人数不够的
-
-            //3.返回可以选择的课程信息
-        }
-        EasUser easUser = (EasUser) SecurityUtils.getSubject().getPrincipal();//获取EasUser对象
-        String username = easUser.getUsername();
-//        System.out.println("教师用户名为:"+username);
-        EasStudent easStudent = easStudentService.getStudentByUsername(username);
-        if (easStudent.getUsername() == null || easStudent.getUsername().equals("")){
-            map.put("code",1);
-            map.put("msg","目前还没有选课信息");
-        }else{
-            PageUtil pageUtil = new PageUtil(page,limit);
-            int sId = easStudent.getId();
-            int count = easCourseService.getTotalItemsCountBySid(isAll, searchKey, sId);
-
-            List<EasCourse> list = easCourseService.getCourseListBySid(isAll, searchKey, sId,pageUtil);
-            map.put("count",count);
+            for (LessonVo e: list
+            ) {
+                System.out.println(e.getTname()+"------------------");
+            }
+           //map.put("count",count);
             map.put("data",list);
             map.put("code",0);
             map.put("msg","");
+            //3.返回可以选择的课程信息
         }
         return map;
     }

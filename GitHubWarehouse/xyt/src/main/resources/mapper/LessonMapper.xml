@@ -28,4 +28,5 @@
     <select id="queryByLnu" parameterType="java.lang.String" resultType="com.zj.xyt.Entity.LessonVo">
         select * from lesson where Lnu = #{Lnu}
     </select>
+
 </mapper>

@@ -9,6 +9,8 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Api(tags = "课程的业务实现层")
 public class ScoreServiceImpl implements ScoreService {
@@ -37,5 +39,10 @@ public class ScoreServiceImpl implements ScoreService {
         } else {
             return 0;
         }
+    }
+
+    @Override
+    public List<LessonVo> queryChoiceListBySnu(String Snu) {
+        return scoreMapper.queryChoiceListBySnu(Snu);
     }
 }
