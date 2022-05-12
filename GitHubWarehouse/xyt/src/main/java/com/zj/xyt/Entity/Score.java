@@ -10,7 +10,7 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "com.zj.xyt.Entity.Score",description = "管理员实体类")
+@ApiModel(value = "com.zj.xyt.Entity.Score",description = "选课记录")
 @ToString
 public class Score {
 
@@ -26,5 +26,8 @@ public class Score {
     @ApiModelProperty("成绩")
     private Float Grade;
 
-
+    /**任课老师---拓展*/
+    private String Tname;
+    /**任课老师---拓展*/
+    private String Lname;
 }

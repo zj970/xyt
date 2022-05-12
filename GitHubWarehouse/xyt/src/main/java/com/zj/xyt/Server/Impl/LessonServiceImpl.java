@@ -1,6 +1,5 @@
 package com.zj.xyt.Server.Impl;
 
-import com.zj.xyt.Entity.Lesson;
 import com.zj.xyt.Entity.LessonVo;
 import com.zj.xyt.Mapper.LessonMapper;
 import com.zj.xyt.Server.LessonService;
@@ -33,9 +32,18 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
+    public int getCountByLnu(String Lnu) {
+        return lessonMapper.getCountByLnu(Lnu);
+    }
+
+    @Override
     public LessonVo queryByLnu(String Lnu) {
         return lessonMapper.queryByLnu(Lnu);
     }
 
+    @Override
+    public List<LessonVo> queryChoiceListBySnu(int isAll, String searchKey, String Snu, PageUtil pageUtil) {
+        return lessonMapper.queryChoiceListBySnu(isAll, searchKey, Snu, pageUtil);
+    }
 
 }

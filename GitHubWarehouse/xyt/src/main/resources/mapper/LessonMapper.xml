@@ -3,6 +3,15 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zj.xyt.Mapper.LessonMapper">
+
+    <resultMap id="lessonResultMap" type="com.zj.xyt.Entity.LessonVo">
+    <result column="Lnu" jdbcType="CHAR" property="Lnu" />
+    <result column="Lname" jdbcType="CHAR" property="Lname" />
+    <result column="Lcredit" jdbcType="FLOAT" property="Lcredit" />
+    <result column="Tname" jdbcType="CHAR" property="Tname" />
+    <result column="Lnum" jdbcType="CHAR" property="Lnum" />
+    <result column="Las" jdbcType="FLOAT" property="Las" />
+</resultMap>
     <!--查询所有的课程-->
     <select id="queryAll" resultType="com.zj.xyt.Entity.LessonVo">
         select lesson.Lnu,lesson.Lname,lesson.Lcredit,lesson.Tnu,t.Tname,lesson.Las from lesson INNER JOIN teacher t on lesson.Tnu = t.Tnu
@@ -28,5 +37,29 @@
     <select id="queryByLnu" parameterType="java.lang.String" resultType="com.zj.xyt.Entity.LessonVo">
         select * from lesson where Lnu = #{Lnu}
     </select>
+    <!--根据学生Snu查询可选择的课程-->
+    <select id="queryChoiceListBySnu" parameterType="java.lang.String" resultMap="lessonResultMap" >
+        select lesson.Lnu,lesson.Lname,lesson.Lcredit,lesson.Lnum,teacher.Tname,lesson.Las from lesson inner join teacher on lesson.Tnu = teacher.Tnu
+        <where>
+            <if test="searchKey != null and searchKey != '' ">
+                and(
+                (lesson.Lname like CONCAT ('%',#{searchKey},'%') )
+                or (teacher.Tname like CONCAT ('%',#{searchKey},'%') )
+                )
+            </if>
+           and lesson.Lnu
+        </where>
+        <if test="isAll == 1">
+            not
+        </if>
+            in (select sc.Lnu from sc where Snu = #{Snu})
+        <if test="pageUtil != null">
+        limit #{pageUtil.pageStart},#{pageUtil.count}
+        </if>
+    </select>
 
+    <!--根据选课Snu查询可选择的课程剩余数量-->
+    <select id="getCountByLnu" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from sc where Lnu = #{Lnu}
+    </select>
 </mapper>

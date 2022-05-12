@@ -37,10 +37,10 @@
         var form = layui.form,
             table = layui.table;
         var colsArray =[[
-            {field: 'startDate', title: '开始时间',width:60, align:'center'},
-            {field: 'lname', title: '课程名',width:100, align:'left'},
-            {field: 'tname', title: '任课教师',minWidth:120, align:'left'},
-            {field: 'grade', title: '成绩', minWidth:100, align:'center'}
+            {field: 'lnu', title: '课程号', align:'center'},
+            {field: 'lname', title: '课程名', align:'center'},
+            {field: 'tname', title: '任课教师', align:'center'},
+            {field: 'grade', title: '成绩', align:'center'}
         ]];
 
         //MyScoreListTable列表

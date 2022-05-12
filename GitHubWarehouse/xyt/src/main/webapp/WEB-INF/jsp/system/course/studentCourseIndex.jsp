@@ -13,13 +13,12 @@
 <form class="layui-form" action="">
     <div class="layui-form-item" style="margin-left: 5%;margin-top: 30px;">
         <div class="layui-inline">
-            <div class="layui-inline">
+<%--            <div class="layui-inline">
                 <div class="layui-input-inline" style="width: 200px;">
-                    <input type="text" class="layui-input searchVal" placeholder="搜索课程名/教师名" />
+                    <input type="text" class="layui-input" id = "searchVal" placeholder="搜索课程名/教师名" />
                 </div>
-<%--                <a class="layui-btn search_btn" data-type="reload">搜索</a>--%>
-                <button type="reset" class="layui-btn layui-btn-normal"><i class="layui-icon layui-icon-refresh"></i>重置</button>
-            </div>
+                <button type="reset" class="layui-btn layui-btn-normal"><i class="layui-icon layui-icon-d"></i>重置</button>
+            </div>--%>
             <div class="layui-inline" style="width: 100px;">
                 <a class="layui-btn layui-btn-primary search_btn" id = "allCourse">可选课程</a>
             </div>
@@ -35,11 +34,11 @@
 <script>
     layui.use(['table','form'],function() {
         var table = layui.table;
-
         var colsArray = [[
             {field: "lnu", title: "课程编号", sort:true, width:100, align:"left"},
             {field: "lname", title: "课程名",minWidth:120, align:"left"},
             {field: "tname", title: "任课教师",minWidth:120, align:"center"},
+            {field: "las", title: "任课地点", minWidth:100, align:"center"},
             {field: "lnum", title: "最大人数", minWidth:100, align:"center"},
             {field: "choiceNum", title: "已选（人）", minWidth:100, align:"center"},
             {title: "操作", width:90, templet:"#courseListBar",fixed:"right",align:"center"}
@@ -50,11 +49,12 @@
         loadChoiceList(1);
         //isAll =1 可选列表  =0 已选列表
         function loadChoiceList(isAll) {
-
             if (isAll === 1) {
-                colsArray[0][9] = {title: "操作", width:90, templet:"#courseListBar",fixed:"right",align:"center"};
+                console.log("执行此方法");
+                colsArray[0][6] = {title: "操作", width:90, templet:"#courseListBar",fixed:"right",align:"center"};
             } else {
-                colsArray[0][9] = {title: "操作", width:90, templet:"#courseListBar2",fixed:"right",align:"center"};
+                console.log("执行此方法2");
+                colsArray[0][6] = {title: "操作", width:90, templet:"#courseListBar2",fixed:"right",align:"center"};
             }
             tableIns = table.render({
                 id : 'studentCourseTable',
@@ -73,18 +73,16 @@
                 page : true,
                 cols : colsArray
             });
+            console.log()
         }
         //搜索
         $(".search_btn").on("click",function(){
+            console.log($(this).attr("id")+"获取到了吗？")
             if ($(this).attr("id") == "myCourse") {
                 loadChoiceList(0);
             } else {//搜索和all
                 loadChoiceList(1);
             }
-        });
-
-        $(".reset_btn").on("click",function(){
-
         });
         //表格操作列表操作
         table.on("tool(studentCourseTable)", function(obj){
@@ -101,7 +99,7 @@
             $.ajax({
                 type: "get",
                 data: {
-                    courseId: data.id
+                    lnu: data.lnu
                 }, //将课程id传回前台进行处理
                 url: url,
                 success:function(data) {
@@ -109,16 +107,12 @@
                         layer.msg(data.msg, {icon: 1,time:1000},function () {
                             tableIns.reload();
                         });
-
-                        // layer.close(index);
                     }else {
                         layer.msg(data.msg, {icon: 5,time:1000});
                     }
                 }
             });
         });
-
-
     });
 </script>
 

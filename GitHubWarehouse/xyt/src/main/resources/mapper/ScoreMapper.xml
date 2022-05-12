@@ -3,6 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zj.xyt.Mapper.ScoreMapper">
+    <resultMap id="BaseResultMap" type="com.zj.xyt.Entity.Score">
+        <result column="Lnu" jdbcType="CHAR" property="Lnu" />
+        <result column="Lname" jdbcType="CHAR" property="Lname" />
+        <result column="Tname" jdbcType="CHAR" property="Tname" />
+        <result column="Grade" jdbcType="FLOAT" property="Grade" />
+    </resultMap>
+
     <!--查询某个课程已选多少人-->
     <select id="getCountByLnu" parameterType="java.lang.String" resultType="java.lang.Integer">
         select count(*) from sc where Lnu = #{Lnu}
@@ -28,9 +35,23 @@
         </trim>
     </insert>
 
-    <!--根据学生Snu查询可选择的课程-->
-    <select id="queryChoiceListBySnu" parameterType="java.lang.String">
-        select lesson.Lnu,lesson.Lname,lesson.Lcredit,teacher.Tname,lesson.Las from lesson inner join teacher on lesson.Tnu = teacher.Tnu where lesson.Lnu not in (select sc.Lnu from sc where Snu = #{Snu});
+    <!--删除选课记录-->
+    <delete id="deleteScore" parameterType="com.zj.xyt.Entity.Score">
+        delete from sc
+        where Lnu = #{Lnu}
+          and Snu = #{Snu}
+    </delete>
+
+    <!--查询单科成绩-->
+    <select id="queryGradeBySnu" parameterType="java.lang.String" resultType="java.lang.Float">
+        select sc.Grade from sc where Snu = #{Snu} and Lnu = #{Lnu};
     </select>
-    
+
+    <!--查询成绩list-->
+    <select id="queryBySnuList" resultMap="BaseResultMap">
+        select sc.Lnu,lesson.Lname,teacher.Tname,sc.Grade from lesson,teacher,sc where sc.Lnu = lesson.Lnu and lesson.Tnu = teacher.Tnu and sc.Snu = #{Snu}
+        <if test="pageUtil != null">
+            limit #{pageUtil.pageStart},#{pageUtil.count}
+        </if>
+    </select>
 </mapper>
