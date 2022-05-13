@@ -7,9 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
 
 /**
  * @author zj970
@@ -45,13 +43,11 @@ public class Teacher {
 
     /**教师入职时间*/
     @ApiModelProperty(value = "教师入职时间")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date Teyte;
+    private String Teyte;
 
     /**教师离职时间*/
     @ApiModelProperty(value = "教师离职时间")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date Tsnte;
+    private String Tsnte;
 
     /**教师账号密码*/
     @ApiModelProperty(value = "教师账号密码")

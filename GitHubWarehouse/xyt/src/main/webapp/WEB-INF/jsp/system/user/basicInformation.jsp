@@ -7,97 +7,113 @@
     <%@include file="/WEB-INF/jsp/common.jsp"%>
 </head>
 <body>
-<form class="layui-form" action="${path}/easUser/basicInformationIndex"  style="padding-left: 100px;padding-top: 50px;">
+<form class="layui-form" action="${path}/main/basicInformationIndex"  style="padding-left: 100px;padding-top: 50px;">
     <c:if test="${code != 2 && code != 3 && code != 4}">
         <button type="submit"  class="layui-btn layui-btn layui-btn-normal" style="margin: 200px 0 0 200px;" onclick="noRoleMsg();return false;">点我查看提示</button>
     </c:if>
     <c:if test="${code == 4}">
         <button type="submit"  class="layui-btn layui-btn layui-btn-normal" style="margin: 200px 0 0 200px;" onclick="errorMsg();return false;">点我查看提示</button>
     </c:if>
-
-    <c:forEach items="${data}" var="data">
-    <div class="layui-form-item">
-        <label class="layui-form-label">用户名:</label>
-        <div class="layui-input-inline">
-               <input type="text" name="username" readonly="readonly"  value="${data.username}" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">姓名:</label>
-        <div class="layui-input-inline">
-            <input type="text" name="name" readonly="readonly"  value="${data.name}" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">性别:</label>
-        <div class="layui-input-inline">
-            <input type="text" name="sex" readonly="readonly"  value="${data.sex}" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">出生日期:</label>
-        <div class="layui-input-inline">
-            <input type="text" name="birthday" readonly="readonly"  value="${data.birthday}" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">电话号码:</label>
-        <div class="layui-input-inline">
-            <input type="text" name="phone" readonly="readonly"  value="${data.phone}" class="layui-input">
-        </div>
-    </div>
-<%--    <shiro:hasPermission name="student:update">--%>
-<%--    <div class="layui-form-item">--%>
-<%--        <label class="layui-form-label">班级:</label>--%>
-<%--        <div class="layui-input-inline">--%>
-<%--            <input type="text" name="classes" readonly="readonly"  value="${data.easClass.classes}" class="layui-input">--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--    </shiro:hasPermission>--%>
-<%--    <shiro:hasPermission name="teacher:update">--%>
-<%--    <div class="layui-form-item">--%>
-<%--        <label class="layui-form-label">学历:</label>--%>
-<%--        <div class="layui-input-inline">--%>
-<%--            <input type="text" name="education" readonly="readonly"  value="${data.education}" class="layui-input">--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--    </shiro:hasPermission>--%>
     <c:choose>
-<%--        <c:when test="${code == 1}">--%>
-<%--            <div class="layui-input-inline">--%>
-<%--                <button type="submit"  class="layui-btn layui-btn layui-btn-normal"  onclick="noRoleMsg();return false;">点我查看提示</button>--%>
-<%--            </div>--%>
-<%--        </c:when>--%>
         <c:when test="${code == 2}">
+            <div class="layui-form-item">
+                <label class="layui-form-label">学号:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="snu" readonly="readonly"  value="${data.snu}" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">姓名:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="sname" readonly="readonly"  value="${data.sname}" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">性别:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="ssex" readonly="readonly"  value="${data.ssex}" class="layui-input">
+                </div>
+            </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">班级:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="classes" readonly="readonly" value="${data.easClass.classes}" class="layui-input">
+                    <input type="text" name="classes" readonly="readonly" value="${data.cname}" class="layui-input" >
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">院系:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="dname" readonly="readonly" value="${data.dname}" class="layui-input" >
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">出生日期:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="sbirth" readonly="readonly"  value="${data.sbirth}" class="layui-input"  pattern="yyyy-MM-dd">
+                </div>
+            </div>
+            <div class="layui-form-item">
+            <label class="layui-form-label">入学时间:</label>
+            <div class="layui-input-inline">
+                <input type="text" name="sette" readonly="readonly"  value="${data.sette}" class="layui-input"  pattern="yyyy-MM-dd">
+            </div>
+        </div>
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <button  class="layui-btn layui-btn layui-btn-normal" onclick="editForm();return false;">修 改</button>
                 </div>
             </div>
         </c:when>
         <c:when test="${code == 3}">
             <div class="layui-form-item">
+                <label class="layui-form-label">工作证号:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="tnu" readonly="readonly"  value="${data.tnu}" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">姓名:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="tname" readonly="readonly"  value="${data.tname}" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">性别:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="tsex" readonly="readonly"  value="${data.tsex}" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">院系:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="dname" readonly="readonly"  value="${data.dname}" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">入职日期:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="birthday" readonly="readonly"  value="${data.teyte}" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
                 <label class="layui-form-label">学历:</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="education" readonly="readonly"  value="${data.education}" class="layui-input">
+                    <input type="text" name="education" readonly="readonly"  value="${data.title}" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">电话号码:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="phone" readonly="readonly"  value="${data.tphone}" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <button  class="layui-btn layui-btn layui-btn-normal" onclick="editForm();return false;">修 改</button>
                 </div>
             </div>
         </c:when>
     </c:choose>
-    
-    <div class="layui-form-item">
-        <label class="layui-form-label">座右铭:</label>
-        <div class="layui-input-inline">
-            <input type="text" name="motto" readonly="readonly"  value="${data.motto}" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <div class="layui-input-inline">
-            <button  class="layui-btn layui-btn layui-btn-normal" onclick="editForm();return false;">修 改</button>
-        </div>
-    </div>
-</c:forEach>
 </form>
 
 <script>
@@ -105,7 +121,7 @@
     layui.use(["table","form","layer"]);
 
     function editForm() {
-        $.get("${path}/easUser/basicForm",function (str) {
+        $.get("${path}/main/basicForm",function (str) {
             layer.open({
                 type:1,
                 title :'修改基本资料',
@@ -114,16 +130,19 @@
                 skin:'layui-layer-molv',
                 btn : ['修改','取消'],
                 success : function () {
-                    $.get('${path}/easUser/getBasicInformation',function (data) {
+                    $.get('${path}/main/getBasicInformation',function (data) {
                         //显示数据
                         //修改基本资料时 班级无法获取
                         layui.form.val('basicForm', data);
                     });
                 },
                 yes:function (index){
+                    //var params2 = JSON.stringify($("#edit_basic_form").serializeJSON());
                     var params2 = $("#edit_basic_form").serialize();
-                    $.post('${path}/easUser/modifyInformation',params2,function (data) {
-                        // console.log(params2);
+                    //var params2 = JSON.stringify($('#edit_basic_form').serializeJSON());
+                    console.log(params2);
+                    $.post('${path}/main/modifyInformation',params2,function (data) {
+
                         if(data.result === true){
                             layer.close(index);
                             layer.msg('修改成功',{icon:1,time:1000})
@@ -155,7 +174,7 @@
             ,success: function(layero){
                 var btn = layero.find('.layui-layer-btn');
                 btn.find('.layui-layer-btn0').attr({
-                    href: 'http://www.layui.com/'
+                    href: 'http://localhost:8080:/main'
                     ,target: '_blank'
                 });
             }
@@ -179,7 +198,7 @@
             ,success: function(layero){
                 var btn = layero.find('.layui-layer-btn');
                 btn.find('.layui-layer-btn0').attr({
-                    href: 'http://www.layui.com/'
+                    href: 'http://localhost:8080:/main'
                     ,target: '_blank'
                 });
             }

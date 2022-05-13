@@ -18,7 +18,7 @@ public interface TeacherMapper {
      * @param Tnu 账号
      * @return 教师信息
      */
-    TeacherVo queryTeacher(@Param("Tnu")String Tnu);
+    TeacherVo queryTeacherVoByTnu(@Param("Tnu")String Tnu);
     /**
      * 查询老师的个人信息
      * @param Tnu 账号
@@ -36,4 +36,9 @@ public interface TeacherMapper {
      * 查询本系的老师
      */
     List<TeacherVo> findTeacherVoListByDnu(@Param("Dnu")String Dnu);
+
+    /**
+     * 更新教师信息
+     */
+    void updateTeacher(Teacher teacher);
 }

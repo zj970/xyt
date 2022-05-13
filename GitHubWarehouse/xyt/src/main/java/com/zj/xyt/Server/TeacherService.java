@@ -21,7 +21,7 @@ public interface TeacherService {
      * @param Tnu 账号
      * @return 教师信息
      */
-    TeacherVo queryTeacher(String Tnu);
+    TeacherVo queryTeacherVoByTnu(String Tnu);
     /**
      * 查询老师的个人信息
      * @param Tnu 账号
@@ -38,4 +38,9 @@ public interface TeacherService {
      * 查询本系的老师
      */
     List<TeacherVo> findTeacherVoListByDnu(String Dnu);
+
+    /**
+     * 更新教师信息
+     */
+    void updateTeacher(Teacher teacher);
 }

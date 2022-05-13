@@ -36,8 +36,8 @@
                 </a>
                 <dl class="layui-nav-child">
                     <%--   target="middle"在指定的框架中打开被链接文档。 --%>
-                    <dd><a href="${path}/easUser/basicInformationIndex" target="middle">基本资料</a></dd>
-                    <dd><a href="${path}/easUser/passwordRestIndex" target="middle">修改密码</a></dd>
+                    <dd><a href="${path}/main/basicInformationIndex" target="middle">基本资料</a></dd>
+                    <dd><a href="${path}/passwordRestIndex" target="middle">修改密码</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item"><a href="javascript:void(0)" onclick="logout();">退出</a></li>

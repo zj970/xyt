@@ -6,6 +6,7 @@ import com.zj.xyt.Entity.Teacher;
 import com.zj.xyt.Mapper.LoginMapper;
 import com.zj.xyt.Server.LoginService;
 import io.swagger.annotations.Api;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 @Service
@@ -43,6 +44,21 @@ public class LoginServiceImpl implements LoginService {
             return queryAdmin(nu,pd).getUserType().toString();
         }
             return "FALSE";
+    }
+
+    @Override
+    public void updateStudent(String Snu, String Spd) {
+        loginMapper.updateStudent(Snu,Spd);
+    }
+
+    @Override
+    public void updateTeacher(String Tnu, String Tpd) {
+        loginMapper.updateTeacher(Tnu, Tpd);
+    }
+
+    @Override
+    public void updateAdmin(String Anu, String Apd) {
+        loginMapper.updateAdmin(Anu, Apd);
     }
 
 }

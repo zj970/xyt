@@ -20,10 +20,10 @@
         select lesson.Lnu,lesson.Lname,lesson.Lcredit,lesson.Tnu,t.Tname,lesson.Las from lesson INNER JOIN teacher t on lesson.Tnu = t.Tnu
         <where>
             <if test="lessonVo.Lnu != null and lessonVo.Lnu != ''">
-                and Lnu like concat('%',#{lesson.Lnu},'%')
+                and Lnu like concat('%',#{lessonVo.Lnu},'%')
             </if>
             <if test="lessonVo.Lname != null and lessonVo.Lname != ''">
-                and Lname like concat('%',#{lesson.Lname},'%')
+                and Lname like concat('%',#{lessonVo.Lname},'%')
             </if>
         </where>
         <if test="pageUtil != null">

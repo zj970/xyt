@@ -5,14 +5,36 @@
 <mapper namespace="com.zj.xyt.Mapper.LoginMapper">
     <!--查询管理员-->
     <select id="queryAdmin" resultType="com.zj.xyt.Entity.Admin">
-        select * from admin where Anu = #{arg0} and Apd = #{arg1}
+        select * from admin where Anu = #{Anu} and Apd = #{Apd}
     </select>
     <!--查询学生-->
     <select id="queryStudent" resultType="com.zj.xyt.Entity.Student">
-        select * from student where Snu = #{arg0} and Spd = #{arg1}
+        select * from student where Snu = #{Snu} and Spd = #{Spd}
     </select>
     <!--查询教师-->
     <select id="queryTeacher" resultType="com.zj.xyt.Entity.Teacher">
-        select * from teacher where Tnu = #{arg0} and Tpd = #{arg1}
+        select * from teacher where Tnu = #{Tnu} and Tpd = #{Tpd}
     </select>
+    <!--修改密码-->
+    <update id="updateStudent" parameterType="java.lang.String">
+        update student
+        <set>
+            <if test="Spd != null">Spd = #{Spd}</if>
+        </set>
+        where Snu = #{Snu}
+    </update>
+    <update id="updateTeacher" parameterType="java.lang.String">
+        update teacher
+        <set>
+            <if test="Tpd != null">Tpd = #{Tpd}</if>
+        </set>
+        where Tnu = #{Tnu}
+    </update>
+    <update id="updateAdmin" parameterType="java.lang.String">
+        update admin
+        <set>
+            <if test="Apd != null">Tpd = #{Apd}</if>
+        </set>
+        where Anu = #{Anu}
+    </update>
 </mapper>

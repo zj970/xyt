@@ -47,4 +47,16 @@
     <select id="headteacherFindList"  resultMap="resStudent">
         select student.Sname,student.Ssex,student.Cnu,t.Tname,d.Dname,c.Cname,student.Sbirth,student.Sette,student.Scredit,student.Snu FROM student INNER JOIN class c on student.Cnu = c.Cnu INNER JOIN teacher t on c.Tnu = t.Tnu INNER join department d on c.Dnu = d.Dnu where c.Tnu = #{Tnu} order by Snu
     </select>
+
+    <!--更新学生信息-->
+    <update id="updateStudent" parameterType="com.zj.xyt.Entity.Student">
+        update student
+        <set>
+            <if test="Sname != null">Sname = #{Sname},</if>
+            <if test="Ssex != null">Ssex = #{Ssex},</if>
+            <if test="Sbirth != null">Sbirth=STR_TO_DATE(#{Sbirth},"%Y-%m-%d"),</if>
+            <if test="Cnu != null">Cnu = #{Cnu}</if>
+        </set>
+        where Snu = #{Snu}
+    </update>
 </mapper>

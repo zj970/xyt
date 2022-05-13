@@ -20,8 +20,8 @@ public class TeacherServiceImpl implements TeacherService {
      * @return
      */
     @Override
-    public TeacherVo queryTeacher(String Tnu) {
-        return teacherMapper.queryTeacher(Tnu);
+    public TeacherVo queryTeacherVoByTnu(String Tnu) {
+        return teacherMapper.queryTeacherVoByTnu(Tnu);
     }
 
     @Override
@@ -37,6 +37,11 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public List<TeacherVo> findTeacherVoListByDnu(String Dnu) {
         return teacherMapper.findTeacherVoListByDnu(Dnu);
+    }
+
+    @Override
+    public void updateTeacher(Teacher teacher) {
+        teacherMapper.updateTeacher(teacher);
     }
 
 

@@ -32,6 +32,11 @@ public interface StudentMapper {
      * 注册学生账号
      */
     void insertStudent(Student student);
+
+    /**
+     * 更新学生信息
+     */
+    void updateStudent(Student student);
     /**
      * 查询学生的所有信息
      */

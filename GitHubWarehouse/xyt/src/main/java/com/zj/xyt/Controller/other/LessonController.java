@@ -45,11 +45,8 @@ public class LessonController {
         Map<String,Object> map = new HashMap<>();
         int count = lessonService.getCount();
         PageUtil pageUtil = new PageUtil(page,limit);
+        lessonVo.toString();
         List<LessonVo> list = lessonService.getList(lessonVo,pageUtil);
-//        for (LessonVo s : list){
-//            System.out.println(s.getTname());
-//            System.out.println(s.getLnu());
-//        }
         map.put("count",count);
         map.put("data",list);
         map.put("code",0);

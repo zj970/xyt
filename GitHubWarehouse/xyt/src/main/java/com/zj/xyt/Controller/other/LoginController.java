@@ -7,11 +7,13 @@ import com.zj.xyt.Entity.Teacher;
 import com.zj.xyt.Server.LoginService;
 import com.zj.xyt.Server.PermissionService;
 import com.zj.xyt.utils.Constants;
-import com.zj.xyt.utils.UserType;
 import io.swagger.annotations.Api;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -130,5 +132,103 @@ public class LoginController {
         }
         return null;
     }
+    @RequestMapping("/passwordRestIndex")
+    public String passwordRestIndex(){
+        return "/system/user/changePwd";
+    }
 
+    @RequestMapping(value = "/passwordRest",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> passwordRest(HttpServletRequest request) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+
+        //获取页面输入的新旧密码
+        String oldPassword = request.getParameter("oldPassword");
+        String newPassword1 = request.getParameter("newPassword1");
+        String newPassword2 = request.getParameter("newPassword2");
+
+        String regex = "^(?!([a-zA-Z]+|\\d+)$)[a-zA-Z\\d]{6,20}$";
+        String salt;
+        boolean matches = newPassword1.matches(regex);
+
+        //获取用户信息
+        if (SecurityUtils.getSubject().getPrincipal() instanceof Student){
+            Student student = (Student) SecurityUtils.getSubject().getPrincipal();
+            salt = student.getSnu();
+            //将页面输入的密码进行加密 存入oldMd5Hash
+            Md5Hash oldMd5Hash = new Md5Hash(oldPassword, salt,1024);
+            Md5Hash newMd5Hash = new Md5Hash(newPassword1, salt,1024);
+            //进行密码的判断
+            if(oldPassword.length() <= 0 || newPassword1.length() <= 0 || newPassword2.length() <= 0){
+                map.put("code",4);
+                map.put("msg","密码不能为空");
+            }else if(!student.getSpd().equals(oldMd5Hash.toString())){
+                map.put("code",2);
+                map.put("msg","输入的旧密码不正确");
+            }else if(!newPassword1.equals(newPassword2)){
+                map.put("code",1);
+                map.put("msg","输入的新密码不一致");
+            }else if(!matches){
+                map.put("code",3);
+                map.put("msg","密码必须包含字母、数字且长度为6-20位");
+            }
+            else if(student.getSpd().equals(oldMd5Hash.toString())){
+                loginService.updateStudent(salt,newMd5Hash.toString());
+                map.put("code",0);
+                map.put("msg","修改成功");
+            }
+        }else if (SecurityUtils.getSubject().getPrincipal() instanceof Teacher){
+            Teacher teacher = (Teacher) SecurityUtils.getSubject().getPrincipal();
+            salt = teacher.getTnu();
+            //将页面输入的密码进行加密 存入oldMd5Hash
+            Md5Hash oldMd5Hash = new Md5Hash(oldPassword, salt,1024);
+            Md5Hash newMd5Hash = new Md5Hash(newPassword1, salt,1024);
+            //进行密码的判断
+            if(oldPassword.length() <= 0 || newPassword1.length() <= 0 || newPassword2.length() <= 0){
+                map.put("code",4);
+                map.put("msg","密码不能为空");
+            }else if(!teacher.getTpd().equals(oldMd5Hash.toString())){
+                map.put("code",2);
+                map.put("msg","输入的旧密码不正确");
+            }else if(!newPassword1.equals(newPassword2)){
+                map.put("code",1);
+                map.put("msg","输入的新密码不一致");
+            }else if(!matches){
+                map.put("code",3);
+                map.put("msg","密码必须包含字母、数字且长度为6-20位");
+            }
+            else if(teacher.getTpd().equals(oldMd5Hash.toString())){
+                loginService.updateTeacher(salt,newMd5Hash.toString());
+                map.put("code",0);
+                map.put("msg","修改成功");
+            }
+        }else if (SecurityUtils.getSubject().getPrincipal() instanceof Admin){
+            Admin admin = (Admin) SecurityUtils.getSubject().getPrincipal();
+            salt = admin.getAnu();
+            //将页面输入的密码进行加密 存入oldMd5Hash
+            Md5Hash oldMd5Hash = new Md5Hash(oldPassword, salt);
+            Md5Hash newMd5Hash = new Md5Hash(newPassword1, salt);
+            //进行密码的判断
+            if(oldPassword.length() <= 0 || newPassword1.length() <= 0 || newPassword2.length() <= 0){
+                map.put("code",4);
+                map.put("msg","密码不能为空");
+            }else if(!admin.getApd().equals(oldMd5Hash.toString())){
+                map.put("code",2);
+                map.put("msg","输入的旧密码不正确");
+            }else if(!newPassword1.equals(newPassword2)){
+                map.put("code",1);
+                map.put("msg","输入的新密码不一致");
+            }else if(!matches){
+                map.put("code",3);
+                map.put("msg","密码必须包含字母、数字且长度为6-20位");
+            }
+            else if(admin.getApd().equals(oldMd5Hash.toString())){
+                loginService.updateAdmin(salt,newMd5Hash.toString());
+                map.put("code",0);
+                map.put("msg","修改成功");
+            }
+        }
+
+        return map;
+    }
 }

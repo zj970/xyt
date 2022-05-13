@@ -49,4 +49,8 @@ public interface StudentService {
      */
     List<StudentVo> headteacherFindList(String Tnu);
 
+    /**
+     * 更新学生信息
+     */
+    void updateStudent(Student student);
 }

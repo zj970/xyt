@@ -4,3 +4,4 @@
 <link rel="shortcut icon " type="images/x-icon" href="${path}/images/favicon.ico">
 <script src="${path}/js/jquery.min.js"></script>
 <script src="${path}/layui/layui.js" charset="utf-8"></script>
+<script src="${path}/js/jquery.serializejson.js" charset="utf-8"></script>

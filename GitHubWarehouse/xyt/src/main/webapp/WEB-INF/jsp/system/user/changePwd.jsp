@@ -40,7 +40,7 @@
 
     function subForm() {
         var params = $("#passwordRest").serialize();
-        $.post("${path}/easUser/passwordRest",params,function(data){
+        $.post("${path}/passwordRest",params,function(data){
             if(data.code === 4){
                 layui.layer.msg(data.msg,{icon:5});
             }else if(data.code === 3){
@@ -51,6 +51,7 @@
                 layui.layer.msg(data.msg,{icon:5});
             }else if(data.code === 0){
                 layui.layer.msg(data.msg,{icon:1});
+                parent.location.href = "${path}/logout";
             }else {
                 layui.layer.msg('密码修改失败',{icon:1});
             }

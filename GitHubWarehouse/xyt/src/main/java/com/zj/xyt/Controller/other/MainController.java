@@ -1,7 +1,10 @@
 package com.zj.xyt.Controller.other;
 
-import com.zj.xyt.Entity.Notice;
+import com.zj.xyt.Entity.*;
+import com.zj.xyt.Server.ClassService;
 import com.zj.xyt.Server.NoticeService;
+import com.zj.xyt.Server.StudentService;
+import com.zj.xyt.Server.TeacherService;
 import com.zj.xyt.utils.PageUtil;
 import io.swagger.annotations.Api;
 import org.apache.shiro.SecurityUtils;
@@ -9,6 +12,8 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,12 +34,22 @@ import java.util.Map;
 public class MainController {
     @Autowired
     NoticeService noticeService;
+    @Autowired
+    StudentService studentService;
+    @Autowired
+    ClassService classService;
+    @Autowired
+    TeacherService teacherService;
 
     @GetMapping("/home")
     public String main() throws Exception{
         return "/system/home/homePage";
     }
-
+    @RequestMapping("/basicForm")
+    public String basicForm(ModelMap modelMap) throws Exception {
+        modelMap.put("classList",classService.getAll());
+        return "/system/user/form2";
+    }
     @RequestMapping(value="/getNotice",method = RequestMethod.GET)
     @ResponseBody
     public Map<String,Object> getNotice(@RequestParam(defaultValue = "1") Integer page,
@@ -127,5 +142,75 @@ public class MainController {
         modelAndView.addObject("noticeList",list);
         //modelAndView.setViewName("system/notice/homeNotice");
         return modelAndView;
+    }
+
+
+    @RequestMapping("/basicInformationIndex")
+    public String basicInformationIndex(Model model) throws Exception {
+        //1. 获取身份信息 判断是哪个角色
+        if (SecurityUtils.getSubject().getPrincipal() instanceof Student){
+            Student student = (Student) SecurityUtils.getSubject().getPrincipal();
+            StudentVo studentVo = studentService.queryStudentVo(student.getSnu());
+            model.addAttribute("data",studentVo);
+            model.addAttribute("code",2);
+            model.addAttribute("msg","学生信息成功");
+        }else if (SecurityUtils.getSubject().getPrincipal() instanceof Teacher){
+            Teacher teacher = (Teacher) SecurityUtils.getSubject().getPrincipal();
+            TeacherVo teacherVo = teacherService.queryTeacherVoByTnu(teacher.getTnu());
+            model.addAttribute("data",teacherVo);
+            model.addAttribute("code",3);
+            model.addAttribute("msg","教师信息成功");
+        }else if (SecurityUtils.getSubject().getPrincipal() instanceof Admin){
+            model.addAttribute("code",4);
+            model.addAttribute("msg","管理员还没有个人信息，请静候功能开放！");
+        } else{
+            model.addAttribute("code",1);
+            model.addAttribute("msg","该用户还没有个人信息,请稍后再来查看和修改个人信息！");
+        }
+        return "/system/user/basicInformation";
+    }
+
+    /**
+     * 获取修改个人资料时用户已有的信息
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/getBasicInformation")
+    @ResponseBody
+    public Object getBasicInformation() throws Exception {
+        if (SecurityUtils.getSubject().getPrincipal() instanceof Student){
+            Student student = (Student)SecurityUtils.getSubject().getPrincipal();
+            return student;
+        } else  if (SecurityUtils.getSubject().getPrincipal() instanceof Teacher){
+            Teacher teacher = (Teacher) SecurityUtils.getSubject().getPrincipal();
+            return  teacher;
+        } else {
+            System.out.println("我怎么变成null了！");
+            return null;
+        }
+    }
+    @RequestMapping(value = "/modifyInformation",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> modifyInformation(Student student,Teacher teacher,String cnu) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        System.out.println(student.toString()+"student");
+        System.out.println(teacher.toString()+"teacher");
+        System.out.println(cnu);
+        if (SecurityUtils.getSubject().getPrincipal() instanceof Student) {
+            //Student s = (Student) SecurityUtils.getSubject().getPrincipal();
+            //名称不符合必须重新set课程id
+            //student.setCnu(cnu);
+            studentService.updateStudent(student);
+            map.put("result", true);
+            return map;
+        } else if (SecurityUtils.getSubject().getPrincipal() instanceof Teacher) {
+            teacherService.updateTeacher(teacher);
+            map.put("result", true);
+            return map;
+        } else {
+            System.out.println("我怎么变成null了！");
+            map.put("result", false);
+            return null;
+        }
     }
 }

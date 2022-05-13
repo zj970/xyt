@@ -51,4 +51,9 @@ public class StudentServiceImpl implements StudentService {
     public List<StudentVo> headteacherFindList(String Tnu) {
         return studentMapper.headteacherFindList(Tnu);
     }
+
+    @Override
+    public void updateStudent(Student student) {
+        studentMapper.updateStudent(student);
+    }
 }

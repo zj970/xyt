@@ -24,7 +24,7 @@ public interface LessonMapper {
     /**
      * 查询课程
      */
-    List<LessonVo> getList(@Param("lessonVo")LessonVo lessonVo, @Param("pageUtil")PageUtil pageUtil) throws Exception;
+    List<LessonVo> getList(@Param("lessonVo")Lesson lessonVo, @Param("pageUtil")PageUtil pageUtil) throws Exception;
 
     int getCount();
 
