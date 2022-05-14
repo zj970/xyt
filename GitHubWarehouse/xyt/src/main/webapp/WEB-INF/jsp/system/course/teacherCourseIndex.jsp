@@ -26,7 +26,6 @@
             {field: "tname", title: "任课教师",minWidth:120, align:"center"},
             {field: "lnum", title: "最大人数", minWidth:100, align:"center"},
             {field: "choiceNum", title: "已选（人）", minWidth:100, align:"center"},
-            {title: "操作", width:90, templet:"#courseListBar",fixed:"right",align:"center"},
             {fixed: "right",title: '操作', width:160,toolbar: '#barDemo',align:'center'}
         ]];
 

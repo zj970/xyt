@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zj.xyt.Mapper.EchartMapper">
+    <!--根据Lnu查询课程-->
+    <select id="getLessonVoByLnu" parameterType="java.lang.String" resultType="com.zj.xyt.Entity.LessonVo">
+        select * from lesson where Lnu =#{Lnu};
+    </select>
+    <!--根据Lnu查询课程通过人数-->
+    <select id="getToalPass" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from sc where Lnu =#{Lnu} and Grade &gt;= 60
+    </select>
+    <!--根据Lnu查询课程通过人数-->
+    <select id="getToalNOPass" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from sc where sc.Lnu =#{Lnu} and sc.Grade &lt; 60
+    </select>
+
+    <!--查询学生数-->
+    <select id="getStudentCount" resultType="java.lang.Integer">
+        select count(*) from student;
+    </select>
+    <!--查询教师数-->
+    <select id="getTeacherCount" resultType="java.lang.Integer">
+        select count(*) from teacher;
+    </select>
+    <!--查询学生性别数-->
+    <select id="getStuentBySex" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from student where student.Ssex = #{Ssex};
+    </select>
+</mapper>

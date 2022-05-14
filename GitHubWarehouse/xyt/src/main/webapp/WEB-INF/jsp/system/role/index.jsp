@@ -49,7 +49,7 @@
         });
         str = str.substring(0,str.length - 1);
         //发送异步请求，参数：角色编号、一组权限编号
-        $.post("${path}/easRole/assignPers",{
+        $.post("${path}/admin/assignPers",{
             roleId : roleId,
             persIds : str
         },function () {
@@ -71,7 +71,7 @@
         }
     };
 
-    $.get('${path}/easPermission/parentList',function (zNodes) {
+    $.get('${path}/permission/parentList',function (zNodes) {
 
         // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
         zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);

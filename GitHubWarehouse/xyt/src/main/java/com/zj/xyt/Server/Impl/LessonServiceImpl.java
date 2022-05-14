@@ -46,4 +46,9 @@ public class LessonServiceImpl implements LessonService {
         return lessonMapper.queryChoiceListBySnu(isAll, searchKey, Snu, pageUtil);
     }
 
+    @Override
+    public List<LessonVo> queryChoiceListByTnu(String Tnu, PageUtil pageUtil) {
+        return lessonMapper.queryChoiceListByTnu(Tnu, pageUtil);
+    }
+
 }

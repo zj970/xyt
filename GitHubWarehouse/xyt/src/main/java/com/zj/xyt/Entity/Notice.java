@@ -6,13 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ApiModel(value = "通知")
-public class Notice {
+public class Notice implements Serializable {
     /**
      * 通知id
      */

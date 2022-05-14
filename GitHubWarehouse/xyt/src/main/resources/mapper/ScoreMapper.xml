@@ -9,6 +9,15 @@
         <result column="Tname" jdbcType="CHAR" property="Tname" />
         <result column="Grade" jdbcType="FLOAT" property="Grade" />
     </resultMap>
+    <resultMap id="SelectLessonResultMap" type="com.zj.xyt.Entity.StudentVo">
+        <result column="Snu" jdbcType="CHAR" property="Snu" />
+        <result column="Sname" jdbcType="CHAR" property="Sname" />
+        <result column="Ssex" jdbcType="CHAR" property="Ssex" />
+        <result column="Cname" jdbcType="CHAR" property="Cname" />
+        <result column="Dname" jdbcType="CHAR" property="Dname" />
+        <result column="Lname" jdbcType="CHAR" property="Lname" />
+        <result column="Grade" jdbcType="FLOAT" property="Grade" />
+    </resultMap>
 
     <!--查询某个课程已选多少人-->
     <select id="getCountByLnu" parameterType="java.lang.String" resultType="java.lang.Integer">
@@ -54,4 +63,75 @@
             limit #{pageUtil.pageStart},#{pageUtil.count}
         </if>
     </select>
+
+    <!--查询数量(教师)-->
+    <select id="getCountByTnuAndCnu" resultType="java.lang.Integer">
+        select count(*) from student,teacher,lesson,sc
+        <where>
+            teacher.Tnu = lesson.Tnu and
+            sc.Lnu = lesson.Lnu and
+            student.Snu = sc.Snu and
+            teacher.Tnu = #{Tnu}
+            <if test="Lnu != null and Lnu != ''">
+                and lesson.Lnu = #{Lnu}
+            </if>
+            <if test="Cnu != null and Cnu != ''">
+                and student.Cnu = #{Cnu}
+            </if>
+        </where>
+    </select>
+
+    <!--查询记录(教师)-->
+    <select id="getStudentSelectLessonListByTnu" resultMap="SelectLessonResultMap">
+        select student.Snu,student.Sname,student.Ssex,lesson.Lname,class.Cname,department.Dname,sc.Grade
+            from student,teacher,sc,class,lesson,department
+        <where>
+            student.Cnu = class.Cnu
+            and class.Dnu = department.Dnu
+            and  teacher.Tnu = lesson.Tnu
+            and sc.Lnu = lesson.Lnu
+            and student.Snu = sc.Snu
+            and teacher.Tnu = #{Tnu}
+            <if test="Lnu != null and Lnu != ''">
+                and lesson.Lnu = #{Lnu}
+            </if>
+            <if test="Cnu != null and Cnu != ''">
+                and student.Cnu = #{Cnu}
+            </if>
+        </where>
+        <if test="pageUtil != null">
+            limit #{pageUtil.pageStart},#{pageUtil.count}
+        </if>
+    </select>
+
+    <update id="updateScore">
+        update sc
+        <set>
+            <if test="Grade != null">
+                Grade = #{Grade,jdbcType=FLOAT},
+            </if>
+        </set>
+        where Snu = #{Snu} and Lnu in (select lesson.Lnu from lesson where Lname = #{Lname})
+    </update>
+
+    <update id="updateScoreByScoreList" parameterType="java.util.List">
+        update eas_score
+        --  suffixOverrides:指定去除多余的后缀内容 --
+        <trim prefix="set" suffixOverrides=",">
+            -- prefix:在trim标签内sql语句加上前缀。suffix:在trim标签内sql语句加上后缀 --
+            <trim prefix="grade = case" suffix="end ,">
+                <foreach collection="list" item="item">
+                    when Grade = #{item.Grade}
+                    then #{item.Grade}
+                </foreach>
+            </trim>
+                <foreach collection="list" item="item">
+                    when Snu = #{item.Snu} and Lnu in (select lesson.Lnu from lesson where Lname = #{item.Lname})
+                </foreach>
+        </trim>
+        where Snu in
+        <foreach collection="list" item="item" separator="," open="(" close=")" >
+            #{item.Snu}
+        </foreach>
+    </update>
 </mapper>

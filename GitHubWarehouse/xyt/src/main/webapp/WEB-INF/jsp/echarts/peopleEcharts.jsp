@@ -23,9 +23,8 @@
 
             var mySAndTChart = echarts.init(document.getElementById('SAndTEchart'));
 
-            $.get('${path}/easEchart/getAllStuAndTea').done(function (data) {
+            $.get('${path}/echart/getAllStuAndTea').done(function (data) {
                 // console.log("返回的数据为:"+data.totalStu);
-
                 mySAndTChart.setOption({
                     title: {
                         text: '教师学生人数图',
@@ -41,16 +40,11 @@
                         left: '12%',
                         top: '10%'
                     },
-                    // xAxis: {
-                    //     data: ['教师人数','学生人数']
-                    // },
-                    // yAxis: {},
                     series: [{
                         name: '教师学生人数',
                         type: 'pie', //饼图
                         radius: '50%',
                         legendHoverLink:true,
-                        // data: [data.totalTea,data.totalStu]
                         data: [
                             {value: data.totalTea, name: '教师人数'},
                             {value: data.totalStu, name: '学生人数'}
@@ -71,8 +65,8 @@
 
         var mySexChart = echarts.init(document.getElementById('SexEchart'));
 
-        $.get('${path}/easEchart/getAllSex').done(function (data) {
-
+        $.get('${path}/echart/getAllSex').done(function (data) {
+            console.log(data+"学生表")
             mySexChart.setOption({
                 title: {
                     text: '学生男女比例图',
@@ -84,9 +78,6 @@
                 },
                 tooltip: {},
                 legend: {
-                    // orient: 'vertical',
-                    // left: '12%',
-                    // top: '10%'
                     data: ['男生','女生']
                 },
                 grid: {
@@ -104,10 +95,6 @@
                     type: 'bar', //饼图
                     legendHoverLink:true,
                     data: [data.totalMan,data.totalWoman],
-                    // data: [
-                    //     {value: data.totalMan, name: '男生人数'},
-                    //     {value: data.totalWoman, name: '女生人数'},
-                    // ],
                     emphasis: {
                         //加入外边框阴影
                         itemStyle: {

@@ -26,4 +26,12 @@ public class StudentVo extends Student{
     /**学生所属系名*/
     @ApiModelProperty("学生所属系名")
     private String Dname;
+    /**学生所属系名*/
+    @ApiModelProperty("学生选课名称")
+    private String Lname;
+
+    /**成绩*/
+    @ApiModelProperty("成绩")
+    private Float Grade;
+
 }

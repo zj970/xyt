@@ -6,11 +6,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ApiModel(value = "权限资源")
-public class Permission {
+public class Permission  implements Serializable {
     /**
      * 权限id --- 自增
      */

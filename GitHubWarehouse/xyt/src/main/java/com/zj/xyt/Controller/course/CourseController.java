@@ -2,6 +2,7 @@ package com.zj.xyt.Controller.course;
 
 import com.zj.xyt.Entity.LessonVo;
 import com.zj.xyt.Entity.Student;
+import com.zj.xyt.Entity.Teacher;
 import com.zj.xyt.Server.LessonService;
 import com.zj.xyt.Server.StudentService;
 import com.zj.xyt.Server.TeacherService;
@@ -116,6 +117,37 @@ public class CourseController {
             map.put("msg","");
             //3.返回可以选择的课程信息
         }
+        return map;
+    }
+
+    /**
+     * 返回教师自己教的课程列表
+     */
+    @ResponseBody
+    @RequestMapping(value="/getMyCourseList")
+    public Map<String, Object> getMyCourseList(@RequestParam(defaultValue = "1") Integer page,
+                                               @RequestParam(defaultValue = "10") Integer limit) {
+        Map<String,Object> map = new HashMap<>();
+        //获取用户信息
+        if(SecurityUtils.getSubject().getPrincipal() instanceof Teacher){
+            Teacher teacher = (Teacher) SecurityUtils.getSubject().getPrincipal();
+            PageUtil pageUtil = new  PageUtil(page,limit);
+            List<LessonVo> list = lessonService.queryChoiceListByTnu(teacher.getTnu(),pageUtil);
+            for (LessonVo e: list
+            ) {
+                e.setChoiceNum(lessonService.getCountByLnu(e.getLnu()));
+                System.out.println(e.getTname()+"------------------");
+            }
+            if (list.size() < 1){
+                map.put("code",1);
+                map.put("msg","您还没有教授课程");
+            }else {
+                map.put("data",list);
+                map.put("code",0);
+                map.put("msg","");
+            }
+        }
+
         return map;
     }
 }

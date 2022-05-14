@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -14,7 +15,7 @@ import java.util.List;
 @Data
 @ApiModel(value = "系")
 @NoArgsConstructor
-public class Department {
+public class Department  implements Serializable {
     /**系编号*/
     @ApiModelProperty("系编号")
     private String Dnu;

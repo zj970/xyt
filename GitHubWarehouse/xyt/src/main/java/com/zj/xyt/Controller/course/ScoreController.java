@@ -1,13 +1,12 @@
 package com.zj.xyt.Controller.course;
 
-import com.zj.xyt.Entity.LessonVo;
-import com.zj.xyt.Entity.Score;
-import com.zj.xyt.Entity.Student;
+import com.zj.xyt.Entity.*;
 import com.zj.xyt.Server.ScoreService;
 import com.zj.xyt.Server.StudentService;
 import com.zj.xyt.Server.TeacherService;
 import com.zj.xyt.utils.PageUtil;
 import io.swagger.annotations.Api;
+import com.alibaba.fastjson.JSON;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -154,6 +153,113 @@ public class ScoreController {
             map.put("code",1);
             map.put("msg","没有查询相关成绩");
         }
+        return map;
+    }
+    /**
+     * 获取我的学生选课信息
+     * @param page
+     * @param limit
+     * @param lnu
+     * @param cnu
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/stuSelectCourseList")
+    @ResponseBody
+    public Map<String, Object> stuSelectCourseList(@RequestParam(defaultValue = "1") Integer page,
+                                                   @RequestParam(defaultValue = "10") Integer limit,
+                                                   @RequestParam(required=false) String lnu,
+                                                   @RequestParam(required=false) String cnu) throws Exception {
+        //    @requestparam(required = false)不传值后台也不会报错
+        System.out.println(lnu);
+        System.out.println(cnu);
+        Map<String, Object> map = new HashMap<>();
+        //获取当前教师id
+        if (SecurityUtils.getSubject().getPrincipal() instanceof Teacher){
+            Teacher teacher = (Teacher) SecurityUtils.getSubject().getPrincipal();
+            //获取行数
+            int count = scoreService.getCountByTnuAndCnu(teacher.getTnu(),lnu,cnu);
+            PageUtil pageUtil = new  PageUtil(page,limit);
+            List<StudentVo> list = scoreService.getStudentSelectLessonListByTnu(teacher.getTnu(),lnu,cnu,pageUtil);
+            map.put("count",count);
+            map.put("data",list);
+            map.put("code",0);
+            map.put("msg","");
+        }
+        else {
+            map.put("code",1);
+            map.put("msg","没有数据");
+        }
+        return map;
+    }
+
+    /**
+     * 返回选修了我(教师)已结束课程的学生列表
+     * @param page
+     * @param limit
+     * @param lnu
+     * @param cnu
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/stuScoreList")
+    @ResponseBody
+    public Map<String, Object> stuScoreList(@RequestParam(defaultValue = "1") Integer page,
+                                            @RequestParam(defaultValue = "10") Integer limit,
+                                            @RequestParam(required=false) String lnu,
+                                            @RequestParam(required=false) String cnu) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        //获取当前教师id
+        if (SecurityUtils.getSubject().getPrincipal() instanceof Teacher) {
+            Teacher teacher = (Teacher) SecurityUtils.getSubject().getPrincipal();
+            //获取行数
+            int count = scoreService.getCountByTnuAndCnu(teacher.getTnu(), lnu, cnu);
+            PageUtil pageUtil = new  PageUtil(page,limit);
+            List<StudentVo> list = scoreService.getStudentSelectLessonListByTnu(teacher.getTnu(),lnu,cnu,pageUtil);
+            map.put("count",count);
+            map.put("data",list);
+            map.put("code",0);
+            map.put("msg","");
+        }
+        else {
+            map.put("code",1);
+            map.put("msg","没有数据");
+        }
+        return map;
+    }
+
+    @RequestMapping("/updateScore")
+    @ResponseBody
+    public Map<String, Object> updateScore(Score score) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+
+        int res = scoreService.updateScore(score);
+        if (res > 0){
+            map.put("result",true);
+            map.put("msg","评分成功");
+        }else {
+            map.put("result",false);
+            map.put("msg","课程还未结束,评分失败");
+        }
+
+        return map;
+    }
+
+    @RequestMapping("/updateScoreList")
+    @ResponseBody
+    public Map<String, Object> updateScoreList(String scoreListStr) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        List<Score> scoreList = JSON.parseArray(scoreListStr,Score.class);
+        System.out.println("我是scoreList"+scoreList);
+        int res = scoreService.updateScoreByScoreList(scoreList);
+        if (res > 0){
+            map.put("result",true);
+            map.put("msg","批量评分成功");
+        }else {
+            map.put("result",false);
+            map.put("msg","批量评分失败，请联系管理员！");
+        }
+
         return map;
     }
 

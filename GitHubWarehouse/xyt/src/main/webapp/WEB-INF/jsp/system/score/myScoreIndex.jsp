@@ -15,7 +15,7 @@
 <body>
 <%--<h2>学生成绩页面</h2>--%>
 <%--<hr>--%>
-<form class="layui-form" style="margin-left: 5%;margin-top: 30px;">
+<%--<form class="layui-form" style="margin-left: 5%;margin-top: 30px;">
     <div class="layui-inline">
         <a id="all" class="layui-btn layui-btn-primary search_btn ">全部</a>
     </div>
@@ -25,10 +25,10 @@
     <div class="layui-inline">
         <a  id="pass" class="layui-btn layui-btn-primary search_btn">已通过课程</a>
     </div>
-<%--    <div class="layui-inline">--%>
-<%--        <a class="layui-btn layui-btn-primary" onclick="doPrint()">打印</a>--%>
-<%--    </div>--%>
-</form>
+&lt;%&ndash;    <div class="layui-inline">&ndash;%&gt;
+&lt;%&ndash;        <a class="layui-btn layui-btn-primary" onclick="doPrint()">打印</a>&ndash;%&gt;
+&lt;%&ndash;    </div>&ndash;%&gt;
+</form>--%>
 
 <table id="MyScoreListTable" lay-filter="MyScoreListTable" ></table>
 

@@ -1,6 +1,7 @@
 package com.zj.xyt.Server.Impl;
 
 import com.zj.xyt.Entity.Score;
+import com.zj.xyt.Entity.StudentVo;
 import com.zj.xyt.Mapper.LessonMapper;
 import com.zj.xyt.Mapper.ScoreMapper;
 import com.zj.xyt.Server.ScoreService;
@@ -55,6 +56,26 @@ public class ScoreServiceImpl implements ScoreService {
     @Override
     public List<Score> queryBySnuList(String Snu, PageUtil pageUtil) {
         return scoreMapper.queryBySnuList(Snu, pageUtil);
+    }
+
+    @Override
+    public int getCountByTnuAndCnu(String Tnu, String Lnu, String Cnu) {
+        return scoreMapper.getCountByTnuAndCnu(Tnu, Lnu, Cnu);
+    }
+
+    @Override
+    public List<StudentVo> getStudentSelectLessonListByTnu(String Tnu, String Lnu, String Cnu, PageUtil pageUtil) {
+        return scoreMapper.getStudentSelectLessonListByTnu(Tnu, Lnu, Cnu, pageUtil);
+    }
+
+    @Override
+    public int updateScore(Score score) throws Exception {
+        return scoreMapper.updateScore(score);
+    }
+
+    @Override
+    public int updateScoreByScoreList(List<Score> scoreList) throws Exception {
+        return scoreMapper.updateScoreByScoreList(scoreList);
     }
 
 

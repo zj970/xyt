@@ -2,6 +2,7 @@ package com.zj.xyt.Controller.admin;
 
 import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -12,4 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 @Api(tags = "管理员接口")
 public class AdminController {
+
+    @GetMapping("/userManager")
+    public String userManager(){
+        return "/system/user/index";
+    }
+
+    @GetMapping("/role")
+    public String roleManager(){
+        return "/system/role/index";
+    }
 }

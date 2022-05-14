@@ -133,6 +133,7 @@ public class ShiroConfiguration {
     public SecurityManager securityManager(@Qualifier("adminRealm") AdminRealm adminRealm,@Qualifier("studentRealm")StudentRealm studentRealm,@Qualifier("teacherRealm")TeacherRealm teacherRealm) {
         DefaultWebSecurityManager  securityManager = new DefaultWebSecurityManager();
         securityManager.setAuthenticator(modularRealmAuthenticator());
+        securityManager.setSessionManager(sessionManager());
         //设置realm.
         List<Realm> realms = new ArrayList<>();
         //添加多个Realm
@@ -145,7 +146,7 @@ public class ShiroConfiguration {
         // 自定义session管理 使用redis
         //securityManager.setSessionManager(sessionManager());
         //注入记住我管理器;
-        //securityManager.setRememberMeManager(rememberMeManager());
+        securityManager.setRememberMeManager(rememberMeManager());
         return securityManager;
     }
     /**
@@ -215,7 +216,8 @@ public class ShiroConfiguration {
     @Bean
     public DefaultWebSessionManager sessionManager() {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
-        sessionManager.setSessionDAO(redisSessionDAO());
+       //sessionManager.setSessionDAO(redisSessionDAO());
+        sessionManager.setGlobalSessionTimeout(3600000L);//设置有效期
         return sessionManager;
     }
     /**
@@ -265,6 +267,5 @@ public class ShiroConfiguration {
         hashedCredentialsMatcher.setHashIterations(1024);//散列的次数，比如散列两次，相当于 md5(md5(""));
         return hashedCredentialsMatcher;
     }
-
 }
 

@@ -21,15 +21,13 @@
 
             <div class="layui-inline">
                 <div class="layui-input-inline" >
-                    <select id="baseCourseId" class="baseCourseId">
-<%--                        <option selected="selected" disabled="disabled" style='display: none' value=''></option>--%>
+                    <select id="lnu" class="lnu">
                         <option value="">全部</option>
-
                     </select>
                 </div>
 
                 <div class="layui-input-inline" >
-                    <select id="classId" class="classId">
+                    <select id="cnu" class="cnu">
                              <option value="">全部</option>
                     </select>
                 </div>
@@ -51,16 +49,12 @@
             table = layui.table;
 
         var colsArray =[[
-            // {type: "checkbox", fixed:"left", width:50},
-            {field: "snu", title: "学号", sort:true, width:60, align:"center"},
-            {field: "sname", title: "姓名",width:100, align:"center"},
-            {field: "ssex", title: "性别", width:70, align:"center"},
-            {field: "className", title: "班级", minWidth:180, align:"center"},
-            {field: "courseName", title: "课程名", minWidth:150, align:"center"},
-            // {field: "score", title: "成绩", edit: "text", width:140, align:"center"},
-            // {field: "result", title: "结果", edit: "text", width:130, align:"center"},
-            // // {field: "result", title: "结果", edit: "text",sort: true, width:130, align:"center",templet: '#resultSelect'},
-            // {title: "操作", width:120, templet:"#studentScoreListBar",fixed:"right",align:"center"}
+            {field: "snu", title: "学号", sort:true, align:"center"},
+            {field: "sname", title: "姓名", align:"center"},
+            {field: "ssex", title: "性别",  align:"center"},
+            {field: "cname", title: "班级",  align:"center"},
+            {field: "dname", title: "院系",  align:"center"},
+            {field: "lname", title: "课程名",  align:"center"},
         ]];
 
         //学生成绩列表
@@ -68,10 +62,6 @@
             id : "myStudentSelectCoureTable",
             elem: "#myStudentSelectCoureTable",
             url : "${path}/score/stuSelectCourseList",
-            // where: {
-            //     courseId: $("#searchType").val() //课程id
-            // },
-            // height : "full-125",
             page : true,
             toolbar: true,
             defaultToolbar: ['filter', 'exports', 'print'],
@@ -83,8 +73,8 @@
         layui.form.render('select','scoreSearchForm');//渲染表格加载 下拉框select
         $.get("${path}/baseCourse/search",function (data) {
             $.each(data,function () {
-                var opt = $("<option></option>").appendTo("#baseCourseId");
-                opt.text(this.lname).val(this.id);
+                var opt = $("<option></option>").appendTo("#lnu");
+                opt.text(this.lname).val(this.lnu);
             });
             //获取数据后再进行渲染，显示未显示的option
             layui.form.render('select','scoreSearchForm'); //获取内容重新渲染表格 下拉框select
@@ -94,8 +84,8 @@
         layui.form.render('select','scoreSearchForm');//渲染表格加载 下拉框select
         $.get("${path}/class/search",function (data) {
             $.each(data,function () {
-                var opt = $("<option></option>").appendTo("#classId");
-                opt.text(this.cname).val(this.id);
+                var opt = $("<option></option>").appendTo("#cnu");
+                opt.text(this.cname).val(this.cnu);
             });
             //获取数据后再进行渲染，显示未显示的option
             layui.form.render('select','scoreSearchForm'); //获取内容重新渲染表格 下拉框select
@@ -108,49 +98,15 @@
                     curr: 1
                 },
                 where: {
-                    baseCourseId: $("#baseCourseId").val(),
-                    classId: $("#classId").val()
+                    lnu: $("#lnu").val(),
+                    cnu: $("#cnu").val()
                 }
             });
         });
-
-        <%--//监听行工具事件--%>
-        <%--table.on("tool(studentScoreListTable)",function (obj) {--%>
-        <%--    var data = obj.data;--%>
-        <%--    //教师提交成绩--%>
-        <%--    if (obj.event == 'submitResult'){--%>
-        <%--        $.ajax({--%>
-        <%--            type: "get",--%>
-        <%--            data: {--%>
-        <%--                id: data.id,--%>
-        <%--                score: data.score,--%>
-        <%--                result: data.result--%>
-        <%--            },--%>
-        <%--            url: "${path}/easScore/updateScore",--%>
-        <%--            success:function(res) {--%>
-        <%--                if (res.result === true) {--%>
-        <%--                    //提交成绩成功--%>
-        <%--                    layer.msg(res.msg, {icon: 1,time:1000},function () {--%>
-        <%--                        tableIns.reload();--%>
-        <%--                    });--%>
-        <%--                }else {--%>
-        <%--                    layer.msg(res.msg, {icon: 5,time:1000});--%>
-        <%--                }--%>
-        <%--            }--%>
-        <%--        });--%>
-
-        <%--    }--%>
-
-        <%--});--%>
-
 
     });
 
 </script>
 
-<%--操作--%>
-<%--<script type="text/html" id="studentScoreListBar">--%>
-<%--    <a class="layui-btn layui-btn-xs" lay-event="submitResult">提交成绩</a>--%>
-<%--</script>--%>
 </body>
 </html>

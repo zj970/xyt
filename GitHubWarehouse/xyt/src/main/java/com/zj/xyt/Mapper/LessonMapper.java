@@ -37,4 +37,6 @@ public interface LessonMapper {
     /**根据Snu查询当前学生的可选择课程*/
     List<LessonVo> queryChoiceListBySnu(@Param("isAll") int isAll, @Param("searchKey") String searchKey,@Param("Snu") String Snu,@Param("pageUtil") PageUtil pageUtil);
 
+    /**根据Tnu查询当前学生的授课课程*/
+    List<LessonVo> queryChoiceListByTnu(@Param("Tnu") String Tnu,@Param("pageUtil")PageUtil pageUtil);
 }

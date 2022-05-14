@@ -11,7 +11,7 @@
 <body>
 <%--<h2>学生信息表</h2>--%>
 <%--<hr>--%>
-<form class="layui-form" action="">
+<%--<form class="layui-form" action="">
     <div class="layui-form-item" style="margin-left: 5%;margin-top: 30px;">
         <div class="layui-inline">
             <label class="layui-form-label">姓名</label>
@@ -35,7 +35,7 @@
         </div>
 
     </div>
-</form>
+</form>--%>
 <table class="layui-table" lay-data="{id:'studentTable',url:'${path}/student/list', page:true,toolbar:'#toolbarDemo',defaultToolbar: ['filter', 'print', 'exports'],even: true}"
        lay-filter="studentTable">
     <thead>

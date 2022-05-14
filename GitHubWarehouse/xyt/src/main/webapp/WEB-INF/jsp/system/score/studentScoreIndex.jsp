@@ -21,7 +21,7 @@
 
             <div class="layui-inline">
                 <div class="layui-input-inline" >
-                    <select id="baseCourseId" class="baseCourseId">
+                    <select id="lnu" class="lnu">
 <%--                        <option selected="selected" disabled="disabled" style='display: none' value=''></option>--%>
                         <option value="">全部</option>
 
@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="layui-input-inline" >
-                    <select id="classId" class="classId">
+                    <select id="cnu" class="cnu">
                              <option value="">全部</option>
                     </select>
                 </div>
@@ -55,12 +55,13 @@
 
         var colsArray =[[
             {type: "checkbox", fixed:"left", width:50},
-            {field: "snu", title: "学号", sort:true, width:60, align:"center"},
-            {field: "sname", title: "姓名",width:100, align:"center"},
-            {field: "ssex", title: "性别", width:70, align:"center"},
-            {field: "cname", title: "班级", minWidth:180, align:"center"},
-            {field: "lname", title: "课程名", minWidth:150, align:"center"},
-            {field: "grade", title: "成绩", edit: "text", width:140, align:"center"},
+            {field: "snu", title: "学号", sort:true, align:"center"},
+            {field: "sname", title: "姓名", align:"center"},
+            {field: "ssex", title: "性别",  align:"center"},
+            {field: "cname", title: "班级",  align:"center"},
+            {field: "dname", title: "院系",  align:"center"},
+            {field: "lname", title: "课程名",  align:"center"},
+            {field: "grade", title: "成绩", edit: "text", align:"center"},
             {title: "操作", width:120, templet:"#studentScoreListBar",fixed:"right",align:"center"}
         ]];
 
@@ -84,8 +85,8 @@
         layui.form.render('select','scoreSearchForm');//渲染表格加载 下拉框select
         $.get("${path}/baseCourse/search",function (data) {
             $.each(data,function () {
-                var opt = $("<option></option>").appendTo("#baseCourseId");
-                opt.text(this.lname).val(this.id);
+                var opt = $("<option></option>").appendTo("#lnu");
+                opt.text(this.lname).val(this.lnu);
             });
             //获取数据后再进行渲染，显示未显示的option
             layui.form.render('select','scoreSearchForm'); //获取内容重新渲染表格 下拉框select
@@ -95,8 +96,8 @@
         layui.form.render('select','scoreSearchForm');//渲染表格加载 下拉框select
         $.get("${path}/class/search",function (data) {
             $.each(data,function () {
-                var opt = $("<option></option>").appendTo("#classId");
-                opt.text(this.cname).val(this.id);
+                var opt = $("<option></option>").appendTo("#cnu");
+                opt.text(this.cname).val(this.cnu);
             });
             //获取数据后再进行渲染，显示未显示的option
             layui.form.render('select','scoreSearchForm'); //获取内容重新渲染表格 下拉框select
@@ -109,8 +110,8 @@
                     curr: 1
                 },
                 where: {
-                    baseCourseId: $("#baseCourseId").val(),
-                    classId: $("#classId").val()
+                    lnu: $("#lnu").val(),
+                    cnu: $("#cnu").val()
                 }
             });
         });
@@ -123,9 +124,9 @@
                 $.ajax({
                     type: "get",
                     data: {
-                        id: data.id,
-                        score: data.score,
-                        result: data.result
+                        snu: data.snu,
+                        lname: data.lname,
+                        grade: data.grade,
                     },
                     url: "${path}/score/updateScore",
                     success:function(res) {
@@ -152,9 +153,9 @@
             if(data.length > 0) {
                 for (var i in data) {
                     var score = new Object();
-                    score.id = data[i].id;
-                    score.score = data[i].score;
-                    score.result = data[i].result;
+                    score.snu = data[i].snu;
+                    score.lname = data[i].lname;
+                    score.grade = data[i].grade;
                     scoreList[i] = score;
                 }
                 // console.log("我是成绩列表:"+scoreList);//打印成绩列表信息
@@ -170,7 +171,7 @@
                             if (res.result === true) {
                                 tableIns.reload({
                                     page: { curr: 1 },
-                                    where: { courseId: $("#searchType").val() }
+                                    where: { cnu: $("#cnu").val() }
                                 });
                             } else {
                                 layer.msg(res.data, {icon: 5,time:1000});
@@ -191,8 +192,6 @@
     });
 
 </script>
-
-
 <%--<script type="text/html" id="resultSelect">--%>
 <%--    <select id="result">--%>
 <%--        <option value="">请选择成绩</option>--%>

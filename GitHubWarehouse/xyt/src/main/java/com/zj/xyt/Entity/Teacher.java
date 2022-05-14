@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 
 /**
  * @author zj970
@@ -18,7 +20,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ApiModel(value = "教师")
 @ToString(exclude = {"Tpd"})
-public class Teacher {
+public class Teacher implements Serializable {
     private UserType userType = UserType.TEACHER;
 
     /**教师工作证号*/

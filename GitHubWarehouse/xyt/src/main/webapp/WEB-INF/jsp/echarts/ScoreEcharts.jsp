@@ -28,10 +28,10 @@
             $ = layui.$,
             laytpl = layui.laytpl; //模板引擎 例:{{ d.checked }}
 
-        $.get("${path}/easBaseCourse/search",function (data) {
+        $.get("${path}/baseCourse/search",function (data) {
             $.each(data,function () {
                 var opt = $("<option></option>").appendTo("#baseCourseSelect");
-                opt.text(this.coursename).val(this.id);
+                opt.text(this.lname).val(this.lnu);
             });
             //获取数据后再进行渲染，显示未显示的option
             form.render();
@@ -42,7 +42,7 @@
 
             var myScoreChart = echarts.init(document.getElementById('scoreEchart'));
 
-            $.get('${path}/easEchart/getAllClassScore',{baseCourseId:data.value}).done(function (data) {
+            $.get('${path}/echart/getAllClassScore',{lnu:data.value}).done(function (data) {
                 // console.log("返回的数据信息为:"+data);
                 myScoreChart.setOption({
                     title: {
@@ -50,7 +50,7 @@
                     },
                     tooltip: {},
                     legend:{
-                        data: [data.coursename]
+                        data: [data.lname]
                     },
                     xAxis: {
 
@@ -58,8 +58,8 @@
                     },
                     yAxis: {},
                     series: [{
-                        name: data.coursename,
-                        data: [data.totalPass, data.totalNoPass],
+                        name: data.lname,
+                        data: [data.totalPass,data.totalNoPass],
                         type: 'bar',
                         showBackground: true,
                         backgroundStyle: {
