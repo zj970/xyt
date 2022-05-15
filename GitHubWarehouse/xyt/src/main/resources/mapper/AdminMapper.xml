@@ -3,13 +3,61 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zj.xyt.Mapper.AdminMapper">
+    <resultMap id="resStudentVo" type="com.zj.xyt.Entity.StudentVo">
+        <!-- property指实体类 -->
+        <id property="Snu" column="Snu"/>
+        <result property="Sname" column="Sname"/>
+        <result property="Ssex" column="Ssex"/>
+        <result property="Sbirth" column="Sbirth"/>
+        <result property="Scredit" column="Scredit"/>
+        <result property="Sette" column="Sette"/>
+        <result property="Tname" column="Tname"/>
+        <result property="Dname" column="Dname"/>
+        <result property="Cname" column="Cname"/>
+        <result property="Spd" column="Spd"/>
+    </resultMap>
+
+    <resultMap id="resTeacherVo" type="com.zj.xyt.Entity.TeacherVo">
+        <!-- property指实体类 -->
+        <id property="Tnu" column="Tnu"/>
+        <result property="Tname" column="Tname"/>
+        <result property="Tsex" column="Tsex"/>
+        <result property="Tphone" column="Tphone"/>
+        <result property="Teyte" column="Teyte"/>
+        <result property="Tsnte" column="Tsnte"/>
+        <result property="Title" column="Title"/>
+        <result property="Dname" column="Dname"/>
+        <result property="Tpd" column="Tpd"/>
+    </resultMap>
+
     <!--查询所有管理员用户-->
     <select id="queryAdminList" parameterType="String" resultType="com.zj.xyt.Entity.Admin">
         select * from admin
     </select>
-
     <!--查询单个用户-->
     <select id="queryAdminByID" parameterType="String" resultType="com.zj.xyt.Entity.Admin">
         select * from admin where Anu = #{Anu}
+    </select>
+
+    <!--获取学生信息-->
+    <select id="queryStudentVoList" parameterType="com.zj.xyt.utils.PageUtil" resultMap="resStudentVo">
+        select student.Snu,student.Sname,student.Ssex,student.Scredit,student.Sette,student.Spd,student.Cnu
+        from student
+        <if test="pageUtil != null">
+            limit #{pageUtil.pageStart},#{pageUtil.count}
+        </if>;
+    </select>
+    <!--获取教师信息-->
+    <select id="queryTeacherVoList" parameterType="com.zj.xyt.utils.PageUtil" resultMap="resTeacherVo">
+        select teacher.Tnu,teacher.Tname,teacher.Tsex,teacher.Tphone,teacher.Teyte,teacher.Tsnte,department.Dname,teacher.Tpd
+        from teacher,department
+        where teacher.Dnu = department.Dnu
+        <if test="pageUtil != null">
+            limit #{pageUtil.pageStart},#{pageUtil.count}
+        </if>;
+    </select>
+    <!--获取所有系信息-->
+    <select id="getAllDepartment" resultType="com.zj.xyt.Entity.Department">
+        select * from department;
     </select>
 </mapper>

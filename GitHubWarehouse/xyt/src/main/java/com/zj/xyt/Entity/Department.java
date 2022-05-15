@@ -28,12 +28,4 @@ public class Department  implements Serializable {
     @ApiModelProperty("系电话")
     private String Dphone;
 
-    /**系班级*/
-    @ApiModelProperty("系班级")
-    public List<Classes> D_C_list;
-
-    /**系老师*/
-    @ApiModelProperty("系老师")
-    public List<Teacher> D_T_list = new ArrayList<>();
-
 }
