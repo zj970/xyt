@@ -34,4 +34,15 @@ public class Classes  implements Serializable {
      * 班级名称
      */
     private String Cname;
+
+    /**
+     * 班级名称
+     */
+    private String Dname;
+
+    /**
+     * 班主任工作证号
+     */
+    @ApiModelProperty(value = "班主任工作证号")
+    private String Tname;
 }

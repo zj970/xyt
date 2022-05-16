@@ -22,7 +22,7 @@
 <body>
 <%--<h2>角色列表</h2>--%>
 <%--<hr>--%>
-<div class="layui-fluid">
+<%--<div class="layui-fluid">
     <div class="layui-row">
         <div class="layui-col-md8">
             <table id="roleTable" lay-filter="roleTable"></table>
@@ -36,9 +36,13 @@
 
         </div>
     </div>
+</div>--%>
+<div>
+    <p>
+        该功能尚未开发完善，敬请期待！
+    </p>
 </div>
-
-<script>
+<%--<script>
     var roleId;
     function assignPers(){
         //先获取所有选中的节点，其实就是要一个编号
@@ -227,7 +231,7 @@
         })
 
     });
-</script>
+</script>--%>
 
 <script type="text/html" id="barDemo">
     <a href="javascript:void(0)" lay-event="edit"><i class="layui-icon layui-icon-edit"></i></a>

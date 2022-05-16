@@ -20,7 +20,7 @@
     layui.use('treeGrid',function () {
         var treeGrid = layui.treeGrid;
 
-        $.get("${path}/easPermission/list",function (d) {
+        $.get("${path}/permission/list",function (d) {
             $.each(d.data,function () {
                this.isOpen = false;
             });

@@ -18,7 +18,7 @@
     </select>
 
     <select id="getList" resultType="com.zj.xyt.Entity.LessonVo">
-        select lesson.Lnu,lesson.Lname,lesson.Lcredit,lesson.Tnu,t.Tname,lesson.Las from lesson INNER JOIN teacher t on lesson.Tnu = t.Tnu
+        select lesson.Lnu,lesson.Lname,lesson.Lcredit,lesson.Tnu,t.Tname,lesson.Las,lesson.Lnum from lesson INNER JOIN teacher t on lesson.Tnu = t.Tnu
         <where>
             <if test="lessonVo.Lnu != null and lessonVo.Lnu != ''">
                 and Lnu like concat('%',#{lessonVo.Lnu},'%')

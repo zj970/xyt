@@ -47,7 +47,7 @@
         table.render({
              id:'classTable'
             ,elem: '#classTable'
-            ,url:'${path}/easClass/list'
+            ,url:'${path}/class/list'
             ,even: true
             ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
             ,defaultToolbar: ['filter', 'exports', 'print']
@@ -55,8 +55,10 @@
             ,page: true
             ,cols: [[
                 {type: 'checkbox', fixed: 'left'}
-                ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true,align:"center"}
-                ,{field:'classes', title:'课程名称', minWidth:180,align:"center"}
+                ,{field:'cnu', title:'班级编号', width:80, fixed: 'left', unresize: true, sort: true,align:"center"}
+                ,{field:'cname', title:'班级名称', minWidth:180,align:"center"}
+                ,{field:'cname', title:'班主任', minWidth:180,align:"center"}
+                ,{field:'cname', title:'院系', minWidth:180,align:"center"}
                 ,{fixed: 'right', title:'操作', toolbar: '#barDemo', minWidth:150,align:"center"}
             ]]
 
@@ -67,17 +69,17 @@
             var e = obj.event;
             switch (e){
                 case "add":
-                    $.get('${path}/easClass/classForm',function (str) {
+                    $.get('${path}/class/classForm',function (str) {
                         layer.open({
                             type:1,
-                            title :'添加基本课程',
+                            title :'添加班级',
                             area : '700px',
                             content : str,
                             skin:'layui-layer-molv',
                             btn : ['确定','取消'],
                             yes : function (index) {
                                 var params = $("#class_form").serialize();
-                                $.post('${path}/easClass/addClass',params,function (data) {
+                                $.post('${path}/class/addClass',params,function (data) {
 
                                     if(data.result === false){
                                         layui.layer.msg(data.msg,{icon:5});
@@ -101,14 +103,14 @@
                         layer.msg("请选择要删除的数据",function(){});
                         return;
                     }
-                    layer.confirm('真的干掉这么多基本课程吗？',{icon:5,title:'友情提示'},function (index) {
+                    layer.confirm('确定删除这些班级吗？',{icon:5,title:'友情提示'},function (index) {
                         var params = "";
                         for(let classes of data){
                             params += "ids="+classes.id+"&";
                         }
                         // console.log("我的id值为:"+params);
 
-                        $.post('${path}/easClass/batchDeleteClass',params,function (data) {
+                        $.post('${path}/class/batchDeleteClass',params,function (data) {
 
                             layui.layer.msg(data.msg,{icon:5,time:1000},function () {
                                 layer.close(index);
@@ -126,7 +128,7 @@
         table.on("tool(classTable)",function (obj) {
             var data = obj.data;
             if (obj.event == 'edit'){ //edit
-                $.get("${path}/easClass/classForm",function (str) {
+                $.get("${path}/class/classForm",function (str) {
                     layer.open({
                         type:1,
                         title : '修改班级',
@@ -135,14 +137,14 @@
                         skin:'layui-layer-molv',
                         btn:['确定','取消'],
                         success:function(){
-                            $.get('${path}/easClass/getClassView',{id:data.id},function (data) {
+                            $.get('${path}/class/getClassView',{id:data.id},function (data) {
                                 //显示数据
                                 layui.form.val('class_form',data);
                             });
                         },
                         yes : function (index) {
                             var params2 = $("#class_form").serialize();
-                            $.post('${path}/easClass/editClass',params2,function () {
+                            $.post('${path}/class/editClass',params2,function () {
                                 layer.close(index);
                                 layer.msg('修改成功',{icon:5,time:1000})
                                 table.reload('classTable');
@@ -160,7 +162,7 @@
                     shade: [0.3, '#000'],
                     btn:['确定','取消'],
                     yes : function () {
-                        $.post("${path}/easClass/batchDeleteClass",{"ids":data.id},function () {
+                        $.post("${path}/class/batchDeleteClass",{"ids":data.id},function () {
                             layer.msg('删除成功',{icon:1,time:1000});
                             table.reload('classTable');
                         });

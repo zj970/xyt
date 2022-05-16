@@ -12,4 +12,55 @@
     <select id="queryByCnu" parameterType="java.lang.String" resultType="com.zj.xyt.Entity.Classes">
         select * from class where Cnu = #{Cnu}
     </select>
+
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(*) from class;
+    </select>
+
+    <select id="getList" resultType="com.zj.xyt.Entity.Classes">
+        select class.Cnu,class.Cname,teacher.Tname,department.Dname
+        from class,teacher,department
+        <where>
+            class.Dnu = department.Dnu
+            and
+            class.Tnu = teacher.Tnu
+            <if test="classes.cnu != null and classes.cnu != ''">
+                and Cnu like concat('%',#{classes.Cnu},'%')
+            </if>
+        </where>
+        <if test="pageUtil != null">
+            limit #{pageUtil.pageStart},#{pageUtil.count}
+        </if>
+    </select>
+
+    <select id="getClassView" resultType="com.zj.xyt.Entity.Classes">
+        select class.Cnu,class.Cname,teacher.Tname,department.Dname
+        from class,teacher,department
+        where class.Dnu = department.Dnu
+        and class.Tnu = teacher.Tnu
+        and class.Cnu = #{Cnu}
+    </select>
+
+    <select id="findClass" resultType="com.zj.xyt.Entity.Classes">
+        select class.Cnu,class.Cname,teacher.Tname,department.Dname
+        from class,teacher,department
+        where class.Dnu = department.Dnu
+        and class.Tnu = teacher.Tnu
+        and class.Cnu = #{Cnu}
+    </select>
+
+    <update id="updateClass">
+        update class
+        <set>
+            <if test="classes != null">Cnu = #{Cnu}</if>
+        </set>
+        where Cnu=#{Cnu}
+    </update>
+
+    <delete id="batchDeleteClass">
+        delete from class where Cnu in
+        <foreach collection="array" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
 </mapper>

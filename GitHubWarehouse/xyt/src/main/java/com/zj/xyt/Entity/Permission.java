@@ -24,6 +24,12 @@ public class Permission  implements Serializable {
     @ApiModelProperty(value = "权限名称")
     private String text;
     /**
+     * 权限类型
+     */
+    @ApiModelProperty(value = "权限名称")
+    private String type;
+
+    /**
      * 功能地址
      */
     @ApiModelProperty(value = "功能地址")

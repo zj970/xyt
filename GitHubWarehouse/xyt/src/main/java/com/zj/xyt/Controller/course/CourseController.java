@@ -76,6 +76,10 @@ public class CourseController {
         int count = lessonService.getCount();
         PageUtil pageUtil = new  PageUtil(page,limit);
         List<LessonVo> list = lessonService.getList(lessonVo,pageUtil);
+        for (LessonVo e: list
+        ) {
+            e.setChoiceNum(lessonService.getCountByLnu(e.getLnu()));
+        }
         map.put("count",count);
         map.put("data",list);
         map.put("code",0);

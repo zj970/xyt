@@ -9,4 +9,23 @@
     <select id="queryByID" resultType="com.zj.xyt.Entity.Permission">
         select * from permission where permission.id in (select distinct permission_id from role_permission where role_id = #{arg0})
     </select>
+    <!--查询三级权限-->
+    <resultMap id="perMap002" type="com.zj.xyt.Entity.Permission" autoMapping="true">
+        <id column="id" property="id"></id>
+        <collection property="children" javaType="java.util.List" ofType="com.jubilantz.entity.EasPermission" column="id" select="getThird"></collection>
+    </resultMap>
+
+    <!--查询二级权限-->
+    <select id="getByParentId" parameterType="long" resultMap="perMap002">
+        select * from permission where parentid = #{id}
+    </select>
+
+    <resultMap id="perMap" type="com.zj.xyt.Entity.Permission" autoMapping="true">
+        <id column="id" property="id"></id>
+        <collection property="children" javaType="java.util.List" ofType="com.zj.xyt.Entity.Permission" column="id" select="getByParentId"></collection>
+    </resultMap>
+    <select id="getParentPers" resultMap="perMap">
+        select * from permission where parentid is null
+    </select>
+
 </mapper>

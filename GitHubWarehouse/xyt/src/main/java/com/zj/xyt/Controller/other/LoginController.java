@@ -62,15 +62,15 @@ public class LoginController {
         Object ob = SecurityUtils.getSubject().getPrincipal();
          if(ob instanceof Admin){
              System.out.println("登录类型为管理员");
-             if (SecurityUtils.getSubject().hasRole("admin")){
+/*             if (SecurityUtils.getSubject().hasRole("admin")){
                  System.out.println("=-=======================================");
-             }
-
+             }*/
              Admin admin = (Admin) SecurityUtils.getSubject().getPrincipal();
              //设置名字的
              session.setAttribute(Constants.LOGIN_USER,admin.getAnu());
              List<Permission> list = permissionService.queryByID("0");
              session.setAttribute(Constants.LOGIN_USER_PERS,list);
+             map.put("loginType","admin");
          }
         if(ob instanceof Student){
             System.out.println("登录类型为学生");
@@ -79,6 +79,7 @@ public class LoginController {
             session.setAttribute(Constants.LOGIN_USER,student.getSname());
             List<Permission> list = permissionService.queryByID("1");
             session.setAttribute(Constants.LOGIN_USER_PERS,list);
+            map.put("loginType","student");
         }
         if(ob instanceof Teacher){
 
@@ -88,6 +89,7 @@ public class LoginController {
             session.setAttribute(Constants.LOGIN_USER,teacher.getTname());
             List<Permission> list = permissionService.queryByID("2");
             session.setAttribute(Constants.LOGIN_USER_PERS,list);
+            map.put("loginType","teacher");
         }
 
         //session.getAttribute("userType");
