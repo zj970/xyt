@@ -117,12 +117,17 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
         <!-- shiro+redis缓存插件 -->
         <dependency>
             <groupId>org.crazycake</groupId>
             <artifactId>shiro-redis</artifactId>
             <version>2.4.2.1-RELEASE</version>
-            <exclusions>
+<!--            <exclusions>
                 <exclusion>
                     <artifactId>shiro-core</artifactId>
                     <groupId>org.apache.shiro</groupId>
@@ -135,18 +140,20 @@
                     <artifactId>jedis</artifactId>
                     <groupId>redis.clients</groupId>
                 </exclusion>
-            </exclusions>
+            </exclusions>-->
         </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-pool2</artifactId>
-        </dependency>
-        <!-- jedis的客户端 -->
+<!--        &lt;!&ndash; jedis的客户端 &ndash;&gt;
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
             <version>3.1.0</version>
+        </dependency>-->
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
         </dependency>
+
         <!--shiro整合Spring的包-->
         <dependency>
             <groupId>org.apache.shiro</groupId>
@@ -227,6 +234,14 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+ <!--           &lt;!&ndash; 忽略无web.xml警告 &ndash;&gt;
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -244,5 +259,12 @@
                 </executions>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>
+                    src/main/webapp
+                </directory>
+            </resource>
+        </resources>
     </build>
 </project>

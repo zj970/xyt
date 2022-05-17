@@ -129,6 +129,10 @@ public class LoginController {
                     map.put("code", 3);
                     map.put("msg", "验证码不正确");
                     return map;
+                } else {
+                    map.put("code", 4);
+                    map.put("msg", "账户已登录");
+                    return map;
                 }
             }
         }
