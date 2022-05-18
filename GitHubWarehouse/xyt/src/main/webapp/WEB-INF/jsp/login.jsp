@@ -81,7 +81,7 @@
                 <div class="layui-form-item">
                     <button type="submit"  class="layui-btn layui-btn layui-btn-normal layui-btn-fluid" lay-submit="" lay-filter="login" onclick="subForm();return false;">登 入</button>
                 </div>
-                <%--<u><u></u><a onclick="registerForm();" style="margin-left: 70%">立即注册</a></u></p>--%>
+                <u><u></u><a onclick="registerForm();" style="margin-left: 70%">立即注册</a></u></p>
 
             </form>
         </div>
