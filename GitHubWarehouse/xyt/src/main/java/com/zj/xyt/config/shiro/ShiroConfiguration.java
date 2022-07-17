@@ -1,6 +1,5 @@
 package com.zj.xyt.config.shiro;
 
-import com.zj.xyt.Entity.Permission;
 import com.zj.xyt.Server.PermissionService;
 import com.zj.xyt.realms.*;
 import com.zj.xyt.utils.MyFormAuthenticationFilter;
