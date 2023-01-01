@@ -47,7 +47,7 @@ public class TeacherRealm extends AuthorizingRealm {
             info.addRole("teacher");
             //log.info(admin.get);
             //每次都从数据中重新查找，确保能及时更新权限
-            List<Permission> list = permissionService.queryByID("2");
+            List<Permission> list = permissionService.queryByID("3");
             Set<String> set = new HashSet<>();
             for (Permission permission : list){
                 set.add(permission.getPercode());

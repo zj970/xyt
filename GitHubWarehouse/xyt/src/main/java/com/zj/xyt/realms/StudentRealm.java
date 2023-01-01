@@ -49,7 +49,7 @@ public class StudentRealm extends AuthorizingRealm {
             Student student = (Student) principalCollection.getPrimaryPrincipal();
             info.addRole("student");
             //每次都从数据中重新查找，确保能及时更新权限
-            List<Permission> list = permissionService.queryByID("1");
+            List<Permission> list = permissionService.queryByID("2");
             Set<String> set = new HashSet<>();
             for (Permission permission : list){
                 set.add(permission.getPercode());
@@ -86,17 +86,6 @@ public class StudentRealm extends AuthorizingRealm {
             //3). realmName: 当前 realm 对象的 name. 调用父类的 getName() 方法即可
             String realmName = getName();
             //4). credentialsSalt: 盐值,这里我使用的是用户名
-//            /***
-//             * 模拟加密后的密码为多少
-//             */
-//            System.out.println("-------------------------------------------------------");
-//            String hashAlgorithmName = "MD5";//加密方式
-//            Object crdentials = "123456";//密码原值
-//            ByteSource salt = ByteSource.Util.bytes(student.getSnu());//以账号作为盐值
-//            int hashIterations = 1024;//加密1024次
-//            Object result = new SimpleHash(hashAlgorithmName,crdentials,salt,hashIterations);
-//            System.out.println(student.getSnu()+"加密后的结果为:"+result);
-//            System.out.println("=================================================================");
             ByteSource credentialsSalt = ByteSource.Util.bytes(student.getSnu());
             return new SimpleAuthenticationInfo(principal,credentials,credentialsSalt,realmName);
         }
